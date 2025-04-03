@@ -9,7 +9,7 @@ import { getMockParticipants } from './mockData';
  */
 
 // Configuration for API base URL
-const API_BASE_URL = process.env.REACT_APP_API_URL || 'https://eventmeeting-backend.onrender.com';
+const API_BASE_URL = process.env.REACT_APP_API_URL || 'https://eventmeeting.onrender.com';
 
 // Use mock data in development mode
 const USE_MOCK_DATA = process.env.REACT_APP_USE_MOCK_DATA === 'true' || false;
