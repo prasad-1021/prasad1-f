@@ -1,0 +1,480 @@
+.availabilityPage {
+    padding: 32px;
+    background-color: #F5F8FF;
+    min-height: 100vh;
+    width: 100%;
+}
+
+.header {
+    margin-bottom: 32px;
+}
+
+.header h1 {
+    font-size: 24px;
+    font-weight: 600;
+    color: #000000;
+    margin: 0 0 8px 0;
+    font-family: 'Poppins', sans-serif;
+}
+
+.description {
+    color: #000000;
+    font-size: 14px;
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+}
+
+.tabsContainer {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    background-color: #E8E8E8;
+    border-radius: 8px;
+    width: fit-content;
+    padding: 4px;
+    margin-bottom: 32px;
+}
+
+.tab {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-family: 'Poppins', sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    color: #676767;
+    transition: background-color 0.2s ease;
+}
+
+.activeTab {
+    background-color: #FFFFFF;
+}
+
+.icon {
+    width: 16px;
+    height: 16px;
+}
+
+.configContainer {
+    background-color: #FFFFFF;
+    border: 1.5px solid rgba(0, 0, 0, 0.35);
+    border-radius: 24px;
+    overflow: hidden;
+}
+
+.configHeader {
+    display: flex;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.35);
+    padding: 20px 40px;
+    gap: 120px;
+}
+
+.configSection h3 {
+    font-family: 'Poppins', sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    color: #000000;
+    margin: 0 0 8px 0;
+}
+
+.configLabel {
+    font-family: 'Poppins', sans-serif;
+    font-size: 12px;
+    font-weight: 300;
+    color: #1877F2;
+    margin: 0;
+}
+
+/* Event type dropdown styles */
+.eventTypeContainer {
+    position: relative;
+}
+
+.eventTypeLabel {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    user-select: none;
+}
+
+.dropdownIcon {
+    margin-left: 5px;
+    font-size: 12px;
+}
+
+.eventTypeDropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: white;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    border-radius: 4px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    z-index: 10;
+    width: 180px;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.eventTypeOption {
+    padding: 8px 12px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 12px;
+    color: #333;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.eventTypeOption:hover {
+    background-color: #f5f8ff;
+}
+
+.eventTypeOption.selected {
+    background-color: #e5f0ff;
+    color: #1877F2;
+    font-weight: 500;
+}
+
+.weeklyHours {
+    padding: 30px 40px;
+}
+
+.weeklyHours h3 {
+    font-family: 'Poppins', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    color: #000000;
+    margin: 0 0 24px 0;
+}
+
+.dayRow {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 24px;
+    position: relative;
+}
+
+.dayCheck {
+    display: flex;
+    align-items: center;
+    width: 90px;
+    flex-shrink: 0;
+}
+
+.dayContent {
+    flex-grow: 1;
+}
+
+.dayActions {
+    display: flex;
+    gap: 8px;
+    margin-left: auto;
+    flex-shrink: 0;
+}
+
+.checkbox {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 14px;
+    height: 14px;
+    border-radius: 1.3px;
+    background-color: #A2A2A2;
+    cursor: pointer;
+    margin-right: 15px;
+    position: relative;
+    transition: background-color 0.2s ease;
+}
+
+.checkbox:checked {
+    background-color: #1877F2;
+}
+
+.checkbox:checked::after {
+    content: "";
+    position: absolute;
+    top: 2px;
+    left: 4px;
+    width: 4px;
+    height: 8px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+}
+
+.dayCheck label {
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    color: #000000;
+}
+
+.unavailable {
+    color: #e74c3c;
+    font-weight: 500;
+    padding: 8px 16px;
+    display: flex;
+    align-items: center;
+}
+
+.timeSlots {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.timeSlot {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.timeInput {
+    width: 80px;
+    height: 36px;
+    background-color: #F3F3F1;
+    border: 0.8px solid rgba(0, 0, 0, 0.25);
+    border-radius: 3px;
+    padding: 0 10px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+}
+
+.timeSeparator {
+    font-weight: bold;
+    color: rgba(0, 0, 0, 0.45);
+}
+
+.removeButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    color: rgba(0, 0, 0, 0.5);
+    font-size: 18px;
+    transition: color 0.2s ease;
+}
+
+.removeButton:hover {
+    color: #e74c3c;
+}
+
+.addButton, .copyButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    border-radius: 4px;
+    background-color: #FFFFFF;
+    cursor: pointer;
+    font-size: 16px;
+    transition: all 0.2s ease;
+}
+
+.addButton {
+    color: #1877F2;
+}
+
+.addButton:hover:not(:disabled) {
+    background-color: #e5f0ff;
+}
+
+.addButton:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.copyButton {
+    color: rgba(0, 0, 0, 0.6);
+    font-size: 14px;
+}
+
+.copyButton:hover {
+    background-color: #f2f2f2;
+}
+
+.activeCopy {
+    background-color: #e5f0ff;
+    color: #1877F2;
+    border-color: #1877F2;
+}
+
+.actions {
+    display: flex;
+    gap: 10px;
+    margin-left: 30px;
+}
+
+.actionButton {
+    background: transparent;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 8px;
+    margin-left: 8px;
+    cursor: pointer;
+    color: #666;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+}
+
+.actionButton:hover:not(:disabled) {
+    background-color: #f5f5f5;
+    color: #3498db;
+    border-color: #3498db;
+}
+
+.actionButton:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.activeAction {
+    background-color: #eaf4fd;
+    color: #3498db;
+    border-color: #3498db;
+}
+
+.copyTarget {
+    background-color: #f0f9ff;
+    color: #3498db;
+    font-size: 0.75rem;
+    padding: 4px 8px;
+}
+
+.copyingMessage {
+    margin-top: 16px;
+    padding: 12px;
+    background-color: #e8f7ff;
+    border-radius: 6px;
+    border: 1px solid #bde5ff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.copyingMessage p {
+    margin: 0;
+    color: #0078d4;
+    font-size: 0.9rem;
+}
+
+.cancelButton {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 6px 12px;
+    cursor: pointer;
+    font-size: 0.8rem;
+    transition: all 0.2s ease;
+}
+
+.cancelButton:hover {
+    background-color: #f5f5f5;
+    color: #e74c3c;
+    border-color: #e74c3c;
+}
+
+/* New styles for the updated form */
+.timeGapSection {
+    display: flex;
+    align-items: center;
+    margin: 32px 0 24px;
+    font-family: 'Poppins', sans-serif;
+}
+
+.timeGapLabel {
+    font-size: 14px;
+    font-weight: 400;
+    color: #000000;
+    margin-right: 20px;
+    min-width: 260px;
+}
+
+.timeGapInput {
+    width: 80px;
+    height: 36px;
+    background-color: #F3F3F1;
+    border: 0.8px solid rgba(0, 0, 0, 0.25);
+    border-radius: 3px;
+    padding: 0 10px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+}
+
+.formActions {
+    margin-top: 30px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.submitButton {
+    background-color: #1877F2;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 20px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.submitButton:hover:not(:disabled) {
+    background-color: #0e63d3;
+}
+
+.submitButton:disabled {
+    background-color: #a0c5f5;
+    cursor: not-allowed;
+}
+
+.errorMessage {
+    color: #e74c3c;
+    font-size: 12px;
+    margin-left: 10px;
+    font-family: 'Poppins', sans-serif;
+}
+
+.loadingContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 200px;
+    background-color: #FFFFFF;
+    border: 1.5px solid rgba(0, 0, 0, 0.35);
+    border-radius: 24px;
+    padding: 30px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 16px;
+    color: #666;
+}
+
+.errorContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    min-height: 200px;
+    background-color: #FFFFFF;
+    border: 1.5px solid rgba(0, 0, 0, 0.35);
+    border-radius: 24px;
+    padding: 30px;
+    font-family: 'Poppins', sans-serif;
+}
+
+.errorContainer p {
+    color: #e74c3c;
+    font-size: 16px;
+} 

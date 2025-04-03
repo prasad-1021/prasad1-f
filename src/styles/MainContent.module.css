@@ -1,0 +1,803 @@
+.mainSection {
+  position: relative;
+  width: 100%;
+  padding-top: 200px;
+  padding-bottom: 740px; 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.heroSection {
+  position: relative;
+  width: 100%;
+  padding-top: 200px;
+  padding-bottom: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.heroTitle {
+  position: absolute;
+  width: 612px;
+  height: 190px;
+  left: 50%;
+  top: 190px;
+  transform: translateX(-50%);
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 64px;
+  line-height: 95px;
+  text-align: center;
+  letter-spacing: 0.01em;
+  color: #000000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.heroTitleTop {
+  display: block;
+  margin-bottom: 0;
+}
+
+.heroTitleBottom {
+  display: block;
+  margin-top: 0;
+}
+
+.signUpButtonHero {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 12px 24px;
+  width: 234px;
+  height: 68px;
+  margin-top: 200px;
+  background: #1877F2;
+  border-radius: 50px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.signUpButtonHero:hover {
+  background: #1668d4;
+}
+
+.signupTextHero {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 24px;
+  color: #FFFFFF;
+  text-align: center;
+}
+
+.appScreenshot {
+  position: absolute;
+  width: 1004px;
+  height: 700px;
+  left: calc(50% - 1004px/2);
+  top: 545px;
+  filter: drop-shadow(0px 1px 48.1px rgba(0, 0, 0, 0.16));
+  border-radius: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.responsiveImage {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 12px;
+  max-width: 100%;
+}
+
+.appScreenshotImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 12px;
+}
+
+.simplifiedSection {
+  width: 100%;
+  padding: 80px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.sectionTitle {
+  width: 848px;
+  font-family: 'Inter';
+  font-weight: 600;
+  font-size: 40px;
+  line-height: 41px;
+  text-align: center;
+  color: #000000;
+}
+
+.sectionDescription {
+  width: 1280px;
+  margin-top: 20px;
+  font-family: 'Inter';
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 41px;
+  text-align: center;
+  color: #000000;
+}
+
+.organizerSection {
+  display: flex;
+  width: 100%;
+  padding: 80px 20px;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 30px;
+}
+
+.organizerContent {
+  max-width: 670px;
+  flex: 1;
+  min-width: 300px;
+  margin: 0 auto;
+  transition: all 0.3s ease;
+}
+
+.organizerTitle {
+  width: 100%;
+  font-family: 'Inter';
+  font-weight: 600;
+  font-size: 35px;
+  line-height: 41px;
+  color: #000000;
+  margin-bottom: 25px;
+  transition: all 0.3s ease;
+}
+
+.organizerDescription {
+  font-family: 'Inter';
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 41px;
+  color: #000000;
+  margin-bottom: 20px;
+  transition: all 0.3s ease;
+}
+
+.organizerWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  transition: all 0.3s ease;
+}
+
+.organizerListContainer {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  transition: all 0.3s ease;
+}
+
+.organizerFeature {
+  margin-bottom: 15px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  font-size: 22px;
+  text-align: left;
+  align-self: flex-start;
+}
+
+.organizerFeatureList {
+  list-style-type: disc;
+  padding-left: 20px;
+  margin-top: 0;
+  margin-bottom: 20px;
+  display: inline-block;
+  text-align: left;
+  transition: all 0.3s ease;
+}
+
+.organizerFeatureItem {
+  font-family: 'Inter';
+  font-weight: 400;
+  font-size: 20px;
+  color: #000000;
+  margin-bottom: 28px;
+  padding-left: 10px;
+  transition: all 0.3s ease;
+  line-height: 1.8;
+}
+
+.calendarScreens {
+  display: flex;
+  position: relative;
+  flex: 1;
+  justify-content: center;
+  min-width: 300px;
+}
+
+.calendarScreen1 {
+  position: relative;
+  width: 196px;
+  height: 470px;
+  filter: drop-shadow(0px 1px 48.1px rgba(0, 0, 0, 0.16));
+  border-radius: 10.8px;
+  background-color: #f5f5f5;
+  transform: rotate(-7deg);
+  z-index: 1;
+  overflow: hidden;
+  max-width: 100%;
+  transition: all 0.3s ease;
+}
+
+.calendarScreen2 {
+  position: relative;
+  width: 321px;
+  height: 463px;
+  border-radius: 16px;
+  background-color: #f5f5f5;
+  transform: rotate(14deg);
+  z-index: 2;
+  margin-left: -40px;
+  overflow: hidden;
+  max-width: 100%;
+  transition: all 0.3s ease;
+}
+
+.calendarImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: inherit;
+  display: block;
+  max-width: 100%;
+}
+
+.testimonialSection {
+  width: 100%;
+  padding: 80px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.testimonialHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  width: 100%;
+  margin-bottom: 40px;
+}
+
+.testimonialTitleContainer {
+  max-width: 660px;
+}
+
+.testimonialTitle {
+  font-family: 'Poppins';
+  font-weight: 400;
+  font-size: 48px;
+  line-height: 48px;
+  letter-spacing: -0.02em;
+  color: #000000;
+  text-align: left;
+  margin: 0;
+}
+
+.customerBlue {
+  color: #1877F2;
+}
+
+.testimonialNote {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  max-width: 300px;
+  margin-right: 100px;
+}
+
+.testimonialNoteIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #1877F2;
+  min-width: 24px;
+  height: 24px;
+}
+
+.testimonialNoteText {
+  font-family: 'Poppins';
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 16px;
+  color: #1F1F1F;
+}
+
+.testimonialGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 30px;
+  width: 100%;
+}
+
+.testimonialCard {
+  position: relative;
+  background: #FFFFFF;
+  border-radius: 10px;
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+  padding: 48px 32px;
+  height: 250px;
+}
+
+.testimonialContent {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.testimonialHeading {
+  width: 100%;
+  font-family: 'Poppins';
+  font-weight: 300;
+  font-size: 24px;
+  line-height: 24px;
+  letter-spacing: -0.02em;
+  color: #000000;
+}
+
+.testimonialText {
+  width: 100%;
+  font-family: 'Poppins';
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+  color: #1F1F1F;
+}
+
+.testimonialProfile {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-top: 20px;
+}
+
+.testimonialAvatar {
+  width: 48px;
+  height: 48px;
+  background: #1877F2;
+  border: 2px solid #E3E3E3;
+  border-radius: 50%;
+}
+
+.testimonialInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.testimonialName {
+  font-family: 'Poppins';
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 24px;
+  color: #000000;
+}
+
+.testimonialPosition {
+  font-family: 'Poppins';
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 16px;
+  color: #3D3D3D;
+}
+
+.readMoreButton {
+  display: inline-flex;
+  margin-top: -20px;
+  padding: 12px 24px;
+  font-family: 'Poppins';
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  color: #1877F2;
+  cursor: pointer;
+  text-decoration: none;
+  border: 1px solid #1877F2;
+  border-radius: 50px;
+  transition: background-color 0.2s;
+}
+
+.readMoreButton:hover {
+  background-color: rgba(24, 119, 242, 0.1);
+}
+
+.integrationsHeading {
+  width: 701px;
+  margin: 0 auto 60px;
+  font-family: 'Poppins';
+  font-weight: 700;
+  font-size: 48px;
+  line-height: 56px;
+  text-align: center;
+  letter-spacing: -1.12px;
+  color: #1E2330;
+}
+
+.responsiveSvg {
+  width: 100%;
+  height: auto;
+  max-width: 24px;
+}
+
+
+@media (max-width: 1400px) {
+  .heroTitle, .sectionTitle, .sectionDescription, .integrationsHeading {
+    width: 90%;
+  }
+  
+  .heroTitle {
+    font-size: 54px;
+    line-height: 75px;
+  }
+  
+  .appScreenshot {
+    width: 90%;
+    left: 5%;
+  }
+  
+  .testimonialSection {
+    padding: 80px 20px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .heroTitle {
+    width: 90%;
+    font-size: 48px;
+    line-height: 72px;
+  }
+  
+  .appScreenshot {
+    width: 90%;
+    height: 600px;
+    left: 5%;
+  }
+  
+  .sectionTitle, .sectionDescription {
+    width: 90%;
+  }
+  
+  .organizerSection {
+    justify-content: center;
+    text-align: center;
+  }
+  
+  .organizerTitle {
+    width: 100%;
+    text-align: center;
+    font-size: 32px;
+    line-height: 38px;
+  }
+  
+  .organizerFeatureList {
+    display: inline-block;
+    text-align: left;
+    margin-bottom: 30px;
+  }
+  
+  .organizerContent {
+    max-width: 90%;
+    text-align: center;
+  }
+  
+  .calendarScreens {
+    justify-content: center;
+    margin: 0 auto;
+  }
+  
+  .testimonialGrid {
+    grid-template-columns: 1fr;
+  }
+  
+  .testimonialHeader {
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .testimonialNote {
+    max-width: 100%;
+  }
+  
+  .calendarScreen1 {
+    transform: rotate(-5deg);
+  }
+  
+  .calendarScreen2 {
+    transform: rotate(10deg);
+  }
+  
+  .organizerFeatureItem {
+    font-size: 18px;
+    line-height: 30px;
+  }
+  
+  .organizerWrapper {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .organizerListContainer {
+    max-width: 90%;
+  }
+}
+
+@media (max-width: 768px) {
+  .mainSection {
+    padding-top: 120px;
+    padding-bottom: 500px;
+  }
+  
+  .heroTitle {
+    top: 140px;
+    font-size: 36px;
+    line-height: 54px;
+  }
+  
+  .signUpButtonHero {
+    width: 200px;
+    height: 56px;
+    margin-top: 160px;
+  }
+  
+  .signupTextHero {
+    font-size: 16px;
+  }
+  
+  .appScreenshot {
+    width: 90%;
+    height: 500px;
+    left: 5%;
+    top: 500px;
+  }
+  
+  .sectionTitle {
+    font-size: 30px;
+    line-height: 36px;
+  }
+  
+  .sectionDescription {
+    font-size: 16px;
+    line-height: 30px;
+  }
+  
+  .organizerSection {
+    flex-direction: column;
+    padding: 40px 15px;
+  }
+  
+  .organizerContent {
+    width: 100%;
+    text-align: center;
+    padding: 0 15px;
+  }
+  
+  .organizerTitle {
+    font-size: 28px;
+    line-height: 34px;
+    width: 100%;
+  }
+  
+  .organizerDescription {
+    font-size: 16px;
+    line-height: 30px;
+  }
+  
+  .calendarScreens {
+    margin-top: 30px;
+  }
+  
+  .calendarScreen1 {
+    width: 150px;
+    height: 360px;
+    transform: rotate(-3deg);
+  }
+  
+  .calendarScreen2 {
+    width: 240px;
+    height: 350px;
+    transform: rotate(7deg);
+    margin-left: -30px;
+  }
+  
+  .testimonialTitle {
+    font-size: 36px;
+    line-height: 42px;
+  }
+  
+  .organizerFeatureItem {
+    font-size: 18px;
+    line-height: 1.8;
+    padding-left: 5px;
+    margin-bottom: 28px;
+  }
+  
+  .organizerWrapper {
+    padding: 0;
+  }
+  
+  .organizerListContainer {
+    max-width: 95%;
+  }
+  
+  .organizerFeature {
+    font-size: 20px;
+    line-height: 28px;
+  }
+}
+
+@media (max-width: 480px) {
+  .mainSection {
+    padding-top: 100px;
+    padding-bottom: 400px;
+  }
+  
+  .heroTitle {
+    top: 120px;
+    font-size: 28px;
+    line-height: 42px;
+  }
+  
+  .signUpButtonHero {
+    width: 180px;
+    height: 48px;
+    margin-top: 140px;
+    padding: 10px 20px;
+  }
+  
+  .signupTextHero {
+    font-size: 14px;
+  }
+  
+  .appScreenshot {
+    width: 90%;
+    height: 400px;
+    left: 5%;
+    top: 450px;
+  }
+  
+  .sectionTitle {
+    font-size: 24px;
+    line-height: 30px;
+  }
+  
+  .sectionDescription {
+    font-size: 14px;
+    line-height: 24px;
+  }
+  
+  .organizerSection {
+    padding: 30px 10px;
+  }
+  
+  .organizerContent {
+    padding: 0 10px;
+  }
+  
+  .organizerTitle {
+    font-size: 24px;
+    line-height: 30px;
+  }
+  
+  .organizerDescription {
+    font-size: 14px;
+    line-height: 24px;
+  }
+  
+  .calendarScreens {
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+  }
+  
+  .calendarScreen1 {
+    width: 140px;
+    height: 335px;
+    transform: rotate(0deg);
+    margin-bottom: 20px;
+  }
+  
+  .calendarScreen2 {
+    width: 200px;
+    height: 325px;
+    transform: rotate(0deg);
+    margin-left: 0;
+  }
+  
+  .testimonialTitle {
+    font-size: 36px;
+    line-height: 42px;
+  }
+  
+  .organizerFeatureList {
+    padding-left: 10px;
+    margin-bottom: 20px;
+  }
+  
+  .organizerFeatureItem {
+    font-size: 16px;
+    line-height: 1.8;
+    padding-left: 2px;
+    margin-bottom: 28px;
+  }
+  
+  .organizerWrapper {
+    padding: 0;
+  }
+  
+  .organizerListContainer {
+    max-width: 100%;
+  }
+  
+  .organizerFeature {
+    font-size: 18px;
+    line-height: 24px;
+  }
+}
+
+@media (max-width: 380px) {
+  .organizerTitle {
+    font-size: 22px;
+    line-height: 28px;
+    margin-bottom: 15px;
+  }
+  
+  .organizerFeature {
+    font-size: 16px;
+    line-height: 22px;
+    margin-bottom: 10px;
+  }
+  
+  .organizerWrapper {
+    padding: 0 5px;
+  }
+  
+  .organizerListContainer {
+    padding: 0 5px;
+  }
+  
+  .organizerFeatureList {
+    padding-left: 8px;
+  }
+  
+  .organizerFeatureItem {
+    font-size: 14px;
+    line-height: 1.8;
+    margin-bottom: 28px;
+    padding-left: 0;
+  }
+  
+  .calendarScreen1 {
+    width: 120px;
+    height: 285px;
+  }
+  
+  .calendarScreen2 {
+    width: 170px;
+    height: 275px;
+  }
+} 
+

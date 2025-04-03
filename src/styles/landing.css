@@ -1,0 +1,170 @@
+
+:root {
+  --primary-color: #1877F2;
+  --primary-light: rgba(24, 119, 242, 0.1);
+  --text-color: #1E2330;
+  --bg-gray: #F0F0F0;
+  --bg-light: #FFFFFF;
+  --bg-card: #DEDEDE;
+  --border-color: #EDEDED;
+  --font-heading: 'Plus Jakarta Sans', sans-serif;
+  --font-body-primary: 'Inter', sans-serif;
+  --font-body-secondary: 'Poppins', sans-serif;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-body-primary);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: var(--text-color);
+  overflow-x: hidden;
+}
+
+.landing-layout {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  width: 100%;
+  background-color: var(--bg-light);
+}
+
+
+.section-container {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+  font-weight: 700;
+}
+
+.logo-text {
+  font-family: var(--font-heading);
+}
+
+.heading-primary {
+  font-family: var(--font-body-secondary);
+}
+
+.heading-secondary {
+  font-family: var(--font-body-primary);
+}
+
+.body-primary {
+  font-family: var(--font-body-primary);
+}
+
+.body-secondary {
+  font-family: var(--font-body-secondary);
+}
+
+p {
+  margin: 0;
+  line-height: 1.6;
+}
+
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  cursor: pointer;
+  font-family: var(--font-body-primary);
+  transition: all 0.2s ease;
+}
+
+.btn-primary {
+  background-color: var(--primary-color);
+  color: white;
+  border-radius: 96px;
+}
+
+.btn-primary:hover {
+  background-color: #1668d4;
+}
+
+.btn-secondary {
+  background-color: transparent;
+  color: var(--primary-color);
+  border: 2px solid var(--primary-color);
+  border-radius: 99px;
+}
+
+.btn-secondary:hover {
+  background-color: var(--primary-light);
+}
+
+
+@media (max-width: 1280px) {
+  .section-container {
+    padding: 0 2rem;
+    max-width: 90%;
+  }
+}
+
+@media (max-width: 768px) {
+  .section-container {
+    padding: 0 1rem;
+    max-width: 95%;
+  }
+  
+  body {
+    font-size: 15px;
+  }
+  
+  h1 {
+    font-size: 2.2rem;
+  }
+  
+  h2 {
+    font-size: 1.8rem;
+  }
+  
+  h3 {
+    font-size: 1.4rem;
+  }
+  
+  .btn {
+    padding: 0.6rem 1.2rem;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .section-container {
+    padding: 0 0.75rem;
+  }
+  
+  body {
+    font-size: 14px;
+  }
+  
+  h1 {
+    font-size: 1.8rem;
+  }
+  
+  h2 {
+    font-size: 1.5rem;
+  }
+  
+  h3 {
+    font-size: 1.2rem;
+  }
+  
+  .btn {
+    padding: 0.5rem 1rem;
+    font-size: 0.85rem;
+  }
+  
+  .landing-layout {
+    overflow-x: hidden;
+  }
+} 
+

@@ -1,0 +1,79 @@
+
+.copySource {
+  border-left: 3px solid #1877F2;
+  background-color: rgba(24, 119, 242, 0.05);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.canReceiveCopy {
+  border: 1px dashed #1877F2;
+  transition: background-color 0.2s ease;
+}
+
+.canReceiveCopy:hover {
+  background-color: rgba(24, 119, 242, 0.1);
+  cursor: pointer;
+}
+
+.activeCopy {
+  background-color: #1877F2 !important;
+  color: white !important;
+  transform: scale(1.1);
+  border-color: #1877F2 !important;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.copyIcon {
+  width: 16px;
+  height: 16px;
+  max-width: 100%;
+  object-fit: contain;
+}
+
+.checkIcon {
+  width: 16px;
+  height: 16px;
+  max-width: 100%;
+}
+
+@media (max-width: 768px) {
+  .copyIcon, .checkIcon {
+    width: 14px;
+    height: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .copyIcon, .checkIcon {
+    width: 12px;
+    height: 12px;
+  }
+}
+
+
+.copyButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 30px;
+  min-height: 30px;
+  border-radius: 4px;
+  border: 1px solid #e0e0e0;
+  background-color: transparent;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  padding: 6px;
+  margin-left: 4px;
+}
+
+.copyButton:hover {
+  background-color: rgba(24, 119, 242, 0.1);
+  border-color: #1877F2;
+}
+
+.copyButton:active {
+  transform: scale(0.95);
+}
+
+ 
+

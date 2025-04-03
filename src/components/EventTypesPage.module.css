@@ -1,0 +1,247 @@
+.eventTypesPage {
+    padding: 32px;
+    background-color: #F5F8FF;
+    min-height: 100vh;
+    width: 100%;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 32px;
+}
+
+.headerContent {
+    display: flex;
+    flex-direction: column;
+}
+
+.title {
+    font-size: 24px;
+    font-weight: 600;
+    margin: 0 0 5px 0;
+    color: #000000;
+    font-family: 'Poppins', sans-serif;
+}
+
+.description {
+    font-size: 14px;
+    color: #000000;
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;
+}
+
+.addEventButton {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    background-color: transparent;
+    color: #1877F2;
+    border: 1px solid #1877F2;
+    border-radius: 19px;
+    padding: 7px 20px;
+    font-size: 12px;
+    font-weight: 300;
+    cursor: pointer;
+    font-family: 'Poppins', sans-serif;
+}
+
+.plusIcon {
+    font-size: 16px;
+    font-weight: bold;
+    color: #1877F2;
+}
+
+/* Event Cards Grid */
+.eventCardsContainer {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(359px, 1fr));
+    gap: 16px;
+}
+
+/* Event Card Styles */
+.eventCard {
+    background: white;
+    border-radius: 22px;
+    overflow: hidden;
+    height: 200px;
+    position: relative;
+}
+
+.eventCardHeader {
+    height: 14px;
+    width: 100%;
+}
+
+.eventCardContent {
+    padding: 20px;
+    height: calc(100% - 14px);
+    display: flex;
+    flex-direction: column;
+}
+
+.eventCardTitleRow {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 18px;
+}
+
+.eventCardTitle {
+    font-size: 18px;
+    font-weight: 400;
+    margin: 0;
+    color: #454545;
+    font-family: 'Poppins', sans-serif;
+}
+
+.editButton {
+    background: none;
+    border: none;
+    padding: 4px;
+    cursor: pointer;
+    color: #676B5F;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.editIcon {
+    font-size: 16px;
+}
+
+.eventCardDetails {
+    display: flex;
+    flex-direction: column;
+    gap: 0px;
+}
+
+.eventDate {
+    font-family: 'Poppins', sans-serif;
+    font-size: 12px;
+    font-weight: 300;
+    color: #000000;
+    margin: 0;
+    margin-bottom: 0px;
+}
+
+.eventTime {
+    font-family: 'Poppins', sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    color: #3694FF;
+    margin: 0;
+    margin-top: 0px;
+    margin-bottom: 3px;
+    letter-spacing: 0.2px;
+    display: inline-block;
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.eventDuration {
+    font-family: 'Poppins', sans-serif;
+    font-size: 9px;
+    font-weight: 300;
+    color: #7E7E7E;
+    margin: 0;
+    margin-top: 5px;
+}
+
+.eventType {
+    font-family: 'Poppins', sans-serif;
+    font-size: 10px;
+    font-weight: 500;
+    color: #3694FF;
+    letter-spacing: 0.2px;
+}
+
+.eventCardDivider {
+    height: 0.8px;
+    background-color: rgba(0, 0, 0, 0.25);
+    margin-top: auto;
+    margin-bottom: 8px;
+}
+
+.eventCardFooter {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 8px 0;
+    gap: 15px;
+}
+
+.actionButtons {
+    display: flex;
+    gap: 15px;
+}
+
+.actionButton {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    color: #676B5F;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.3s ease;
+}
+
+.actionButton:hover {
+    color: #1877F2;
+}
+
+.actionButton:last-child:hover {
+    color: #ED0000;
+}
+
+/* Toggle Switch */
+.toggleSwitch {
+    width: 30px;
+    height: 20px;
+    background-color: #676767;
+    border-radius: 23.0625px;
+    position: relative;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.toggleSwitch.enabled {
+    background-color: #1877F2;
+}
+
+.toggleThumb {
+    width: 16px;
+    height: 16px;
+    background-color: #FFFFFF;
+    border-radius: 50%;
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    transition: left 0.3s;
+}
+
+.toggleSwitch.enabled .toggleThumb {
+    left: 12px;
+}
+
+.emptyState {
+    background-color: white;
+    border-radius: 10px;
+    padding: 40px;
+    text-align: center;
+    margin-top: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.emptyState p {
+    font-family: 'Poppins', sans-serif;
+    font-size: 16px;
+    color: #676767;
+} 

@@ -1,0 +1,358 @@
+.createEventPage {
+    padding: 0 32px;
+    margin-bottom: 32px;
+    width: 100%;
+}
+
+.header {
+    margin-bottom: 32px;
+}
+
+.title {
+    width: 157px;
+    height: 36px;
+    font-family: 'Poppins', sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 36px;
+    color: #000000;
+    margin-bottom: 5px;
+}
+
+.subtitle {
+    width: 416px;
+    height: 42px;
+    font-family: 'Poppins', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 21px;
+    color: #000000;
+}
+
+.formContainer {
+    width: 1087px;
+    height: 792px;
+    background: #FFFFFF;
+    border-radius: 40px;
+    position: relative;
+}
+
+.formContent {
+    padding: 32px;
+}
+
+.formTitle {
+    width: 250px;
+    height: 36px;
+    font-family: 'Poppins', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 36px;
+    line-height: 36px;
+    color: #1877F2;
+    text-align: center;
+    margin: 0 auto 32px;
+}
+
+.formDivider {
+    width: 100%;
+    height: 0;
+    border: 1.5px solid #B6B6B6;
+    margin: 30px 0;
+}
+
+.formGroup {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 28.95px;
+    margin-bottom: 24px;
+}
+
+.label {
+    width: 227.61px;
+    height: 29px;
+    font-family: 'Poppins', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 19.3023px;
+    line-height: 29px;
+    letter-spacing: 0.15em;
+    color: #343434;
+}
+
+.required {
+    color: #FF0000;
+}
+
+.input, .textarea, .dateInput, .timeInput, .periodInput, .timeZoneInput, .durationInput, .eventTypeInput {
+    box-sizing: border-box;
+    width: 573.44px;
+    height: 62.73px;
+    background: #FFFFFF;
+    border: 1.60853px solid #E0E0E0;
+    border-radius: 16.0853px;
+    padding: 0 19.3px;
+    font-family: 'Poppins', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14.4767px;
+    line-height: 22px;
+    letter-spacing: 0.15em;
+    color: #8A8A8A;
+}
+
+.textarea {
+    height: 112.6px;
+    padding-top: 19.3px;
+    resize: none;
+}
+
+.dateTimeGroup {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    align-items: flex-start;
+}
+
+.dateInput {
+    width: 123.05px;
+}
+
+.timeInput {
+    width: 99.73px;
+}
+
+.periodInput {
+    width: 71.58px;
+}
+
+.timeZoneInput {
+    width: 240.47px;
+}
+
+.durationInput {
+    width: 177.74px;
+}
+
+.selectWrapper {
+    position: relative;
+    display: inline-block;
+}
+
+.selectArrow {
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    transform: translateY(-50%) rotate(90deg);
+    width: 27.34px;
+    height: 27.34px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+    cursor: pointer;
+}
+
+.selectArrow svg {
+    transform: rotate(90deg);
+}
+
+.dropdownMenu {
+    position: absolute;
+    top: calc(100% + 5px);
+    left: 0;
+    width: 100%;
+    background: #FFFFFF;
+    border: 1.60853px solid #E0E0E0;
+    border-radius: 16.0853px;
+    z-index: 10;
+    max-height: 200px;
+    overflow-y: auto;
+    box-shadow: 0px 4px 14.7px rgba(0, 0, 0, 0.1);
+}
+
+.dropdownItem {
+    padding: 12px 19.3px;
+    font-family: 'Poppins', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14.4767px;
+    line-height: 22px;
+    letter-spacing: 0.15em;
+    color: #343434;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.dropdownItem:hover {
+    background-color: #F5F8FF;
+}
+
+/* Make inputs look clickable */
+.timeInput, .periodInput, .timeZoneInput, .durationInput, .eventTypeInput {
+    cursor: pointer;
+    user-select: none;
+}
+
+.formActions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 35px;
+    margin-top: 60px;
+    padding-right: 180px;
+}
+
+.cancelButton, .saveButton {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 14px 74px;
+    gap: 10px;
+    width: 190px;
+    height: 50px;
+    border-radius: 15px;
+    font-family: 'Poppins', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 27px;
+    text-align: center;
+    border: none;
+    cursor: pointer;
+}
+
+.cancelButton {
+    background: #F3F3F1;
+    color: #000000;
+}
+
+.saveButton {
+    background: #1877F2;
+    color: #FFFFFF;
+}
+
+.calendarContainer {
+    position: absolute;
+    top: 68px;
+    left: 0;
+    z-index: 20;
+    box-shadow: 0px 4px 14.7px rgba(0, 0, 0, 0.1);
+    border-radius: 16px;
+    background-color: white;
+    padding: 10px;
+}
+
+.calendar {
+    width: 350px;
+    border: none !important;
+    border-radius: 16px !important;
+    font-family: 'Poppins', sans-serif !important;
+}
+
+/* Override react-calendar styles */
+:global(.react-calendar) {
+    border: none;
+    border-radius: 16px;
+    box-shadow: 0px 4px 14.7px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    font-family: 'Poppins', sans-serif;
+}
+
+:global(.react-calendar button) {
+    border-radius: 8px;
+    font-family: 'Poppins', sans-serif;
+    color: #343434;
+}
+
+:global(.react-calendar__tile--now) {
+    background: rgba(24, 119, 242, 0.1);
+    color: #1877F2;
+}
+
+:global(.react-calendar__tile--active) {
+    background: #1877F2 !important;
+    color: white !important;
+}
+
+:global(.react-calendar__tile:hover) {
+    background: rgba(24, 119, 242, 0.2);
+}
+
+:global(.react-calendar__navigation button:hover) {
+    background: rgba(24, 119, 242, 0.1);
+    border-radius: 8px;
+}
+
+:global(.react-calendar__month-view__days__day--weekend) {
+    color: #dc3545;
+}
+
+:global(.react-calendar__navigation) {
+    margin-bottom: 10px;
+}
+
+:global(.react-calendar__navigation button) {
+    border-radius: 8px;
+    font-family: 'Poppins', sans-serif;
+}
+
+.dateInput, .timeInput, .periodInput, .timeZoneInput, .durationInput {
+    cursor: pointer;
+    background-color: white;
+}
+
+.formatHint {
+    position: absolute;
+    top: 38px;
+    left: 12px;
+    font-size: 10px;
+    color: #999;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Make inputs appear interactive */
+.input:hover, .dateInput:hover, .timeInput:hover, .periodInput:hover, .timeZoneInput:hover, .durationInput:hover, .eventTypeInput:hover {
+    border-color: #1877F2;
+}
+
+.calendarTypeIndicator {
+    text-align: center;
+    margin-top: 8px;
+    font-size: 14px;
+    color: #1877F2;
+    font-weight: 500;
+    font-family: 'Poppins', sans-serif;
+    padding-bottom: 4px;
+}
+
+/* Indian Calendar specific styles */
+.indianCalendar :global(.react-calendar__month-view__weekdays__weekday) {
+    font-weight: bold;
+    color: #6C2BD9;
+}
+
+.indianCalendar :global(.react-calendar__tile--active) {
+    background: #6C2BD9 !important;
+    color: white !important;
+}
+
+.indianCalendar :global(.react-calendar__tile--now) {
+    background: rgba(108, 43, 217, 0.1);
+    color: #6C2BD9;
+}
+
+.indianCalendar :global(.react-calendar__tile:hover) {
+    background: rgba(108, 43, 217, 0.2);
+}
+
+.indianCalendar :global(.react-calendar__navigation button:hover) {
+    background: rgba(108, 43, 217, 0.1);
+}
+
+.eventTypeInput {
+    width: 250px;
+} 

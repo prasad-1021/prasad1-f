@@ -1,0 +1,314 @@
+.popupOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.3);
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-start;
+  z-index: 1000;
+  padding-top: 10vh;
+  padding-right: 5vw;
+}
+
+.popup {
+  position: relative;
+  width: 320px;
+  background: #FFFFFF;
+  filter: drop-shadow(0px 2px 15px rgba(0, 0, 0, 0.25));
+  border-radius: 10px;
+  padding: 15px;
+  z-index: 1001;
+  animation: slideIn 0.2s ease-out forwards;
+  max-height: calc(100vh - 20vh);
+  overflow-y: auto;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateY(-20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.closeButton {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: transparent;
+  border: none;
+  font-size: 20px;
+  color: #676B5F;
+  cursor: pointer;
+  z-index: 10;
+}
+
+.popupContent {
+  width: 100%;
+  background: #FFFFFF;
+}
+
+.participantSection {
+  width: 100%;
+  position: relative;
+}
+
+.participantLabel {
+  width: 100%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 15px;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.labelText {
+  font-family: 'Poppins', sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 24px;
+  color: #343434;
+  margin: 0;
+}
+
+.amount {
+  font-family: 'Poppins', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 24px;
+  color: #B6B6B6;
+  margin-left: 5px;
+}
+
+.participantsList {
+  margin-top: 20px;
+  max-height: 280px;
+  overflow-y: auto;
+}
+
+.noParticipants {
+  font-family: 'Poppins', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  color: #808080;
+  text-align: center;
+  margin-top: 40px;
+}
+
+.participantItem {
+  width: 100%;
+  height: 50px;
+  position: relative;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 5px 10px;
+}
+
+.participantInfo {
+  display: flex;
+  align-items: center;
+}
+
+.profile {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-right: 14px;
+}
+
+.profileImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.participantName {
+  font-family: 'Poppins', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  color: #808080;
+}
+
+.statusCheckbox {
+  margin-left: auto;
+  height: 18px;
+  width: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.checkbox {
+  height: 18px;
+  width: 18px;
+  cursor: default;
+  accent-color: #00C45F;
+}
+
+/* Style for pending status checkboxes */
+input[data-status="pending"].checkbox {
+  accent-color: #fff;
+  background-color: #fff;
+  border: 2px solid #b6b6b6;
+}
+
+.actionButtons {
+  display: flex;
+  gap: 8px;
+  margin-left: auto;
+}
+
+.profileInitial {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #E9ECEF;
+  color: #495057;
+  font-weight: 500;
+  font-size: 14px;
+  border-radius: 50%;
+}
+
+.participantActions {
+  display: flex;
+  align-items: center;
+}
+
+.statusIndicator {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+}
+
+.acceptedStatus {
+  display: flex;
+  align-items: center;
+  color: #00C45F;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.acceptedStatus svg {
+  margin-right: 4px;
+  font-size: 12px;
+}
+
+.pendingStatus {
+  color: #F59E0B;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.statusMessage {
+  font-family: 'Poppins', sans-serif;
+  font-style: italic;
+  font-size: 14px;
+  color: #3694FF;
+  text-align: center;
+  margin-top: 15px;
+  background-color: rgba(54, 148, 255, 0.1);
+  padding: 8px;
+  border-radius: 4px;
+}
+
+.actionButtonsBottom {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 15px;
+  border-top: 1px solid #e1e1e1;
+  padding-top: 15px;
+}
+
+.rejectButton,
+.acceptButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 12px;
+  width: auto;
+  min-width: 80px;
+  height: 32px;
+  border: none;
+  border-radius: 6px;
+  font-family: 'Poppins', sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 13px;
+  color: #FFFFFF;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.rejectButton {
+  background: #ED0000;
+}
+
+.rejectButton:hover:not(:disabled) {
+  background: #D60000;
+  transform: translateY(-1px);
+}
+
+.acceptButton {
+  background: #00C45F;
+}
+
+.acceptButton:hover:not(:disabled) {
+  background: #00B355;
+  transform: translateY(-1px);
+}
+
+.rejectButton svg,
+.acceptButton svg {
+  font-size: 12px;
+  margin-right: 6px;
+}
+
+.rejectButton:active:not(:disabled),
+.acceptButton:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.rejectButton:disabled,
+.acceptButton:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.youLabel {
+  font-style: italic;
+  color: #3694FF;
+  font-size: 14px;
+}
+
+@media (max-width: 768px) {
+  .participantLabel {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .actionButtons {
+    margin-left: 0;
+    margin-top: 8px;
+    align-self: flex-end;
+  }
+} 
