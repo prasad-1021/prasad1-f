@@ -1,167 +1,117 @@
-import React, { createContext, useContext, useState, useEffect, useRef, useCallback } from 'react';
-import { 
-  getCurrentUser, 
-  login as loginService, 
-  logout as logoutService,
-  register as registerService,
-  refreshToken,
-  isTokenExpired,
-  refreshSession,
-  getAuthToken
-} from '../services/userService';
+import React, { createContext, useState, useContext, useEffect, useRef, useCallback } from 'react';
+import { login as loginService, register as registerService, logout as logoutService, refreshToken, getCurrentUser } from '../services/userService';
+import { useNavigate } from 'react-router-dom';
+import api from '../services/api';
 
-// Auth context
-const AuthContext = createContext(null);
+// Create context
+const AuthContext = createContext({
+  user: null,
+  isAuthenticated: false,
+  loading: false,
+  error: null,
+  login: () => {},
+  register: () => {},
+  logout: () => {},
+  updateUser: () => {},
+  refreshSession: () => {}
+});
 
-// Hook to use auth
-export const useAuth = () => {
-  const context = useContext(AuthContext);
-  if (!context) {
-    throw new Error('useAuth must be used within an AuthProvider');
-  }
-  return context;
-};
+// Custom hook to use the auth context
+export const useAuth = () => useContext(AuthContext);
 
-// Auth Provider wrapper
+// Provider component
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-
-  // Refresh every 30 minutes
-  const REFRESH_INTERVAL = 30 * 60 * 1000;
+  const [initialAuthCheckDone, setInitialAuthCheckDone] = useState(false);
   const refreshIntervalRef = useRef(null);
+  const navigate = useNavigate();
 
-  // Check if user is logged in
-  const checkAuth = async () => {
-    try {
-      setLoading(true);
-      const token = getAuthToken();
-      
-      if (!token) {
-        // No token found
-        console.log("No auth token found during checkAuth");
-        setUser(null);
-        setLoading(false);
-        return;
-      }
-      
-      // Try to refresh token if expired
+  // Initial authentication check
+  useEffect(() => {
+    const checkAuth = async () => {
       try {
-        if (isTokenExpired(token)) {
-          try {
-            console.log("Token expired, attempting refresh");
-            await refreshToken();
-          } catch (refreshError) {
-            console.error("Token refresh failed:", refreshError);
-            // Continue with getting user data from localStorage as fallback
-          }
+        // Check if we have a token
+        const token = localStorage.getItem('cnnct_token');
+        
+        if (!token) {
+          setUser(null);
+          setLoading(false);
+          setInitialAuthCheckDone(true);
+          return;
         }
-      } catch (tokenError) {
-        console.error("Error checking token expiration:", tokenError);
-        // Continue anyway to try to get user data
-      }
-      
-      // Try to get user data from API
-      try {
+        
+        // Token exists, try to get user data
         const userData = await getCurrentUser();
         
         if (userData) {
+          console.log('User authenticated from stored token');
           setUser(userData);
-          return;
-        }
-      } catch (apiError) {
-        console.error("Error getting current user from API:", apiError);
-        // Fall back to localStorage if API fails
-      }
-      
-      // If API failed, try to get user from localStorage
-      try {
-        const storedUserString = localStorage.getItem('cnnct_user');
-        if (storedUserString) {
-          const storedUser = JSON.parse(storedUserString);
-          console.log("Using stored user as fallback:", storedUser);
-          setUser(storedUser);
         } else {
+          console.log('Token exists but user data fetch failed');
+          // Clear invalid token
+          localStorage.removeItem('cnnct_token');
+          localStorage.removeItem('cnnct_user');
           setUser(null);
         }
-      } catch (storageError) {
-        console.error("Error getting user from localStorage:", storageError);
-        setUser(null);
-      }
-    } catch (error) {
-      console.error('Auth check failed:', error);
-      setUser(null);
-      setError('Session expired. Please login again.');
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  // Setup token refresh
-  const setupTokenRefresh = useCallback(() => {
-    if (refreshIntervalRef.current) {
-      clearInterval(refreshIntervalRef.current);
-    }
-    
-    // Only set refresh if user is logged in
-    if (user) {
-      refreshIntervalRef.current = setInterval(async () => {
-        try {
-          await refreshSession();
-        } catch (error) {
-          console.error('Token refresh failed:', error);
-        }
-      }, REFRESH_INTERVAL);
-    }
-  }, [user, REFRESH_INTERVAL]);
-
-  // Check auth on load
-  useEffect(() => {
-    const initAuth = async () => {
-      try {
-        await checkAuth();
-        
-        // Process user data after loading
-        if (user && user.name && (!user.firstName || !user.lastName)) {
-          const nameParts = user.name.split(' ');
-          const firstName = nameParts[0] || '';
-          const lastName = nameParts.slice(1).join(' ') || '';
-          
-          // Update the user object with firstName and lastName
-          setUser(prev => ({
-            ...prev,
-            firstName,
-            lastName
-          }));
-          
-          console.log('Added firstName/lastName from name field on init:', { firstName, lastName });
-        }
       } catch (error) {
-        console.error('Auth initialization error:', error);
+        console.error('Auth check error:', error);
+        setUser(null);
+      } finally {
+        setLoading(false);
+        setInitialAuthCheckDone(true);
       }
     };
-    
-    initAuth();
-    
-    // Cleanup interval on unmount
-    return () => {
-      if (refreshIntervalRef.current) {
-        clearInterval(refreshIntervalRef.current);
-      }
-    };
+
+    checkAuth();
   }, []);
 
-  // Setup refresh when user changes
+  // Set up token refresh interval when authenticated
   useEffect(() => {
-    setupTokenRefresh();
+    if (user && !refreshIntervalRef.current) {
+      console.log('Setting up token refresh interval');
+      
+      // Refresh every 10 minutes (600000 ms)
+      refreshIntervalRef.current = setInterval(refreshSession, 600000);
+    }
     
     return () => {
       if (refreshIntervalRef.current) {
         clearInterval(refreshIntervalRef.current);
+        refreshIntervalRef.current = null;
       }
     };
-  }, [setupTokenRefresh]);
+  }, [user]);
+
+  // Refresh session
+  const refreshSession = async () => {
+    if (!user) return false;
+    
+    try {
+      const token = await refreshToken();
+      return !!token;
+    } catch (error) {
+      console.error('Token refresh failed:', error);
+      
+      // Token refresh failed, user needs to login again
+      setUser(null);
+      
+      // Clear interval
+      if (refreshIntervalRef.current) {
+        clearInterval(refreshIntervalRef.current);
+        refreshIntervalRef.current = null;
+      }
+      
+      // Redirect to login if not already there
+      const currentPath = window.location.pathname;
+      if (currentPath !== '/signin' && currentPath !== '/signup') {
+        navigate('/signin');
+      }
+      
+      return false;
+    }
+  };
 
   // Login user
   const login = async (username, password) => {
@@ -204,6 +154,13 @@ export const AuthProvider = ({ children }) => {
           )) {
           // More user-friendly error message for server issues
           const errorMessage = 'Cannot connect to the authentication server. Please check your internet connection and try again later.';
+          setError(errorMessage);
+          throw new Error(errorMessage);
+        }
+        
+        // Handle invalid credentials specifically for better UX
+        if (apiError.message && apiError.message.includes('Invalid username or password')) {
+          const errorMessage = 'The email or password you entered is incorrect. Please try again.';
           setError(errorMessage);
           throw new Error(errorMessage);
         }
@@ -296,4 +253,4 @@ export const AuthProvider = ({ children }) => {
   );
 };
 
-export default AuthContext; 
+export default AuthContext;

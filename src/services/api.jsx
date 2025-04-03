@@ -37,7 +37,7 @@ const USE_MOCK_DATA = false;
 // Create axios instance with base configuration
 const api = axios.create({
     baseURL: API_BASE_URL,
-    timeout: 10000,
+    timeout: 15000, // Increase timeout to 15 seconds for potentially slow connections
     headers: {
         'Content-Type': 'application/json'
     },
@@ -78,34 +78,15 @@ api.interceptors.response.use(
         
         // Skip auth redirect for logout endpoint 401 errors
         const isLogoutEndpoint = error.config?.url?.includes('/auth/logout');
+        const isLoginEndpoint = error.config?.url?.includes('/auth/login');
         
-        if (error.response?.status === 401 && !isLogoutEndpoint) {
+        if (error.response?.status === 401 && !isLogoutEndpoint && !isLoginEndpoint) {
             // Handle unauthorized access
             console.log('Unauthorized access - redirecting to login');
             localStorage.removeItem('cnnct_token');
             localStorage.removeItem('cnnct_user');
             localStorage.removeItem('cnnct_refresh_token');
             window.location.href = '/signin';
-        }
-
-        if (USE_MOCK_DATA && error.config) {
-            // Handle mock participant data requests
-            if (error.config.url.includes('/participants') || error.config.url.includes('/meetings/')) {
-                const meetingIdMatch = error.config.url.match(/\/meetings\/([^\/]+)\/participants/);
-                
-                if (meetingIdMatch && meetingIdMatch[1]) {
-                    const meetingId = meetingIdMatch[1];
-                    console.log('Generating mock participants for meeting:', meetingId);
-                    
-                    // Return mock participant data
-                    return Promise.resolve({
-                        data: {
-                            success: true,
-                            data: getMockParticipants(meetingId)
-                        }
-                    });
-                }
-            }
         }
 
         return Promise.reject(error);
@@ -156,4 +137,4 @@ export const useApi = () => {
 };
 
 // Export the api instance as the default export for direct usage
-export default api; 
+export default api;
