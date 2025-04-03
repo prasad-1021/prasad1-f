@@ -7,10 +7,47 @@
 import axios from 'axios';
 import { mockUsers, mockTokens, simulateApiDelay, simulateApiError, addMockUser, updateMockUser } from './mockData';
 
-// Use mock data if in development mode or API_URL is not set
-const USE_MOCK_DATA = false;
+// Set this to true to use mock data even when API_URL is set
+// This is useful for testing when the backend is down
+const USE_FALLBACK_MODE = true;
+
+// Debug mode can be controlled via environment variable
+const DEBUG_MODE = process.env.REACT_APP_DEBUG === 'true';
+
+// Use mock data if in development mode or API_URL is not set or fallback mode is enabled
+const USE_MOCK_DATA = USE_FALLBACK_MODE || false;
+
+// Add debug logging function
+const debugLog = (...args) => {
+  if (DEBUG_MODE) {
+    console.log('[DEBUG]', ...args);
+  }
+};
+
 // Update API URL to use Render backend by default
-const API_URL = process.env.REACT_APP_API_URL || 'https://eventmeeting.onrender.com/api';
+// Make sure we don't double-append /api if it's already in the URL
+const API_URL = (() => {
+  // Check if we're in production on Vercel
+  const isVercelProduction = process.env.NODE_ENV === 'production' && 
+                             process.env.VERCEL === '1';
+  
+  // Default base URL from environment or fallback
+  let baseUrl = process.env.REACT_APP_API_URL || 'https://eventmeeting.onrender.com';
+  
+  // For Vercel production, ensure we're using HTTPS
+  if (isVercelProduction && !baseUrl.startsWith('https://')) {
+    baseUrl = 'https://eventmeeting.onrender.com';
+  }
+  
+  // Check if baseUrl already ends with /api
+  if (baseUrl.endsWith('/api')) {
+    return baseUrl;
+  }
+  
+  return baseUrl + '/api';
+})();
+
+console.log('User service using API URL:', API_URL);
 
 // Local storage keys
 const USER_KEY = 'cnnct_user';
@@ -229,8 +266,22 @@ export const refreshSession = async () => {
  * @returns {string} Properly formatted URL
  */
 const formatApiUrl = (url) => {
-  // If URL starts with http, assume it's a full URL
+  // If URL starts with http, ensure it includes /api before the endpoints
   if (url.startsWith('http')) {
+    // Check if the URL already has /api in the path
+    if (url.includes('/api/')) {
+      return url;
+    }
+    
+    // URL has domain but missing /api - insert it before specific endpoints
+    const domainPattern = /^(https?:\/\/[^\/]+)\/(users|auth|meetings|preferences)/;
+    const match = url.match(domainPattern);
+    if (match) {
+      const domain = match[1];
+      const restOfUrl = url.substring(domain.length);
+      return `${domain}/api${restOfUrl}`;
+    }
+    
     return url;
   }
 
@@ -238,21 +289,27 @@ const formatApiUrl = (url) => {
   if (url.startsWith('/')) {
     // Extract domain from API_URL (e.g., http://localhost:5000)
     const domain = API_URL.split('/api')[0];
-    return `${domain}${url}`;
+    return `${domain}/api${url}`;
   }
 
   // Otherwise, ensure we have the full API URL
+  // Make sure we don't double-append /api if it's already in the URL
+  if (url.startsWith('api/')) {
+    return `${API_URL.replace(/\/api$/, '')}/${url}`;
+  }
+  
   return `${API_URL}/${url.replace(/^api\//, '')}`;
 };
 
 /**
  * Make an authenticated API request
  * @param {string} url - The URL to fetch
- * @param {Object} options - Fetch options
+ * @param {string} method - HTTP method (GET, POST, PUT, DELETE)
+ * @param {Object} data - Request payload (for POST/PUT)
  * @returns {Promise<any>} Response data
  */
-export const authenticatedRequest = async (url, options = {}) => {
-  console.log(`authenticatedRequest called for URL: ${url}`);
+export const authenticatedRequest = async (url, method = 'GET', data = null) => {
+  console.log(`authenticatedRequest called for URL: ${url} with method: ${method}`);
   
   // Ensure URL is properly formatted
   const formattedUrl = formatApiUrl(url);
@@ -310,17 +367,21 @@ export const authenticatedRequest = async (url, options = {}) => {
   }
   
   const requestOptions = {
-    ...options,
+    method,
     headers: {
-      ...options.headers,
       'Authorization': `Bearer ${currentToken}`,
       'Content-Type': 'application/json',
-    },
+    }
   };
+  
+  // Add body for POST/PUT requests
+  if (data && (method === 'POST' || method === 'PUT')) {
+    requestOptions.body = JSON.stringify(data);
+  }
   
   console.log(`Making authenticated request to: ${formattedUrl}`);
   console.log('Request options:', { 
-    method: requestOptions.method || 'GET',
+    method: requestOptions.method,
     headers: { 
       Authorization: 'Bearer ****' + currentToken.slice(-5), // Show only last 5 chars for security
       'Content-Type': requestOptions.headers['Content-Type']
@@ -332,6 +393,10 @@ export const authenticatedRequest = async (url, options = {}) => {
     const response = await fetch(formattedUrl, requestOptions);
     console.log(`Response status: ${response.status} ${response.statusText}`);
     
+    // Clone the response for multiple reads if needed
+    const responseClone = response.clone();
+    
+    // Handle non-OK responses
     if (!response.ok) {
       // If unauthorized, logout but don't redirect immediately
       if (response.status === 401) {
@@ -340,27 +405,121 @@ export const authenticatedRequest = async (url, options = {}) => {
         return { success: false, message: 'Session expired. Please log in again.' };
       }
       
-      const error = await response.json();
-      console.error('Request failed with error:', error);
-      return { success: false, message: error.message || 'Failed to make authenticated request' };
+      // Try to parse the response as JSON
+      try {
+        const errorData = await response.json();
+        console.error('Request failed with error:', errorData);
+        return { 
+          success: false, 
+          message: errorData.message || `Request failed with status ${response.status}`,
+          status: response.status,
+          error: errorData
+        };
+      } catch (parseError) {
+        // If JSON parsing fails, it might be HTML
+        try {
+          const textResponse = await responseClone.text();
+          
+          // Check if the response is HTML
+          if (textResponse.includes('<!DOCTYPE') || textResponse.includes('<html')) {
+            console.error('Received HTML response instead of JSON. Backend server might be down.');
+            return { 
+              success: false, 
+              message: 'Backend server error. Please try again later.',
+              status: response.status,
+              isHtmlResponse: true
+            };
+          }
+          
+          // Otherwise, return the text response
+          return { 
+            success: false, 
+            message: textResponse || `Request failed with status ${response.status}`,
+            status: response.status
+          };
+        } catch (textError) {
+          // If we can't even read as text
+          return {
+            success: false,
+            message: `Request failed with status ${response.status}`,
+            status: response.status
+          };
+        }
+      }
     }
     
-    const responseData = await response.json();
-    console.log('Response data received:', 
-      Array.isArray(responseData) 
-        ? `Array with ${responseData.length} items` 
-        : responseData.data 
-          ? `Object with data property containing ${Array.isArray(responseData.data) ? responseData.data.length : 'object'}`
-          : 'Object without data property'
-    );
-    // Normalize response to always have success property
-    if (typeof responseData.success === 'undefined') {
-      return { ...responseData, success: true };
+    // Try to parse the successful response as JSON
+    try {
+      const responseData = await response.json();
+      console.log('Response data received:', 
+        Array.isArray(responseData) 
+          ? `Array with ${responseData.length} items` 
+          : responseData.data 
+            ? `Object with data property containing ${Array.isArray(responseData.data) ? responseData.data.length : 'object'}`
+            : 'Object without data property'
+      );
+      
+      // Normalize response to always have success property
+      if (typeof responseData.success === 'undefined') {
+        return { ...responseData, success: true };
+      }
+      return responseData;
+    } catch (parseError) {
+      // If the response is not JSON
+      console.error('Error parsing JSON response:', parseError);
+      try {
+        const textResponse = await responseClone.text();
+        
+        // Check if the response is HTML
+        if (textResponse.includes('<!DOCTYPE') || textResponse.includes('<html')) {
+          console.error('Received HTML response instead of JSON. Backend server might be down.');
+          return { 
+            success: false, 
+            message: 'Backend server error. Please try again later.',
+            isHtmlResponse: true
+          };
+        }
+        
+        // If it's not HTML but still not valid JSON, return a generic success
+        return { 
+          success: true, 
+          message: 'Request successful but response was not JSON',
+          rawResponse: textResponse 
+        };
+      } catch (textError) {
+        // If we can't even read as text at this point, return a generic response
+        return {
+          success: true,
+          message: 'Request successful but could not read response content'
+        };
+      }
     }
-    return responseData;
   } catch (error) {
     console.error('Error in authenticatedRequest:', error);
-    return { success: false, message: error.message || 'Network error' };
+    
+    // Check if it's a network error (like CORS or server down)
+    if (error.message === 'Network Error' || error.message.includes('Failed to fetch')) {
+      return { 
+        success: false, 
+        message: 'Cannot connect to server. Please check your internet connection or try again later.',
+        isNetworkError: true
+      };
+    }
+    
+    // HTML parsing error indicates backend issue
+    if (error.message && error.message.includes('<!DOCTYPE')) {
+      return {
+        success: false,
+        message: 'Backend server error. Please try again later.',
+        isHtmlResponse: true
+      };
+    }
+    
+    return { 
+      success: false, 
+      message: error.message || 'Network error',
+      error
+    };
   }
 };
 
@@ -489,10 +648,7 @@ export const updateUserProfile = async (profileData) => {
   
   try {
     // Call the API to update user data - using the correct endpoint
-    const response = await authenticatedRequest(`${API_URL}/auth/updatedetails`, {
-      method: 'PUT',
-      body: JSON.stringify(profileData),
-    });
+    const response = await authenticatedRequest(`${API_URL}/auth/updatedetails`, 'PUT', profileData);
 
     console.log('Profile update API response:', response);
 
@@ -573,21 +729,56 @@ export const login = async (identifier, password) => {
   console.log('Starting login process for:', identifier);
   
   try {
-    const response = await fetch(`${API_URL}/auth/login`, {
-      method: 'POST',
+    // Use axios instead of fetch for better error handling
+    debugLog('Sending login request to:', `${API_URL}/auth/login`);
+    debugLog('Login credentials:', { username: identifier, password: '********' });
+    
+    const response = await axios.post(`${API_URL}/auth/login`, {
+      username: identifier, 
+      password
+    }, {
+      // Add proper headers
       headers: {
-        'Content-Type': 'application/json',
+        'Content-Type': 'application/json'
       },
-      body: JSON.stringify({ username: identifier, password }),
+      validateStatus: function (status) {
+        // Only treat 2xx status codes as successful
+        return status >= 200 && status < 300;
+      },
+      transformResponse: [(data) => {
+        // Handle empty responses
+        if (!data) return { success: false, message: 'Empty response from server' };
+        
+        // Check if response contains HTML (often indicates server error)
+        if (typeof data === 'string' && data.includes('<!DOCTYPE html>')) {
+          console.error('Server returned HTML instead of JSON');
+          return { 
+            success: false, 
+            message: 'Server returned HTML instead of JSON. The backend may be unavailable.' 
+          };
+        }
+        
+        // Try to parse as JSON
+        try {
+          return JSON.parse(data);
+        } catch (e) {
+          console.error('Failed to parse response as JSON:', e);
+          return { 
+            success: false, 
+            message: 'Invalid JSON response from server' 
+          };
+        }
+      }]
     });
     
-    if (!response.ok) {
-      const error = await response.json();
-      console.error('Login failed:', error);
-      throw new Error(error.message || 'Login failed');
+    debugLog('Login response status:', response.status);
+    const data = response.data;
+    
+    // Check for explicit error in transformed data
+    if (data.success === false) {
+      throw new Error(data.message || 'Login failed');
     }
     
-    const data = await response.json();
     console.log('Login response structure:', {
       hasUser: !!data.user,
       hasToken: !!data.token || !!data.accessToken,
@@ -627,11 +818,36 @@ export const login = async (identifier, password) => {
     return data;
   } catch (error) {
     // Check for connection refused error
-    if (error.name === 'TypeError' && error.message === 'Failed to fetch') {
+    if (error.message === 'Network Error') {
       console.error('Cannot connect to server. Please check if the backend server is running.');
-      throw new Error('Cannot connect to server. Please start the backend with "npm run backend"');
+      throw new Error('Cannot connect to server. Please check if the backend is available');
     }
-    throw error;
+    
+    // Handle HTML responses (which indicate a server error)
+    if (error.response && error.response.headers['content-type'] && 
+        error.response.headers['content-type'].includes('text/html')) {
+      console.error('Backend server returned HTML instead of JSON:', error);
+      throw new Error('Backend server error. Please try again later or contact support');
+    }
+    
+    // Log detailed error information
+    debugLog('Login error details:', {
+      status: error.response?.status,
+      statusText: error.response?.statusText,
+      data: error.response?.data,
+      headers: error.response?.headers,
+      config: {
+        url: error.config?.url,
+        method: error.config?.method,
+        baseURL: error.config?.baseURL,
+        headers: error.config?.headers
+      }
+    });
+    
+    // Extract error message from response if available
+    const errorMessage = error.response?.data?.message || error.message || 'Login failed';
+    console.error('Login error:', errorMessage);
+    throw new Error(errorMessage);
   }
 };
 
@@ -678,10 +894,11 @@ export const updatePassword = async (currentPassword, newPassword) => {
   
   try {
     // Use the auth endpoint for password updates
-    const response = await authenticatedRequest(`${API_URL}/auth/updatepassword`, {
-      method: 'PUT',
-      body: JSON.stringify({ currentPassword, newPassword }),
-    });
+    const response = await authenticatedRequest(
+      `${API_URL}/auth/updatepassword`, 
+      'PUT', 
+      { currentPassword, newPassword }
+    );
     
     console.log('Password update response:', response);
     
@@ -697,10 +914,11 @@ export const updatePassword = async (currentPassword, newPassword) => {
     // Try the users endpoint as fallback
     try {
       console.log('Trying users endpoint as fallback');
-      const fallbackResponse = await authenticatedRequest(`${API_URL}/users/password`, {
-        method: 'PUT',
-        body: JSON.stringify({ currentPassword, newPassword }),
-      });
+      const fallbackResponse = await authenticatedRequest(
+        `${API_URL}/users/password`, 
+        'PUT', 
+        { currentPassword, newPassword }
+      );
       
       console.log('Fallback password update response:', fallbackResponse);
       return fallbackResponse;
@@ -728,10 +946,11 @@ export const resetPassword = async (newPassword) => {
   
   try {
     // Try the dedicated password reset endpoint first
-    const response = await authenticatedRequest(`${API_URL}/users/password/reset`, {
-      method: 'PUT',
-      body: JSON.stringify({ newPassword }),
-    });
+    const response = await authenticatedRequest(
+      `${API_URL}/users/password/reset`, 
+      'PUT', 
+      { newPassword }
+    );
     
     console.log('Password reset response:', response);
     return response;

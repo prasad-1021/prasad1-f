@@ -167,24 +167,53 @@ export const AuthProvider = ({ children }) => {
   const login = async (username, password) => {
     try {
       setLoading(true);
-      console.log('Attempting login for username:', username);
-      const userData = await loginService(username, password);
-      console.log('Login successful, user data:', userData);
+      setError(null);
       
-      // Process user data to add firstName/lastName if needed
-      if (userData && userData.user) {
-        if (userData.user.name && (!userData.user.firstName || !userData.user.lastName)) {
+      console.log('Attempting login for user:', username);
+      
+      try {
+        const userData = await loginService(username, password);
+        
+        // Log successful login
+        console.log('Login successful, user data received:', {
+          userId: userData.user?.id,
+          hasToken: !!userData.token,
+          userFields: userData.user ? Object.keys(userData.user) : []
+        });
+        
+        // Add firstName/lastName from name field if needed
+        if (userData.user && userData.user.name && (!userData.user.firstName || !userData.user.lastName)) {
           const nameParts = userData.user.name.split(' ');
           userData.user.firstName = nameParts[0] || '';
           userData.user.lastName = nameParts.slice(1).join(' ') || '';
           console.log('Added firstName/lastName from name field:', userData.user);
         }
+        
+        setUser(userData.user || userData);
+        return userData;
+      } catch (apiError) {
+        console.error('Login failed with error:', apiError);
+        
+        // Check for HTML response or server connectivity issues
+        if (apiError.message && (
+            apiError.message.includes('HTML') || 
+            apiError.message.includes('backend') || 
+            apiError.message.includes('server') ||
+            apiError.message.includes('<!DOCTYPE') ||
+            apiError.message.includes('network error')
+          )) {
+          // More user-friendly error message for server issues
+          const errorMessage = 'Cannot connect to the authentication server. Please check your internet connection and try again later.';
+          setError(errorMessage);
+          throw new Error(errorMessage);
+        }
+        
+        // Pass through the original error
+        setError(apiError.message || 'Login failed');
+        throw apiError;
       }
-      
-      setUser(userData.user || userData);
-      return userData;
     } catch (error) {
-      console.error('Login failed with error:', error);
+      console.error('Login process error:', error);
       setError(error.message || 'Login failed');
       throw error;
     } finally {

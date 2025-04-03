@@ -9,10 +9,30 @@ import { getMockParticipants } from './mockData';
  */
 
 // Configuration for API base URL
-const API_BASE_URL = process.env.REACT_APP_API_URL || 'https://eventmeeting.onrender.com';
+const API_BASE_URL = (() => {
+    // Check if we're in production on Vercel
+    const isVercelProduction = process.env.NODE_ENV === 'production' && 
+                               process.env.VERCEL === '1';
+    
+    // Use environment variable if available
+    if (process.env.REACT_APP_API_URL) {
+        return process.env.REACT_APP_API_URL;
+    }
+    
+    // Default for Vercel production
+    if (isVercelProduction) {
+        return 'https://eventmeeting.onrender.com';
+    }
+    
+    // Fallback for local development and other environments
+    return 'https://eventmeeting.onrender.com';
+})();
+
+// Add explicit logging of API URL for debugging
+console.log('Using API base URL:', API_BASE_URL);
 
 // Use mock data in development mode
-const USE_MOCK_DATA = process.env.REACT_APP_USE_MOCK_DATA === 'true' || false;
+const USE_MOCK_DATA = false;
 
 // Create axios instance with base configuration
 const api = axios.create({
