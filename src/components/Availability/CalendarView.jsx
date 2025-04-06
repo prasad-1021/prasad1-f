@@ -5,9 +5,9 @@ import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import listPlugin from '@fullcalendar/list';
 import styles from './CalendarView.module.css';
-import { getAvailability } from 'services/availabilityService';
+import { getAvailability } from '../../services/availabilityService';
 import { availabilityToEvents, getStatusColor } from './utils';
-import { getEvents } from 'services/eventService';
+import { getEvents } from '../../services/eventService';
 import { HiChevronLeft, HiChevronRight } from 'react-icons/hi';
 import { BiSearch } from 'react-icons/bi';
 

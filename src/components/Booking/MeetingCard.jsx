@@ -2,8 +2,8 @@ import React, { useState, useCallback, useEffect } from 'react';
 import styles from './MeetingCard.module.css';
 import { HiUsers, HiCheck, HiX } from 'react-icons/hi';
 import ParticipantsPopup from '../ParticipantsPopup';
-import api from 'services/api';
-import { useToast } from 'contexts/ToastContext';
+import api from '../../services/api';
+import { useToast } from '../../contexts/ToastContext';
 import { format, parse, isValid } from 'date-fns';
 
 const MeetingCard = ({ 
