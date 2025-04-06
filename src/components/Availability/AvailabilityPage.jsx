@@ -7,7 +7,6 @@ import AvailabilityForm from './AvailabilityForm';
 import { getUserAvailability, getTimezone, getEventType } from '../../services/availabilityService';
 import { defaultTimeGap } from './data.jsx';
 import { toast } from 'react-toastify';
-import { Segmented } from 'antd';
 
 const AvailabilityPage = () => {
     const [activeTab, setActiveTab] = useState('availability');
