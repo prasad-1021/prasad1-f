@@ -35,7 +35,10 @@ export const getCurrentUser = async () => {
     
     try {
       // Use auth/me endpoint which is actually implemented on the backend
-      const response = await axios.get(`${API_URL}/auth/me`, {
+      const meUrl = API_URL.includes('/api') ? `${API_URL}/auth/me` : `${API_URL.replace(/\/$/, '')}/api/auth/me`;
+      console.log('Current user URL:', meUrl);
+      
+      const response = await axios.get(meUrl, {
         headers: {
           Authorization: `Bearer ${token}`,
           'Accept': 'application/json'
@@ -148,7 +151,10 @@ export const refreshToken = async () => {
     const refreshToken = localStorage.getItem(REFRESH_TOKEN_KEY);
     if (!refreshToken) throw new Error('No refresh token');
     
-    const response = await axios.post(`${API_URL}/auth/refresh`, {
+    const refreshUrl = API_URL.includes('/api') ? `${API_URL}/auth/refresh` : `${API_URL.replace(/\/$/, '')}/api/auth/refresh`;
+    console.log('Refresh token URL:', refreshUrl);
+    
+    const response = await axios.post(refreshUrl, {
       refreshToken
     });
     
@@ -245,8 +251,14 @@ const formatApiUrl = (url) => {
     return `${domain}${url}`;
   }
 
+  // Make sure we have the correct /api path
+  let baseUrl = API_URL;
+  if (!API_URL.includes('/api')) {
+    baseUrl = `${API_URL.replace(/\/$/, '')}/api`;
+  }
+
   // Otherwise, ensure we have the full API URL
-  return `${API_URL}/${url.replace(/^api\//, '')}`;
+  return `${baseUrl}/${url.replace(/^api\//, '')}`;
 };
 
 /**
@@ -422,7 +434,11 @@ export const register = async (userData) => {
     return { user: createdUser, ...mockTokens };
   }
   
-  const response = await fetch(`${API_URL}/auth/signup`, {
+  // Make sure the URL is properly formatted with /api/auth/signup
+  const signupUrl = API_URL.includes('/api') ? `${API_URL}/auth/signup` : `${API_URL.replace(/\/$/, '')}/api/auth/signup`;
+  console.log('Signup URL:', signupUrl);
+  
+  const response = await fetch(signupUrl, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -588,7 +604,11 @@ export const login = async (identifier, password) => {
   console.log('Starting login process for:', identifier);
   
   try {
-    const response = await fetch(`${API_URL}/auth/login`, {
+    // Make sure the URL is properly formatted with /api/auth/login
+    const loginUrl = API_URL.includes('/api') ? `${API_URL}/auth/login` : `${API_URL.replace(/\/$/, '')}/api/auth/login`;
+    console.log('Login URL:', loginUrl);
+    
+    const response = await fetch(loginUrl, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
