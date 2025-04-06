@@ -276,7 +276,7 @@ export const copyTimeSlots = async (sourceDay, targetDays) => {
  * @returns {Promise<Object>} Timezone object
  */
 export const getTimezone = async () => {
-  return authenticatedRequest(`${API_URL}/users/preferences/timezone`);
+  return authenticatedRequest(`${getBaseUrl()}/users/preferences/timezone`);
 };
 
 /**
@@ -285,7 +285,7 @@ export const getTimezone = async () => {
  * @returns {Promise<Object>} Updated preferences object
  */
 export const updateTimezone = async (timezone) => {
-  return authenticatedRequest(`${API_URL}/users/preferences/timezone`, {
+  return authenticatedRequest(`${getBaseUrl()}/users/preferences/timezone`, {
     method: 'PUT',
     body: JSON.stringify({ timezone })
   });
@@ -377,7 +377,7 @@ export const checkAvailabilityConflict = async (userId, date, startTime, endTime
   console.log(`Date: ${date}, Time: ${normalizedStartTime} - ${normalizedEndTime}`);
   
   try {
-    const response = await authenticatedRequest(`${API_URL}/meetings/check-availability`, {
+    const response = await authenticatedRequest(`${getBaseUrl()}/meetings/check-availability`, {
       method: 'POST',
       body: JSON.stringify({ 
         userId, // This could be an email or a user ID
