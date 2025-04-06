@@ -1,0 +1,222 @@
+.footer {
+  background-color: #fff;
+  padding: 40px 80px;
+  border-radius: 16px;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.05);
+  margin-top: 60px;
+  width: 100%;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.footerContent {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.authButtonsContainer {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.loginButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 20px;
+  background-color: #EFF0EC;
+  border-radius: 8px;
+  color: #000;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 16px;
+  transition: background-color 0.2s;
+  width: 96px;
+  height: 48px;
+}
+
+.loginButton:hover {
+  background-color: #e5e6e2;
+}
+
+.signupButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 20px;
+  background-color: #1877F2;
+  border-radius: 32px;
+  color: #fff;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 16px;
+  transition: background-color 0.2s;
+  width: 174px;
+  height: 48px;
+}
+
+.signupButton:hover {
+  background-color: #1669d5;
+}
+
+.footerLinksContainer {
+  display: flex;
+  justify-content: space-between;
+  gap: 80px;
+}
+
+.linksColumn {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.columnTitle {
+  font-size: 14px;
+  font-weight: 600;
+  color: #000;
+  margin: 0 0 8px 0;
+  text-decoration: none;
+  display: block;
+}
+
+.columnTitle:hover {
+  color: #1877F2;
+}
+
+.footerLink {
+  color: #000;
+  text-decoration: none;
+  font-size: 14px;
+  transition: color 0.2s;
+}
+
+.footerLink:hover {
+  color: #1877F2;
+}
+
+.footerBottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 30px;
+  padding-top: 30px;
+}
+
+.acknowledgement {
+  max-width: 655px;
+}
+
+.acknowledgement p {
+  font-family: 'Poppins', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 21px;
+  letter-spacing: 0.13px;
+  color: #1E2330;
+  margin: 0;
+}
+
+.socialLinks {
+  display: flex;
+  gap: 24px;
+}
+
+.socialIcon {
+  color: #1E2330;
+  transition: color 0.2s;
+}
+
+.socialIcon:hover {
+  color: #1877F2;
+}
+
+@media (max-width: 1024px) {
+  .footer {
+    padding: 30px 40px;
+    width: 90%;
+  }
+  
+  .footerLinksContainer {
+    gap: 40px;
+  }
+}
+
+@media (max-width: 768px) {
+  .footer {
+    padding: 30px 20px;
+    border-radius: 12px;
+    width: 90%;
+    margin-top: 40px;
+  }
+  
+  .footerLinksContainer {
+    flex-direction: column;
+    gap: 30px;
+  }
+  
+  .footerBottom {
+    flex-direction: column;
+    gap: 20px;
+    align-items: flex-start;
+  }
+  
+  .acknowledgement {
+    max-width: 100%;
+  }
+  
+  .socialLinks {
+    width: 100%;
+    justify-content: center;
+  }
+  
+  .authButtonsContainer {
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .footer {
+    padding: 25px 15px;
+    border-radius: 8px;
+    width: 95%;
+    margin-top: 30px;
+  }
+  
+  .authButtonsContainer {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  
+  .loginButton, .signupButton {
+    width: 100%;
+    text-align: center;
+    justify-content: center;
+  }
+  
+  .columnTitle {
+    font-size: 13px;
+  }
+  
+  .footerLink {
+    font-size: 12px;
+  }
+  
+  .acknowledgement p {
+    font-size: 10px;
+    line-height: 18px;
+  }
+  
+  .socialLinks {
+    gap: 16px;
+  }
+} 
+

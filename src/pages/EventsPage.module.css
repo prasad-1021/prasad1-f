@@ -1,0 +1,116 @@
+.container {
+  padding: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #333;
+  margin: 0;
+}
+
+.createButton {
+  background-color: #1877F2;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.createButton:hover {
+  background-color: #166fe5;
+}
+
+.loading {
+  text-align: center;
+  padding: 40px;
+  font-size: 1.1rem;
+  color: #666;
+}
+
+.error {
+  background-color: #fff4f4;
+  border: 1px solid #ffd6d6;
+  color: #d32f2f;
+  padding: 20px;
+  border-radius: 8px;
+  text-align: center;
+  margin: 20px 0;
+}
+
+.retryButton {
+  background-color: #d32f2f;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+.retryButton:hover {
+  background-color: #b71c1c;
+}
+
+.emptyState {
+  text-align: center;
+  padding: 60px 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  margin: 20px 0;
+}
+
+.emptyState p {
+  font-size: 1.1rem;
+  margin-bottom: 20px;
+  color: #666;
+}
+
+.createButtonEmpty {
+  background-color: #1877F2;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 5px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.createButtonEmpty:hover {
+  background-color: #166fe5;
+}
+
+.eventGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 20px;
+  }
+  
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+  }
+  
+  .eventGrid {
+    grid-template-columns: 1fr;
+  }
+} 

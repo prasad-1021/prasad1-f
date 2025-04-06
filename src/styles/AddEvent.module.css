@@ -1,0 +1,1191 @@
+
+
+.addEventContainer {
+  max-width: 1087px;
+  margin: 0 auto;
+}
+
+.header {
+  margin-bottom: 40px;
+}
+
+.title {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 36px;
+  color: #000000;
+  margin: 0 0 10px 0;
+}
+
+.subtitle {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 21px;
+  color: #000000;
+  margin: 0;
+}
+
+.content {
+  background: #FFFFFF;
+  border-radius: 40px;
+  padding: 40px;
+  min-height: 1034px;
+}
+
+.bannerSection {
+  margin-bottom: 40px;
+  border-bottom: 1.5px solid #B6B6B6;
+  padding-bottom: 40px;
+}
+
+.sectionTitle {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 56px;
+  color: #000000;
+  margin: 0 0 20px 0;
+}
+
+.bannerPreview {
+  width: 580px;
+  height: 304px;
+  background: #342B26;
+  border-radius: 6px;
+  position: relative;
+  margin-bottom: 30px;
+}
+
+.bannerContent {
+  position: absolute;
+  bottom: 30px;
+  left: 30px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.avatarContainer {
+  width: 124px;
+  height: 124px;
+  border-radius: 50%;
+  overflow: hidden;
+  background: #D9D9D9;
+}
+
+.avatar {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.eventTitle {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 56px;
+  color: #FFFFFF;
+  margin: 0;
+}
+
+.editButton {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+}
+
+.editIcon {
+  width: 16px;
+  height: 16px;
+  stroke: #FFFFFF;
+}
+
+.colorSection {
+  margin-top: 30px;
+}
+
+.colorTitle {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 56px;
+  color: #000000;
+  margin: 0 0 10px 0;
+}
+
+.colorPicker {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+}
+
+.colorButton {
+  width: 48px;
+  height: 48px;
+  border-radius: 100px;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.colorButton:hover {
+  transform: scale(1.05);
+}
+
+.colorButton.active {
+  border: 2px solid #1877F2;
+}
+
+.customColorPicker {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+}
+
+.colorPreview {
+  width: 48px;
+  height: 48px;
+  border-radius: 8px;
+  background: #000000;
+}
+
+.colorInput {
+  width: 231px;
+  height: 48px;
+  background: #F3F3F1;
+  border-radius: 9px;
+  border: none;
+  padding: 0 16px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 13px;
+  color: #000000;
+}
+
+.formSection {
+  padding-top: 30px;
+}
+
+.inputGroup {
+  display: flex;
+  align-items: flex-start;
+  gap: 28.95px;
+  margin-bottom: 20px;
+}
+
+.label {
+  width: 227.61px;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500;
+  font-size: 19.3023px;
+  line-height: 29px;
+  letter-spacing: 0.1em;
+  color: #343434;
+  padding-top: 16px;
+}
+
+.required {
+  color: #FF0000;
+}
+
+.inputWrapper {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  width: 653px;
+}
+
+.emailInputContainer {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.input {
+  width: 100%;
+  height: 63px;
+  background: #FFFFFF;
+  border: 1.60853px solid #E0E0E0;
+  border-radius: 16.0853px;
+  padding: 0 19.3px;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500;
+  font-size: 14.4767px;
+  line-height: 22px;
+  letter-spacing: 0.15em;
+  color: #000000;
+}
+
+.input::placeholder {
+  color: #8A8A8A;
+}
+
+.inputError {
+  border-color: #FF0000;
+}
+
+.errorMessage {
+  color: #FF0000;
+  font-family: 'Poppins', sans-serif;
+  font-size: 12px;
+  margin: 4px 0 0 4px;
+}
+
+.addEmailButton {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #1877F2;
+  color: #FFFFFF;
+  font-size: 24px;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  margin-left: -50px;
+  margin-top: 0;
+  align-self: center;
+  transition: background-color 0.2s ease;
+}
+
+.addEmailButton:hover {
+  background-color: #1064D3;
+}
+
+.emailList {
+  margin-top: 12px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.emailChip {
+  display: flex;
+  align-items: center;
+  padding: 6px 12px;
+  background: #F0F7FF;
+  border-radius: 16px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 14px;
+  color: #1877F2;
+}
+
+.removeEmailButton {
+  background: none;
+  border: none;
+  color: #1877F2;
+  font-size: 18px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  margin-left: 8px;
+  padding: 0;
+  transition: color 0.2s ease;
+}
+
+.removeEmailButton:hover {
+  color: #FF0000;
+}
+
+.actions {
+  display: flex;
+  justify-content: center;
+  gap: 35px;
+  margin-top: 50px;
+}
+
+.cancelButton, .saveButton {
+  width: 190px;
+  height: 50px;
+  border-radius: 15px;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 27px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.cancelButton {
+  background: #F3F3F1;
+  border: none;
+  color: #000000;
+}
+
+.cancelButton:hover {
+  background: #E5E5E3;
+}
+
+.saveButton {
+  background: #1877F2;
+  border: none;
+  color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.saveButton:hover {
+  background: #1064D3;
+}
+
+.saveButton:disabled {
+  background: #A7B0C0;
+  cursor: not-allowed;
+}
+
+
+@media (max-width: 1200px) {
+  .addEventContainer {
+    max-width: 100%;
+    padding: 0 20px;
+  }
+
+  .bannerPreview {
+    width: 100%;
+    max-width: 580px;
+  }
+}
+
+@media (max-width: 768px) {
+  .content {
+    padding: 20px;
+  }
+
+  .inputGroup {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .label {
+    width: 100%;
+    padding-top: 0;
+  }
+
+  .inputWrapper {
+    width: 100%;
+  }
+
+  .actions {
+    flex-direction: column;
+  }
+
+  .cancelButton, .saveButton {
+    width: 100%;
+  }
+}
+
+
+.addEventPage {
+  position: relative;
+  display: flex;
+  width: 100%;
+  min-height: 100vh;
+  background: #F3F3F1;
+  font-family: 'Poppins', sans-serif;
+}
+
+
+.sidebar {
+  position: relative;
+  width: 230px;
+  min-height: 100vh;
+  background: #FFFFFF;
+  display: flex;
+  flex-direction: column;
+}
+
+.logoContainer {
+  width: 100%;
+  height: 116px;
+  padding: 38px 30px;
+  background: #FFFFFF;
+  border-radius: 0 0 20px 0;
+}
+
+.logoLink {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  text-decoration: none;
+}
+
+.logoText {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-weight: 800;
+  font-size: 24px;
+  line-height: 30px;
+  color: #000000;
+}
+
+.sidebarNav {
+  margin-top: 35px;
+  padding: 0 30px;
+}
+
+.navLink {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 12px 0;
+  text-decoration: none;
+  color: #676767;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  transition: color 0.2s ease;
+}
+
+.navLink:hover {
+  color: #1877F2;
+}
+
+.navLink.active {
+  color: #1877F2;
+  font-weight: 500;
+}
+
+.icon {
+  width: 24px;
+  height: 24px;
+  stroke: currentColor;
+}
+
+.createButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 130px;
+  height: 38px;
+  margin: 30px;
+  background: transparent;
+  border: 1px solid #1877F2;
+  border-radius: 19px;
+  color: #1877F2;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease;
+  text-decoration: none;
+}
+
+.createButton:hover {
+  background-color: #1877F2;
+  color: #FFFFFF;
+}
+
+.plusIcon {
+  width: 24px;
+  height: 24px;
+  stroke: currentColor;
+}
+
+.userProfile {
+  position: absolute;
+  bottom: 30px;
+  left: 25px;
+  display: flex;
+  align-items: center;
+  width: 180px;
+  height: 49px;
+  padding: 5px 15px;
+  border: 1px solid #000000;
+  border-radius: 60px;
+}
+
+.avatarContainer {
+  width: 40px;
+  height: 40px;
+  border-radius: 1000px;
+  background: #F3F3F1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.avatar {
+  width: 39px;
+  height: 39px;
+  border-radius: 1000px;
+  object-fit: cover;
+}
+
+.userName {
+  margin-left: 10px;
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 22px;
+  letter-spacing: -0.02em;
+  text-transform: lowercase;
+  color: #000000;
+}
+
+
+.mainContent {
+  flex: 1;
+  padding: 24px;
+  max-width: 100%;
+  overflow-y: auto;
+}
+
+
+.header {
+  margin-bottom: 30px;
+}
+
+.title {
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 36px;
+  color: #000000;
+  margin: 0;
+}
+
+
+.eventForm {
+  background: #FFFFFF;
+  border-radius: 16px;
+  padding: 32px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.formSection {
+  margin-bottom: 32px;
+}
+
+.sectionTitle {
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 30px;
+  color: #000000;
+  margin: 0 0 20px 0;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #E9EEF8;
+}
+
+.inputGroup {
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.label {
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+  color: #000000;
+  margin-bottom: 8px;
+}
+
+.inputWrapper {
+  width: 100%;
+  position: relative;
+}
+
+.input, .textarea, .select {
+  width: 100%;
+  padding: 12px 16px;
+  background: #FFFFFF;
+  border: 1px solid #E9EEF8;
+  border-radius: 8px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 14px;
+  line-height: 21px;
+  color: #000000;
+  transition: border-color 0.2s ease;
+}
+
+.input:focus, .textarea:focus, .select:focus {
+  outline: none;
+  border-color: #1877F2;
+}
+
+.textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.inputError {
+  border-color: #F44336;
+}
+
+.errorMessage {
+  color: #F44336;
+  font-size: 12px;
+  margin-top: 4px;
+}
+
+
+.emailInputContainer {
+  display: flex;
+  gap: 8px;
+  width: 100%;
+}
+
+.addEmailButton {
+  background: #1877F2;
+  color: #FFFFFF;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 16px;
+  font-weight: 500;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  align-self: flex-start;
+}
+
+.addEmailButton:hover {
+  background-color: #1064D3;
+}
+
+.emailList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.emailChip {
+  display: flex;
+  align-items: center;
+  background: #E9EEF8;
+  border-radius: 16px;
+  padding: 6px 12px;
+  font-size: 14px;
+  color: #000000;
+}
+
+.removeEmailButton {
+  background: none;
+  border: none;
+  color: #676767;
+  font-size: 16px;
+  margin-left: 8px;
+  cursor: pointer;
+  padding: 0 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.removeEmailButton:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+  color: #F44336;
+}
+
+
+.formActions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 16px;
+  margin-top: 24px;
+}
+
+.cancelButton, .submitButton {
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.cancelButton {
+  background: transparent;
+  border: 1px solid #E9EEF8;
+  color: #000000;
+}
+
+.cancelButton:hover {
+  background-color: #F5F8FF;
+}
+
+.submitButton {
+  background: #1877F2;
+  border: none;
+  color: #FFFFFF;
+}
+
+.submitButton:hover {
+  background-color: #1064D3;
+}
+
+.submitButton:disabled {
+  background-color: #CCCCCC;
+  cursor: not-allowed;
+}
+
+
+@media (max-width: 1200px) {
+  .mainContent {
+    padding: 30px 60px;
+  }
+}
+
+@media (max-width: 900px) {
+  .sidebar {
+    width: 200px;
+  }
+  
+  .mainContent {
+    padding: 25px 40px;
+  }
+}
+
+@media (max-width: 768px) {
+  .addEventPage {
+    flex-direction: column;
+  }
+  
+  .sidebar {
+    width: 100%;
+    min-height: auto;
+    padding-bottom: 80px;
+  }
+  
+  .userProfile {
+    position: static;
+    margin: 20px auto;
+  }
+  
+  .mainContent {
+    padding: 20px;
+  }
+  
+  .eventForm {
+    padding: 24px 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .formActions {
+    flex-direction: column;
+  }
+  
+  .cancelButton, .submitButton {
+    width: 100%;
+  }
+}
+
+
+.addEventPage {
+  display: flex;
+  width: 100%;
+  min-height: 100vh;
+  background-color: #F5F8FF;
+  font-family: 'Poppins', sans-serif;
+}
+
+
+.sidebar {
+  width: 216px;
+  min-height: 100vh;
+  background: #FFFFFF;
+  border-right: 1px solid #E9EEF8;
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  padding: 16px 0;
+}
+
+.logoContainer {
+  padding: 16px 24px;
+  margin-bottom: 24px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.logo span {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-weight: 800;
+  font-size: 24px;
+  color: #000000;
+}
+
+.sidebarNav {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 0 16px;
+  margin-bottom: 24px;
+}
+
+.navLink {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 10px;
+  border-radius: 8px;
+  text-decoration: none;
+  color: #667085;
+  font-weight: 500;
+  font-size: 14px;
+  transition: all 0.2s ease;
+}
+
+.navLink:hover {
+  background-color: #F9FAFB;
+  color: #101828;
+}
+
+.navLink.active {
+  background-color: #F9FAFB;
+  color: #1877F2;
+}
+
+.navLink svg {
+  width: 20px;
+  height: 20px;
+}
+
+.createButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background-color: #1877F2;
+  color: white;
+  border-radius: 8px;
+  padding: 10px;
+  margin: 8px 16px;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 14px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.createButton:hover, .createButton.active {
+  background-color: #0D6EFD;
+}
+
+.userProfile {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 16px;
+  margin-top: auto;
+  border-top: 1px solid #EAECF0;
+}
+
+.avatarContainer {
+  width: 40px;
+  height: 40px;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.avatar {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.userName {
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  color: #101828;
+}
+
+
+.mainContent {
+  margin-left: 216px;
+  padding: 32px;
+  width: calc(100% - 216px);
+}
+
+.title {
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 32px;
+  color: #101828;
+  margin: 0;
+}
+
+.subtitle {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  color: #667085;
+  margin: 4px 0 32px;
+}
+
+.formCard {
+  background: #FFFFFF;
+  border-radius: 16px;
+  box-shadow: 0px 1px 3px rgba(16, 24, 40, 0.1), 0px 1px 2px rgba(16, 24, 40, 0.06);
+  overflow: hidden;
+  width: 100%;
+  max-width: 768px;
+}
+
+.cardHeader {
+  padding: 24px 32px 0;
+}
+
+.cardTitle {
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 28px;
+  color: #1877F2;
+  margin: 0;
+  text-align: center;
+}
+
+.divider {
+  height: 1px;
+  background-color: #EAECF0;
+  margin: 16px 0;
+}
+
+.eventForm {
+  padding: 0 32px 32px;
+}
+
+.formGroup {
+  margin-bottom: 24px;
+}
+
+.label {
+  display: block;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 20px;
+  color: #344054;
+  margin-bottom: 8px;
+}
+
+.required {
+  color: #F04438;
+}
+
+.input, .textarea {
+  width: 100%;
+  padding: 10px 14px;
+  background: #FFFFFF;
+  border: 1px solid #D0D5DD;
+  box-shadow: 0px 1px 2px rgba(16, 24, 40, 0.05);
+  border-radius: 8px;
+  font-size: 16px;
+  color: #101828;
+  font-family: 'Inter', sans-serif;
+}
+
+.input:focus, .textarea:focus {
+  outline: none;
+  border-color: #1877F2;
+  box-shadow: 0px 1px 2px rgba(16, 24, 40, 0.05), 0px 0px 0px 4px rgba(24, 119, 242, 0.1);
+}
+
+.textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.dateTimeGroup {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.dateInput {
+  flex: 1;
+  min-width: 120px;
+  padding: 10px 14px;
+  background: #FFFFFF;
+  border: 1px solid #D0D5DD;
+  box-shadow: 0px 1px 2px rgba(16, 24, 40, 0.05);
+  border-radius: 8px;
+  font-size: 16px;
+  color: #101828;
+  font-family: 'Inter', sans-serif;
+}
+
+.dateInput:focus {
+  outline: none;
+  border-color: #1877F2;
+  box-shadow: 0px 1px 2px rgba(16, 24, 40, 0.05), 0px 0px 0px 4px rgba(24, 119, 242, 0.1);
+}
+
+.selectBox, .timeSelectBox, .durationSelectBox {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 14px;
+  background: #FFFFFF;
+  border: 1px solid #D0D5DD;
+  box-shadow: 0px 1px 2px rgba(16, 24, 40, 0.05);
+  border-radius: 8px;
+  font-size: 16px;
+  color: #101828;
+  cursor: pointer;
+}
+
+.timeSelectBox {
+  min-width: 80px;
+  flex: 1;
+}
+
+.durationSelectBox {
+  max-width: 150px;
+}
+
+.selectValue {
+  font-size: 16px;
+  color: #101828;
+}
+
+.selectIcon {
+  margin-left: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.formActions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 32px;
+}
+
+.cancelButton {
+  padding: 10px 18px;
+  background: #F2F4F7;
+  border: 1px solid #D0D5DD;
+  box-shadow: 0px 1px 2px rgba(16, 24, 40, 0.05);
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 16px;
+  color: #344054;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.cancelButton:hover {
+  background-color: #EAECF0;
+}
+
+.saveButton {
+  padding: 10px 18px;
+  background: #1877F2;
+  border: none;
+  box-shadow: 0px 1px 2px rgba(16, 24, 40, 0.05);
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 16px;
+  color: #FFFFFF;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.saveButton:hover {
+  background-color: #0D6EFD;
+}
+
+.saveButton:disabled {
+  background-color: #D0D5DD;
+  cursor: not-allowed;
+}
+
+
+@media (max-width: 1024px) {
+  .mainContent {
+    padding: 24px;
+  }
+  
+  .eventForm {
+    padding: 0 24px 24px;
+  }
+}
+
+@media (max-width: 768px) {
+  .sidebar {
+    width: 180px;
+  }
+  
+  .mainContent {
+    margin-left: 180px;
+    width: calc(100% - 180px);
+    padding: 20px;
+  }
+  
+  .navLink {
+    font-size: 13px;
+  }
+  
+  .logo span {
+    font-size: 20px;
+  }
+  
+  .dateTimeGroup {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 576px) {
+  .addEventPage {
+    flex-direction: column;
+  }
+  
+  .sidebar {
+    width: 100%;
+    min-height: auto;
+    position: relative;
+    border-right: none;
+    border-bottom: 1px solid #E9EEF8;
+    padding-bottom: 16px;
+  }
+  
+  .mainContent {
+    margin-left: 0;
+    width: 100%;
+    padding: 16px;
+  }
+  
+  .sidebarNav {
+    flex-direction: row;
+    overflow-x: auto;
+    padding-bottom: 8px;
+  }
+  
+  .navLink {
+    white-space: nowrap;
+  }
+  
+  .userProfile {
+    display: none;
+  }
+  
+  .eventForm {
+    padding: 0 16px 16px;
+  }
+} 
+

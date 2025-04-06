@@ -1,0 +1,223 @@
+/* Google Calendar-like styling for react-calendar */
+.google-calendar-style {
+  width: 350px;
+  border: none;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  font-family: 'Roboto', 'Arial', sans-serif;
+  padding: 16px;
+  background-color: white;
+}
+
+/* Navigation area styling */
+.google-calendar-style .react-calendar__navigation {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+  height: 48px;
+  font-weight: 500;
+  font-size: 16px;
+}
+
+.google-calendar-style .react-calendar__navigation button {
+  background: none;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  color: #3c4043;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.15s;
+  cursor: pointer;
+}
+
+.google-calendar-style .react-calendar__navigation button:enabled:hover,
+.google-calendar-style .react-calendar__navigation button:enabled:focus {
+  background-color: rgba(60, 64, 67, 0.08);
+}
+
+.google-calendar-style .react-calendar__navigation button:disabled {
+  color: #dadce0;
+  cursor: default;
+}
+
+.calendar-nav-arrow {
+  font-size: 24px;
+  line-height: 24px;
+}
+
+/* Month view styling */
+.google-calendar-style .react-calendar__month-view {
+  padding: 4px 0;
+}
+
+.google-calendar-style .react-calendar__month-view__weekdays {
+  font-weight: 500;
+  font-size: 12px;
+  text-transform: uppercase;
+  color: #70757a;
+  margin-bottom: 8px;
+}
+
+.google-calendar-style .react-calendar__month-view__weekdays__weekday {
+  text-align: center;
+  padding: 4px;
+}
+
+.google-calendar-style .react-calendar__month-view__weekdays__weekday abbr {
+  text-decoration: none;
+}
+
+/* Date tile styling */
+.google-calendar-style .react-calendar__tile {
+  background: none;
+  border: none;
+  text-align: center;
+  padding: 10px 0;
+  font-size: 14px;
+  border-radius: 50%;
+  height: 40px;
+  width: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  transition: background-color 0.15s;
+  color: #3c4043;
+  position: relative;
+}
+
+.google-calendar-style .react-calendar__tile:enabled:hover,
+.google-calendar-style .react-calendar__tile:enabled:focus {
+  background-color: rgba(60, 64, 67, 0.08);
+}
+
+.google-calendar-style .react-calendar__tile--now {
+  background-color: #e8f0fe;
+  color: #1a73e8;
+  font-weight: 500;
+}
+
+.google-calendar-style .react-calendar__tile--now:enabled:hover,
+.google-calendar-style .react-calendar__tile--now:enabled:focus {
+  background-color: #d2e3fc;
+}
+
+.google-calendar-style .react-calendar__tile--active,
+.google-calendar-style .react-calendar__tile--active:enabled:hover,
+.google-calendar-style .react-calendar__tile--active:enabled:focus {
+  background-color: #1a73e8;
+  color: white;
+}
+
+.google-calendar-style .react-calendar__month-view__days__day--weekend {
+  color: #3c4043;
+}
+
+.google-calendar-style .react-calendar__tile--active.react-calendar__month-view__days__day--weekend {
+  color: white;
+}
+
+.google-calendar-style .react-calendar__month-view__days__day--neighboringMonth {
+  color: #bdc1c6;
+}
+
+.google-calendar-style .react-calendar__tile:disabled {
+  color: #dadce0;
+  background-color: transparent;
+  cursor: default;
+}
+
+/* Error state */
+.date-error .dateInput {
+  border-color: #d93025 !important;
+  box-shadow: 0 0 0 1px #d93025 !important;
+}
+
+.date-error-message {
+  color: #d93025;
+  font-size: 12px;
+  margin-top: 4px;
+}
+
+/* Navigation label */
+.google-calendar-style .react-calendar__navigation__label {
+  font-weight: 500;
+  font-size: 16px;
+  color: #3c4043;
+  flex-grow: 1;
+  border-radius: 4px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.google-calendar-style .react-calendar__navigation__label:enabled:hover,
+.google-calendar-style .react-calendar__navigation__label:enabled:focus {
+  background-color: rgba(60, 64, 67, 0.08);
+}
+
+/* Year and decade views */
+.google-calendar-style .react-calendar__year-view .react-calendar__tile,
+.google-calendar-style .react-calendar__decade-view .react-calendar__tile,
+.google-calendar-style .react-calendar__century-view .react-calendar__tile {
+  padding: 10px;
+  border-radius: 16px;
+  height: auto;
+  width: auto;
+}
+
+/* Selection effect - adds blue dot under selected date */
+.google-calendar-style .google-calendar-tile.selected::after {
+  content: '';
+  position: absolute;
+  bottom: 5px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background-color: #1a73e8;
+}
+
+/* Today indicator - adds circle around today's date */
+.google-calendar-style .google-calendar-tile.today {
+  position: relative;
+}
+
+.google-calendar-style .google-calendar-tile.today::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 2px solid #1a73e8;
+  z-index: -1;
+}
+
+/* Tooltip for dates */
+.date-tooltip {
+  position: absolute;
+  background-color: #202124;
+  color: white;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  z-index: 100;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s;
+  white-space: nowrap;
+}
+
+.google-calendar-tile:hover .date-tooltip {
+  opacity: 1;
+} 

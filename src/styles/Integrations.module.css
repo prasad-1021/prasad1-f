@@ -1,0 +1,152 @@
+.integrationsSection {
+  padding: 80px 40px;
+  background-color: #ffffff;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.integrationsHeading {
+  font-family: 'Poppins', sans-serif;
+  font-size: 48px;
+  font-weight: 700;
+  line-height: 48px;
+  letter-spacing: -0.02em;
+  margin-bottom: 60px;
+  color: #000000;
+  text-align: center;
+  position: relative;
+}
+
+.integrationsContainer {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.integrationCard {
+  display: flex;
+  align-items: center;
+  padding: 12px;
+  background-color: #ffffff;
+  transition: transform 0.3s ease;
+  cursor: pointer;
+}
+
+.integrationCard:hover {
+  transform: translateY(-5px);
+}
+
+.iconContainer {
+  margin-right: 16px;
+  flex-shrink: 0;
+}
+
+.iconFrame {
+  width: 56px;
+  height: 56px;
+  border-radius: 10px;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.svgPlaceholder {
+  width: 32px;
+  height: 32px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.svgBackground {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  object-fit: cover;
+}
+
+.svgIcon {
+  width: 32px;
+  height: 32px;
+  position: relative;
+  z-index: 2;
+  object-fit: contain;
+}
+
+.contentContainer {
+  flex: 1;
+}
+
+.title {
+  font-family: 'Poppins', sans-serif;
+  font-size: 19px;
+  font-weight: 400;
+  color: #1E2330;
+  margin: 0 0 4px 0;
+  letter-spacing: -0.2px;
+}
+
+.description {
+  font-family: 'Poppins', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  color: #1E2330;
+  margin: 0;
+  line-height: 26px;
+  letter-spacing: 0.16px;
+}
+
+
+@media (max-width: 1024px) {
+  .integrationsContainer {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .integrationsSection {
+    padding: 60px 20px;
+  }
+  
+  .integrationsContainer {
+    grid-template-columns: 1fr;
+  }
+  
+  .svgIcon {
+    width: 28px;
+    height: 28px;
+  }
+}
+
+
+@media (max-width: 480px) {
+  .integrationsHeading {
+    font-size: 24px;
+  }
+  
+  .integrationCard {
+    padding: 8px;
+  }
+  
+  .title {
+    font-size: 16px;
+  }
+  
+  .description {
+    font-size: 12px;
+    line-height: 20px;
+  }
+  
+  .svgIcon {
+    width: 24px;
+    height: 24px;
+  }
+} 
+

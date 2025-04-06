@@ -1,0 +1,87 @@
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --primary-blue: #1877F2;
+  --gray-light: #F0F0F0;
+  --gray-lighter: #FBFBFB;
+  --dark: #000000;
+  --white: #FFFFFF;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--gray-lighter);
+  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+  color: var(--dark);
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  outline: none;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+
+.appContainer {
+  width: 100%;
+  max-width: 1728px;
+  margin: 0 auto;
+  position: relative;
+  background: var(--gray-lighter);
+}
+
+.primaryBtn {
+  background: var(--primary-blue);
+  color: var(--white);
+  border-radius: 96px;
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+  transition: all 0.3s ease;
+  border: none;
+  cursor: pointer;
+}
+
+.primaryBtn:hover {
+  background: #0f62cf;
+}
+
+.primaryBtnOutline {
+  background: transparent;
+  color: var(--primary-blue);
+  border: 2px solid var(--primary-blue);
+  border-radius: 96px;
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.primaryBtnOutline:hover {
+  background: rgba(24, 119, 242, 0.05);
+}
+
+.sectionContainer {
+  padding: 40px 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Poppins', sans-serif;
+  color: var(--dark);
+}
+
+.textCenter {
+  text-align: center;
+} 
+

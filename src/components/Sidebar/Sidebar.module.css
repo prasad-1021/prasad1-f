@@ -1,0 +1,249 @@
+.sidebar {
+    position: absolute;
+    width: 230px;
+    height: 1026px;
+    left: 0px;
+    top: 0px;
+    display: flex;
+    flex-direction: column;
+    background-color: #F5F8FF;
+}
+
+.sidebarTop {
+    position: relative;
+    width: 230px;
+    height: 116px;
+    background: #FFFFFF;
+    border-radius: 0px 0px 20px 0px;
+}
+
+.sidebarMain {
+    position: relative;
+    width: 230px;
+    height: 846px;
+    background: #FFFFFF;
+    border-radius: 0px 20px 0px 0px;
+    padding-top: 15px;
+}
+
+.logo {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0px;
+    gap: 3px;
+    position: absolute;
+    width: 121px;
+    height: 32px;
+    left: 30px;
+    top: 38px;
+}
+
+.logoIcon {
+    width: 32px;
+    height: 32px;
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+}
+
+.plugIcon {
+    width: 100%;
+    height: 100%;
+}
+
+.logoText {
+    width: 86px;
+    height: 30px;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-style: normal;
+    font-weight: 800;
+    font-size: 24px;
+    line-height: 30px;
+    color: #000000;
+    flex: none;
+    order: 1;
+    flex-grow: 0;
+    margin: 0;
+}
+
+.navigation {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    margin-top: 40px;
+}
+
+.link, .activeLink {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    text-decoration: none;
+    font-family: 'Poppins', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    color: #676767;
+    position: relative;
+    padding-left: 74px;
+}
+
+.linkIcon {
+    position: absolute;
+    left: 30px;
+    width: 24px;
+    height: 24px;
+    color: #676767;
+}
+
+.activeLink {
+    font-weight: 500;
+    color: #1877F2;
+}
+
+.activeLink .linkIcon {
+    color: #1877F2;
+}
+
+.link:first-child, .activeLink:first-child {
+    margin-top: 0;
+}
+
+.createButton {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 7px 20px;
+    gap: 10px;
+    width: 130px;
+    height: 38px;
+    background: #1877F2;
+    border: 1px solid #EDEDED;
+    border-radius: 19px;
+    margin-top: 80px;
+    margin-left: 30px;
+    cursor: pointer;
+}
+
+.addIcon {
+    width: 24px;
+    height: 24px;
+    color: #FFFFFF;
+}
+
+.createButton span {
+    width: 55px;
+    height: 24px;
+    font-family: 'Poppins', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    color: #FFFFFF;
+}
+
+.userDrawer {
+    position: relative;
+    width: 245px;
+    height: 159px;
+    background: #FFFFFF;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+
+.signOutButton {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 21px 23px;
+    gap: 7px;
+    position: absolute;
+    width: 133px;
+    height: 48px;
+    left: 72px;
+    top: 11px;
+    background: #F3F3F1;
+    box-shadow: 0px 4px 14.7px rgba(0, 0, 0, 0.25);
+    border-radius: 22px;
+    border: none;
+    cursor: pointer;
+}
+
+.signOutIcon {
+    width: 24px;
+    height: 24px;
+    opacity: 2.65;
+    color: #000000;
+}
+
+.signOutButton span {
+    width: 53px;
+    height: 33px;
+    font-family: 'Poppins', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 33px;
+    display: flex;
+    align-items: center;
+    color: #000000;
+    opacity: 0.65;
+}
+
+.userProfile {
+    box-sizing: border-box;
+    position: absolute;
+    width: 180px;
+    height: 49px;
+    left: 25px;
+    top: 55px;
+    border: 1px solid #000000;
+    border-radius: 60px;
+    display: flex;
+    align-items: center;
+    padding: 4px;
+}
+
+.avatar {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0px;
+    gap: 10px;
+    width: 40px;
+    height: 40px;
+    background: #F3F3F1;
+    border-radius: 1000px;
+    margin-left: 4px;
+}
+
+.avatar img {
+    width: 39.53px;
+    height: 38.55px;
+    border-radius: 1000px;
+    object-fit: cover;
+}
+
+.defaultAvatar {
+    width: 39.53px;
+    height: 38.55px;
+    border-radius: 1000px;
+    background-color: #F3F3F1;
+}
+
+.userName {
+    width: 94px;
+    height: 22px;
+    margin-left: 8px;
+    font-family: 'Inter', sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 22px;
+    letter-spacing: -0.02em;
+    text-transform: lowercase;
+    color: #000000;
+} 

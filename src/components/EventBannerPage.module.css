@@ -1,0 +1,359 @@
+.pageContainer {
+    position: relative;
+    font-family: 'Poppins', sans-serif;
+    will-change: transform;
+    cursor: default;
+}
+
+.headerSection {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+}
+
+.title {
+    position: absolute;
+    width: 157px;
+    height: 36px;
+    left: 50px;
+    top: 39px;
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 36px;
+    color: #000000;
+    margin: 0;
+}
+
+.description {
+    position: absolute;
+    width: 416px;
+    height: 42px;
+    left: 50px;
+    top: 75px;
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 21px;
+    color: #000000;
+    margin: 0;
+}
+
+.contentFrame {
+    position: absolute;
+    width: 1087px;
+    height: 1034px;
+    left: 50px;
+    top: 153px;
+    background: #FFFFFF;
+    border-radius: 40px;
+    padding-bottom: 50px;
+}
+
+.addEventHeader {
+    position: absolute;
+    width: 145px;
+    height: 36px;
+    left: calc(50% - 145px/2 - 27px);
+    top: 43px;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 32px;
+    line-height: 36px;
+    color: #1877F2;
+}
+
+.divider {
+    position: absolute;
+    width: 1084px;
+    height: 0px;
+    left: 1px;
+    border: 1.5px solid #B6B6B6;
+}
+
+.divider:first-of-type {
+    top: 109px;
+}
+
+.divider:nth-of-type(2) {
+    top: 723px;
+}
+
+.section {
+    position: absolute;
+    top: 138px;
+    padding: 0 75px;
+    width: calc(100% - 150px);
+}
+
+.sectionTitle {
+    position: absolute;
+    width: 74px;
+    height: 33.96px;
+    left: 76px;
+    top: 0;
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 56px;
+    display: flex;
+    align-items: center;
+    color: #000000;
+    margin: 0;
+}
+
+.bannerPreview {
+    position: absolute;
+    width: 580px;
+    height: 304px;
+    left: 75px;
+    top: 62px;
+    background: #342B26;
+    border-radius: 6px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s ease;
+}
+
+.avatarCircle {
+    width: 124px;
+    height: 124px;
+    background: #D9D9D9;
+    border-radius: 10000px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    transition: background-color 0.2s ease;
+}
+
+.avatarImage {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.editIcon {
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    right: 15px;
+    top: 15px;
+    cursor: pointer;
+}
+
+.bannerTitle {
+    position: absolute;
+    width: 221px;
+    height: 56px;
+    left: calc(50% - 221px/2);
+    bottom: 30px;
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 56px;
+    display: flex;
+    align-items: center;
+    color: #FFFFFF;
+    margin: 0;
+}
+
+.colorOptions {
+    position: absolute;
+    top: 380px;
+    left: 0;
+    width: 100%;
+}
+
+.colorTitle {
+    position: absolute;
+    width: 173px;
+    height: 56px;
+    left: 76px;
+    top: 0;
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 56px;
+    display: flex;
+    align-items: center;
+    color: #000000;
+    margin: 0;
+}
+
+.colorPalette {
+    position: absolute;
+    top: 50px;
+    left: 75px;
+    display: flex;
+    gap: 13px;
+}
+
+.colorOption {
+    width: 48px;
+    height: 48px;
+    border-radius: 100px;
+    cursor: pointer;
+}
+
+.customColorContainer {
+    position: absolute;
+    top: 113px;
+    left: 76px;
+    display: flex;
+    align-items: center;
+}
+
+.colorPreview {
+    width: 48px;
+    height: 48px;
+    background-color: #000000;
+    border-radius: 8px;
+    margin-right: 13px;
+}
+
+.colorInput {
+    width: 231px;
+    height: 48px;
+    background: #F3F3F1;
+    border-radius: 9px;
+    border: none;
+    padding: 0 15px;
+    font-family: 'Poppins';
+    font-weight: 500;
+    font-size: 13px;
+    color: #000000;
+}
+
+.inputsSection {
+    position: absolute;
+    top: 753px;
+    width: 100%;
+}
+
+.inputGroup {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0px;
+    gap: 28.95px;
+    position: absolute;
+    width: 910px;
+    height: 63px;
+    left: 50px;
+}
+
+.inputGroup:first-child {
+    top: 0;
+}
+
+.inputGroup:nth-child(2) {
+    top: 75px;
+}
+
+.label {
+    width: 227.61px;
+    height: 29px;
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 19.3px;
+    line-height: 29px;
+    letter-spacing: 0.1em;
+    color: #343434;
+}
+
+.required {
+    color: #FF0000;
+}
+
+.input {
+    box-sizing: border-box;
+    width: 653px;
+    height: 63px;
+    background: #FFFFFF;
+    border: 1.60853px solid #E0E0E0;
+    border-radius: 16.0853px;
+    padding: 0 20px;
+    font-family: 'Poppins';
+    font-weight: 500;
+    font-size: 14.5px;
+    line-height: 22px;
+    letter-spacing: 0.15em;
+    color: #000000;
+}
+
+.input::placeholder {
+    color: #8A8A8A;
+}
+
+.actions {
+    position: absolute;
+    bottom: 43px;
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 125px;
+    gap: 35px;
+}
+
+.cancelButton {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 14px 74px;
+    gap: 10px;
+    position: relative;
+    width: 190px;
+    height: 50px;
+    background: #F3F3F1;
+    border-radius: 15px;
+    border: none;
+    font-family: 'Poppins';
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 27px;
+    text-align: center;
+    color: #000000;
+    cursor: pointer;
+}
+
+.saveButton {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 14px 74px;
+    gap: 10px;
+    position: relative;
+    width: 190px;
+    height: 50px;
+    background: #1877F2;
+    border-radius: 15px;
+    border: none;
+    font-family: 'Poppins';
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 27px;
+    text-align: center;
+    color: #FFFFFF;
+    cursor: pointer;
+}
+
+.colorOption, .editIcon, .saveButton, .cancelButton {
+    cursor: pointer;
+}
+
+.bannerPreview, .avatarCircle, .colorOption {
+    transition: background-color 0.2s ease;
+} 

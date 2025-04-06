@@ -1,0 +1,239 @@
+.calendarContainer {
+  width: 100%;
+  font-family: 'Inter', sans-serif;
+  color: #000000;
+}
+
+/* Custom calendar header */
+.calendarHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 0;
+  margin-bottom: 16px;
+}
+
+.navigationControls {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.navButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  background-color: #F4F4F5;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  color: #18181B;
+  font-size: 18px;
+}
+
+.dateLabel {
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  color: #18181B;
+  min-width: 64px;
+  text-align: center;
+}
+
+.viewControls {
+  display: flex;
+  gap: 0px;
+  margin: 0 auto;
+}
+
+.viewButton {
+  background: transparent;
+  border: none;
+  padding: 5px 16px;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: #71717A;
+  cursor: pointer;
+  border-radius: 8px;
+}
+
+.activeView {
+  background-color: #1877F2;
+  color: #FFFFFF;
+}
+
+.searchContainer {
+  display: flex;
+  align-items: center;
+  padding: 4px 8px;
+  background-color: #F4F4F5;
+  border-radius: 4px;
+  width: 175px;
+}
+
+.searchIcon {
+  color: #18181B;
+  margin-right: 8px;
+  font-size: 16px;
+}
+
+.searchInput {
+  background: transparent;
+  border: none;
+  outline: none;
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  width: 100%;
+  color: #18181B;
+}
+
+.searchInput::placeholder {
+  color: #A1A1AA;
+}
+
+/* Day header */
+.dayName {
+  font-family: 'Inter', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  color: #71717A;
+  margin-bottom: 4px;
+}
+
+.dayNumber {
+  font-family: 'Inter', sans-serif;
+  font-size: 22px;
+  font-weight: 500;
+  color: #000000;
+}
+
+/* Override react-big-calendar styles */
+:global(.rbc-header) {
+  padding: 4px 8px 16px;
+}
+
+:global(.rbc-time-header-content) {
+  background-color: #FFFFFF;
+}
+
+:global(.rbc-time-view) {
+  border: 1.5px solid rgba(0, 0, 0, 0.35);
+  border-radius: 24px;
+  overflow: hidden;
+}
+
+:global(.rbc-time-header) {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.35);
+}
+
+:global(.rbc-day-slot .rbc-time-slot) {
+  border-top: 1px solid #F7F7F7;
+}
+
+:global(.rbc-today) {
+  background-color: #FFFFFF;
+}
+
+:global(.rbc-label) {
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  color: #71717A;
+  padding: 0 5px;
+}
+
+:global(.rbc-time-content) {
+  border-top: 1px solid rgba(0, 0, 0, 0.35);
+}
+
+:global(.rbc-time-view .rbc-row) {
+  min-height: 64px;
+}
+
+:global(.rbc-events-container) {
+  margin-right: 0 !important;
+}
+
+.currentDay {
+  background-color: #FFFFFF;
+}
+
+.weekendDay {
+  background-color: #FAFAFA;
+}
+
+/* Event styles */
+.calendarEvent {
+  padding: 4px;
+  border-radius: 4px;
+  overflow: hidden;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.availabilityEvent {
+  background-color: rgba(220, 252, 231, 0.5) !important; /* Light green with transparency */
+  border: 1px dashed #10B981;
+  color: #047857 !important;
+  cursor: default;
+}
+
+.regularEvent {
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.calendarEvent:hover {
+  transform: scale(1.02);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.availabilityEvent:hover {
+  transform: none;
+  box-shadow: none;
+}
+
+.loadingOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(255, 255, 255, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  font-weight: 500;
+  color: #374151;
+}
+
+.eventBar {
+  width: 3px;
+  height: 100%;
+}
+
+.eventContent {
+  flex: 1;
+  padding: 6px;
+}
+
+.eventTime {
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  color: #0369A1;
+  margin-bottom: 4px;
+}
+
+.eventTitle {
+  font-family: 'Poppins', sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  color: #0369A1;
+} 
