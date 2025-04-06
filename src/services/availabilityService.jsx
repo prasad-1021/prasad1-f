@@ -6,7 +6,7 @@
 
 import { authenticatedRequest } from './userService';
 
-const API_URL = process.env.REACT_APP_API_URL || 'https://eventmeeting.onrender.com/api';
+const API_URL = process.env.REACT_APP_API_URL || 'https://eventmeeting-backend.onrender.com/api';
 const AVAILABILITY_ENDPOINT = `${API_URL}/users/availability`;
 const PREFERENCES_ENDPOINT = `${API_URL}/users/preferences`;
 

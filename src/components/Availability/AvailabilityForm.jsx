@@ -3,12 +3,11 @@ import { useForm, Controller } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useToast } from '../../contexts/ToastContext';
 import { HiChevronDown } from 'react-icons/hi';
-import styles from './AvailabilityForm.module.css';
+import styles from './AvailabilityPage.module.css';
 import { timeSlots, dayMappingToFull } from './data.jsx';
 import { updateUserAvailability, updateEventType, updateTimezone, getEventType } from '../../services/availabilityService';
 import { availabilitySchema } from '../../utils/validators.jsx';
 import CopyIcon from '../../assets/copy.svg';
-import { useNavigate } from 'react-router-dom';
 
 const AvailabilityForm = ({ initialData, selectedEventType: propSelectedEventType, onEventTypeChange }) => {
   const { successToast, errorToast } = useToast();

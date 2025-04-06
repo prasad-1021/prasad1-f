@@ -5,30 +5,17 @@
  */
 
 import axios from 'axios';
+import { mockUsers, mockTokens, simulateApiDelay, simulateApiError, addMockUser, updateMockUser } from './mockData';
 
-// Mock data replacements (empty implementations since we removed the file)
-const mockUsers = [];
-const mockTokens = {
-  accessToken: '',
-  refreshToken: '',
-  expiresIn: 0 
-};
-const simulateApiDelay = () => Promise.resolve();
-const simulateApiError = () => {};
-const addMockUser = () => ({});
-const updateMockUser = () => ({});
-
-// Force USE_MOCK_DATA to be explicitly false to fix any type coercion issues
+// Use mock data if in development mode or API_URL is not set
 const USE_MOCK_DATA = false;
-console.log('userService.jsx loaded, USE_MOCK_DATA set to:', USE_MOCK_DATA, 'type:', typeof USE_MOCK_DATA);
-
 // Update API URL to use Render backend by default
-const API_URL = process.env.REACT_APP_API_URL || 'https://eventmeeting.onrender.com/api';
+const API_URL = process.env.REACT_APP_API_URL || 'https://eventmeeting-backend.onrender.com/api';
 
 // Local storage keys
-export const USER_KEY = 'cnnct_user';
-export const TOKEN_KEY = 'cnnct_token';
-export const REFRESH_TOKEN_KEY = 'cnnct_refresh_token';
+const USER_KEY = 'cnnct_user';
+const TOKEN_KEY = 'cnnct_token';
+const REFRESH_TOKEN_KEY = 'cnnct_refresh_token';
 
 /**
  * Get the current authenticated user from local storage
@@ -45,7 +32,7 @@ export const getCurrentUser = async () => {
     console.log('Fetching current user with token', token.substring(0, 10) + '...');
     
     try {
-      // Use correct API endpoint
+      // Use auth/me endpoint which is actually implemented on the backend
       const response = await axios.get(`${API_URL}/auth/me`, {
         headers: {
           Authorization: `Bearer ${token}`
@@ -383,59 +370,94 @@ export const authenticatedRequest = async (url, options = {}) => {
  * @returns {Promise<Object>} User and token data
  */
 export const register = async (userData) => {
-  // Add extra debug logging
-  console.log('REGISTER FUNCTION ENTRY POINT, USE_MOCK_DATA =', USE_MOCK_DATA);
-  console.log('USE_MOCK_DATA type:', typeof USE_MOCK_DATA);
-  console.log('userData received:', { ...userData, password: '********' });
-  
-  console.log('Register function called with USE_MOCK_DATA:', USE_MOCK_DATA);
-  
-  // Debug right before the condition check
-  console.log('About to check USE_MOCK_DATA condition:', USE_MOCK_DATA);
-  
-  // Forcibly bypass mock data path
-  if (false) {
-    console.log('*** USING MOCK DATA FOR REGISTRATION ***');
-    // Mock data implementation
-  } else {
-    console.log('*** USING REAL API FOR REGISTRATION ***');
-    try {
-      const response = await axios.post(`${API_URL}/auth/signup`, userData);
-      
-      const data = response.data;
-      console.log('Registration response:', data);
-      
-      // Handle different token formats from backend
-      const token = data.token || data.accessToken;
-      const refreshTokenValue = data.refreshToken;
-      
-      if (!token) {
-        console.error('No token received in registration response:', data);
-        // Create a minimal user object without token auth
-        localStorage.setItem(USER_KEY, JSON.stringify(data.user || userData));
-        return data;
-      }
-      
-      // Save user and token to local storage
-      localStorage.setItem(USER_KEY, JSON.stringify(data.user));
-      localStorage.setItem(TOKEN_KEY, token);
-      
-      if (refreshTokenValue) {
-        localStorage.setItem(REFRESH_TOKEN_KEY, refreshTokenValue);
-      }
-      
-      console.log('Saved auth data to localStorage:', {
-        user: !!data.user,
-        token: `${token.substring(0, 10)}...`,
-        refreshToken: refreshTokenValue ? 'present' : 'missing'
-      });
-      
-      return data;
-    } catch (error) {
-      console.error('Registration failed:', error.response?.data || error.message);
-      throw new Error(error.response?.data?.message || error.message || 'Registration failed');
+  if (USE_MOCK_DATA) {
+    await simulateApiDelay();
+    simulateApiError(0.1);
+    
+    // Check if email already exists
+    if (mockUsers.some(u => u.email === userData.email)) {
+      throw new Error('Email already in use');
     }
+    
+    // Create a simple username based on first name (lowercase) + last initial
+    const firstName = userData.firstName.toLowerCase();
+    const lastInitial = userData.lastName.charAt(0).toLowerCase();
+    const generatedUsername = `${firstName}${lastInitial}`;
+    
+    // Create new mock user
+    const newUser = {
+      id: `usr-${mockUsers.length + 1}`,
+      email: userData.email,
+      firstName: userData.firstName,
+      lastName: userData.lastName,
+      username: generatedUsername,
+      name: userData.name, // Include the name field
+      // Store mock password for development logging (would never do this in production!)
+      _devPassword: 'password', // For development reference only
+      preferences: {
+        categories: []
+      }
+    };
+    
+    // Log the created user for debugging
+    console.log('Registered new user:', {
+      email: newUser.email,
+      username: newUser.username,
+      password: 'password' // Reminder of the mock password for testing
+    });
+    
+    const createdUser = addMockUser(newUser);
+    
+    // Save user and token to local storage
+    localStorage.setItem(USER_KEY, JSON.stringify(createdUser));
+    localStorage.setItem(TOKEN_KEY, mockTokens.accessToken);
+    localStorage.setItem(REFRESH_TOKEN_KEY, mockTokens.refreshToken);
+    
+    return { user: createdUser, ...mockTokens };
   }
+  
+  const response = await fetch(`${API_URL}/auth/signup`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(userData),
+  });
+  
+  if (!response.ok) {
+    const error = await response.json();
+    throw new Error(error.message || 'Registration failed');
+  }
+  
+  const data = await response.json();
+  console.log('Registration response:', data);
+  
+  // Handle different token formats from backend
+  const token = data.token || data.accessToken;
+  const refreshTokenValue = data.refreshToken;
+  
+  if (!token) {
+    console.error('No token received in registration response:', data);
+    // Create a minimal user object without token auth
+    localStorage.setItem(USER_KEY, JSON.stringify(data.user || userData));
+    return data;
+  }
+  
+  // Save user and token to local storage
+  localStorage.setItem(USER_KEY, JSON.stringify(data.user));
+  localStorage.setItem(TOKEN_KEY, token);
+  
+  if (refreshTokenValue) {
+    localStorage.setItem(REFRESH_TOKEN_KEY, refreshTokenValue);
+  }
+  
+  console.log('Saved auth data to localStorage:', {
+    user: !!data.user,
+    token: `${token.substring(0, 10)}...`,
+    refreshToken: refreshTokenValue ? 'present' : 'missing'
+  });
+  
+  return data;
 };
 
 /**
@@ -444,50 +466,64 @@ export const register = async (userData) => {
  * @returns {Promise<Object>} Updated user profile data
  */
 export const updateUserProfile = async (profileData) => {
-  // Forcibly bypass mock data path
-  if (false) {
-    // Mock implementation...
-  } else {
-    console.log('Updating user profile with data:', profileData);
+  if (USE_MOCK_DATA) {
+    await simulateApiDelay();
+    simulateApiError(0.1);
     
-    try {
-      // Call the API to update user data - using the correct endpoint
-      const response = await authenticatedRequest(`${API_URL}/auth/updatedetails`, {
-        method: 'PUT',
-        body: JSON.stringify(profileData),
-      });
-
-      console.log('Profile update API response:', response);
-
-      if (!response.success) {
-        console.error('Profile update API failed:', response);
-        throw new Error(response.message || 'Failed to update profile');
-      }
-
-      // Get current user from storage
-      const currentUser = await getCurrentUser();
-      
-      // Create updated user object with response data or fallback to provided data
-      const userData = response.data || profileData;
-      
-      const updatedUser = {
-        ...currentUser,
-        name: userData.name,
-        firstName: userData.firstName || profileData.firstName,
-        lastName: userData.lastName || profileData.lastName,
-        email: userData.email || profileData.email
-      };
-      
-      console.log('Updating user in local storage:', updatedUser);
-      
-      // Update user in local storage
-      localStorage.setItem(USER_KEY, JSON.stringify(updatedUser));
-      
-      return updatedUser;
-    } catch (error) {
-      console.error('Error updating user profile:', error);
-      throw error;
+    // Get current user
+    const user = getCurrentUser();
+    if (!user) {
+      throw new Error('User not found');
     }
+    
+    // Update user in mock data
+    const updatedUser = updateMockUser(user.id, profileData);
+    
+    // Update local storage
+    localStorage.setItem(USER_KEY, JSON.stringify(updatedUser));
+    
+    return updatedUser;
+  }
+  
+  console.log('Updating user profile with data:', profileData);
+  
+  try {
+    // Call the API to update user data - using the correct endpoint
+    const response = await authenticatedRequest(`${API_URL}/auth/updatedetails`, {
+      method: 'PUT',
+      body: JSON.stringify(profileData),
+    });
+
+    console.log('Profile update API response:', response);
+
+    if (!response.success) {
+      console.error('Profile update API failed:', response);
+      throw new Error(response.message || 'Failed to update profile');
+    }
+
+    // Get current user from storage
+    const currentUser = await getCurrentUser();
+    
+    // Create updated user object with response data or fallback to provided data
+    const userData = response.data || profileData;
+    
+    const updatedUser = {
+      ...currentUser,
+      name: userData.name,
+      firstName: userData.firstName || profileData.firstName,
+      lastName: userData.lastName || profileData.lastName,
+      email: userData.email || profileData.email
+    };
+    
+    console.log('Updating user in local storage:', updatedUser);
+    
+    // Update user in local storage
+    localStorage.setItem(USER_KEY, JSON.stringify(updatedUser));
+    
+    return updatedUser;
+  } catch (error) {
+    console.error('Error updating user profile:', error);
+    throw error;
   }
 };
 
@@ -498,68 +534,104 @@ export const updateUserProfile = async (profileData) => {
  * @returns {Promise<Object>} User and token data
  */
 export const login = async (identifier, password) => {
-  console.log('Login function called with USE_MOCK_DATA:', USE_MOCK_DATA);
-  
-  // Forcibly bypass mock data path
-  if (false) {
-    console.log('*** USING MOCK DATA FOR LOGIN ***');
-    // Rest of mock login code...
-  } else {
-    console.log('*** USING REAL API FOR LOGIN ***');
-    console.log('Starting login process for:', identifier);
+  if (USE_MOCK_DATA) {
+    await simulateApiDelay();
+    simulateApiError(0.1); // 10% chance of error for testing
     
-    try {
-      const response = await axios.post(`${API_URL}/auth/login`, {
-        username: identifier, 
-        password
-      });
-      
-      const data = response.data;
-      console.log('Login response structure:', {
-        hasUser: !!data.user,
-        hasToken: !!data.token || !!data.accessToken,
-        hasRefreshToken: !!data.refreshToken,
-        responseKeys: Object.keys(data)
-      });
-      
-      // Handle different token response structures
-      const token = data.token || data.accessToken;
-      if (!token) {
-        console.error('No token in login response. Response data:', data);
-        throw new Error('Login failed: No token received');
-      }
-      
-      // Make sure we have a user object
-      const userObject = data.user || { 
-        email: identifier,
-        username: identifier
-      };
-      
-      // Save user and token to local storage
-      localStorage.setItem(USER_KEY, JSON.stringify(userObject));
-      localStorage.setItem(TOKEN_KEY, token);
-      if (data.refreshToken) {
-        localStorage.setItem(REFRESH_TOKEN_KEY, data.refreshToken);
-      }
-      
-      // Verify data was saved
-      const savedToken = localStorage.getItem(TOKEN_KEY);
-      const savedUser = localStorage.getItem(USER_KEY);
-      console.log('Storage verification:', {
-        tokenSaved: !!savedToken,
-        userSaved: !!savedUser,
-        tokenMatch: savedToken === token
-      });
-      
-      return data;
-    } catch (error) {
-      // Check for connection refused error
-      if (error.name === 'TypeError' && error.message === 'Failed to fetch') {
-        console.error('Cannot connect to server. Please check if the backend server is running.');
-        throw new Error('Cannot connect to server. Please start the backend with "npm run backend"');
-      }
-      throw error;
+    // First check for exact username match
+    let user = mockUsers.find(u => u.username === identifier);
+    
+    // If not found, try case-insensitive match
+    if (!user) {
+      const lowerUsername = identifier.toLowerCase();
+      user = mockUsers.find(u => u.username.toLowerCase() === lowerUsername);
     }
+    
+    if (!user) {
+      throw new Error('Invalid username or password');
+    }
+    
+    // Create a clean user object with required fields
+    const userData = {
+      id: user.id,
+      email: user.email,
+      firstName: user.firstName,
+      lastName: user.lastName,
+      username: user.username,
+      name: `${user.firstName} ${user.lastName}`,
+      preferences: user.preferences || {}
+    };
+    
+    // Save user and token to local storage
+    localStorage.setItem(USER_KEY, JSON.stringify(userData));
+    localStorage.setItem(TOKEN_KEY, mockTokens.accessToken);
+    localStorage.setItem(REFRESH_TOKEN_KEY, mockTokens.refreshToken);
+    
+    return { user: userData, ...mockTokens };
+  }
+  
+  console.log('Starting login process for:', identifier);
+  
+  try {
+    const response = await fetch(`${API_URL}/auth/login`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ username: identifier, password }),
+    });
+    
+    if (!response.ok) {
+      const error = await response.json();
+      console.error('Login failed:', error);
+      throw new Error(error.message || 'Login failed');
+    }
+    
+    const data = await response.json();
+    console.log('Login response structure:', {
+      hasUser: !!data.user,
+      hasToken: !!data.token || !!data.accessToken,
+      hasRefreshToken: !!data.refreshToken,
+      responseKeys: Object.keys(data)
+    });
+    
+    // Handle different token response structures
+    const token = data.token || data.accessToken;
+    if (!token) {
+      console.error('No token in login response. Response data:', data);
+      throw new Error('Login failed: No token received');
+    }
+    
+    // Make sure we have a user object
+    const userObject = data.user || { 
+      email: identifier,
+      username: identifier
+    };
+    
+    // Save user and token to local storage
+    localStorage.setItem(USER_KEY, JSON.stringify(userObject));
+    localStorage.setItem(TOKEN_KEY, token);
+    if (data.refreshToken) {
+      localStorage.setItem(REFRESH_TOKEN_KEY, data.refreshToken);
+    }
+    
+    // Verify data was saved
+    const savedToken = localStorage.getItem(TOKEN_KEY);
+    const savedUser = localStorage.getItem(USER_KEY);
+    console.log('Storage verification:', {
+      tokenSaved: !!savedToken,
+      userSaved: !!savedUser,
+      tokenMatch: savedToken === token
+    });
+    
+    return data;
+  } catch (error) {
+    // Check for connection refused error
+    if (error.name === 'TypeError' && error.message === 'Failed to fetch') {
+      console.error('Cannot connect to server. Please check if the backend server is running.');
+      throw new Error('Cannot connect to server. Please start the backend with "npm run backend"');
+    }
+    throw error;
   }
 };
 
@@ -590,44 +662,51 @@ export const logout = (redirect = true) => {
  * @returns {Promise<Object>} Success message
  */
 export const updatePassword = async (currentPassword, newPassword) => {
-  // Forcibly bypass mock data path
-  if (false) {
-    // Mock implementation...
-  } else {
-    console.log('Updating password with auth endpoint');
+  if (USE_MOCK_DATA) {
+    await simulateApiDelay();
+    simulateApiError(0.1);
     
+    // Simple mock password check
+    if (currentPassword !== 'password') {
+      throw new Error('Current password is incorrect');
+    }
+    
+    return { success: true, message: 'Password updated successfully' };
+  }
+  
+  console.log('Updating password with auth endpoint');
+  
+  try {
+    // Use the auth endpoint for password updates
+    const response = await authenticatedRequest(`${API_URL}/auth/updatepassword`, {
+      method: 'PUT',
+      body: JSON.stringify({ currentPassword, newPassword }),
+    });
+    
+    console.log('Password update response:', response);
+    
+    if (!response.success) {
+      console.error('Password update failed:', response);
+      throw new Error(response.message || 'Failed to update password');
+    }
+    
+    return response;
+  } catch (error) {
+    console.error('Error updating password:', error);
+    
+    // Try the users endpoint as fallback
     try {
-      // Use the auth endpoint for password updates
-      const response = await authenticatedRequest(`${API_URL}/auth/updatepassword`, {
+      console.log('Trying users endpoint as fallback');
+      const fallbackResponse = await authenticatedRequest(`${API_URL}/users/password`, {
         method: 'PUT',
         body: JSON.stringify({ currentPassword, newPassword }),
       });
       
-      console.log('Password update response:', response);
-      
-      if (!response.success) {
-        console.error('Password update failed:', response);
-        throw new Error(response.message || 'Failed to update password');
-      }
-      
-      return response;
-    } catch (error) {
-      console.error('Error updating password:', error);
-      
-      // Try the users endpoint as fallback
-      try {
-        console.log('Trying users endpoint as fallback');
-        const fallbackResponse = await authenticatedRequest(`${API_URL}/users/password`, {
-          method: 'PUT',
-          body: JSON.stringify({ currentPassword, newPassword }),
-        });
-        
-        console.log('Fallback password update response:', fallbackResponse);
-        return fallbackResponse;
-      } catch (fallbackError) {
-        console.error('Fallback password update also failed:', fallbackError);
-        throw error; // Throw the original error
-      }
+      console.log('Fallback password update response:', fallbackResponse);
+      return fallbackResponse;
+    } catch (fallbackError) {
+      console.error('Fallback password update also failed:', fallbackError);
+      throw error; // Throw the original error
     }
   }
 };
@@ -641,29 +720,30 @@ export const updatePassword = async (currentPassword, newPassword) => {
 export const resetPassword = async (newPassword) => {
   console.log('Resetting password without verification');
   
-  // Forcibly bypass mock data path
-  if (false) {
-    // Mock implementation...
-  } else {
+  if (USE_MOCK_DATA) {
+    await simulateApiDelay();
+    simulateApiError(0.1);
+    return { success: true, message: 'Password reset successfully' };
+  }
+  
+  try {
+    // Try the dedicated password reset endpoint first
+    const response = await authenticatedRequest(`${API_URL}/users/password/reset`, {
+      method: 'PUT',
+      body: JSON.stringify({ newPassword }),
+    });
+    
+    console.log('Password reset response:', response);
+    return response;
+  } catch (error) {
+    console.error('Error resetting password:', error);
+    
+    // As a fallback, try using a blank current password with the regular endpoint
     try {
-      // Try the dedicated password reset endpoint first
-      const response = await authenticatedRequest(`${API_URL}/users/password/reset`, {
-        method: 'PUT',
-        body: JSON.stringify({ newPassword }),
-      });
-      
-      console.log('Password reset response:', response);
-      return response;
-    } catch (error) {
-      console.error('Error resetting password:', error);
-      
-      // As a fallback, try using a blank current password with the regular endpoint
-      try {
-        return await updatePassword('', newPassword);
-      } catch (fallbackError) {
-        console.error('Fallback password reset also failed:', fallbackError);
-        throw error; // Throw the original error
-      }
+      return await updatePassword('', newPassword);
+    } catch (fallbackError) {
+      console.error('Fallback password reset also failed:', fallbackError);
+      throw error; // Throw the original error
     }
   }
 };

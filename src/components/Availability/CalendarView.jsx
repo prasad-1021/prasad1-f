@@ -1,24 +1,26 @@
 import React, { useState, useEffect } from 'react';
-import FullCalendar from '@fullcalendar/react';
-import dayGridPlugin from '@fullcalendar/daygrid';
-import timeGridPlugin from '@fullcalendar/timegrid';
-import interactionPlugin from '@fullcalendar/interaction';
-import listPlugin from '@fullcalendar/list';
-import { format, addDays, startOfWeek } from 'date-fns';
+import { Calendar, dateFnsLocalizer, Views } from 'react-big-calendar';
+import { format, parse, startOfWeek, getDay, addDays } from 'date-fns';
+import { enUS } from 'date-fns/locale';
+import 'react-big-calendar/lib/css/react-big-calendar.css';
 import styles from './CalendarView.module.css';
-import { getAvailability } from '../../services/availabilityService';
-import { availabilityToEvents, getStatusColor } from './utils';
-import { getEvents } from '../../services/eventService';
 import { HiChevronLeft, HiChevronRight } from 'react-icons/hi';
 import { BiSearch } from 'react-icons/bi';
+import { getAvailability } from '../../services/availabilityService';
+import { getEvents } from '../../services/eventService';
 
-// Define valid view types
-const Views = {
-  MONTH: 'dayGridMonth',
-  WEEK: 'timeGridWeek',
-  DAY: 'timeGridDay',
-  AGENDA: 'listWeek'
+// Setup date-fns localizer
+const locales = {
+  'en-US': enUS
 };
+
+const localizer = dateFnsLocalizer({
+  format,
+  parse,
+  startOfWeek,
+  getDay,
+  locales
+});
 
 // Function to convert time string to date object
 const timeStringToDate = (dateStr, timeStr) => {
@@ -247,42 +249,52 @@ const CalendarView = () => {
   return (
     <div className={styles.calendarContainer}>
       {loading && <div className={styles.loadingOverlay}>Loading calendar data...</div>}
-      <FullCalendar
-        plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin, listPlugin]}
-        initialView="dayGridMonth"
-        initialDate={currentDate}
-        headerToolbar={{
-          left: 'prev,next today',
-          center: 'title',
-          right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
-        }}
+      <Calendar
+        localizer={localizer}
         events={allCalendarItems}
-        eventContent={(arg) => <EventComponent event={arg.event} />}
-        eventClick={(info) => {
-          // Handle event click
+        startAccessor="start"
+        endAccessor="end"
+        style={{ height: 700 }}
+        date={currentDate}
+        onNavigate={date => setCurrentDate(date)}
+        view={view}
+        onView={handleViewChange}
+        components={{
+          toolbar: CustomHeader,
+          event: EventComponent,
+          timeSlotWrapper: props => React.cloneElement(props.children, { ...props })
         }}
-        dateClick={(info) => {
-          // Handle date click
-        }}
-        dayCellContent={(arg) => {
+        eventPropGetter={event => ({
+          className: event.type === 'availability' ? styles.availabilityEvent : styles.regularEvent
+        })}
+        dayPropGetter={date => {
           const today = new Date();
-          if (arg.date.getDate() === today.getDate() && 
-              arg.date.getMonth() === today.getMonth() && 
-              arg.date.getFullYear() === today.getFullYear()) {
-            return (
-              <div className={styles.currentDayCell}>
-                {arg.dayNumberText}
-              </div>
-            );
+          if (date.getDate() === today.getDate() && 
+              date.getMonth() === today.getMonth() && 
+              date.getFullYear() === today.getFullYear()) {
+            return {
+              className: styles.currentDay
+            };
           }
-          if (arg.date.getDay() === 0 || arg.date.getDay() === 6) {
-            return (
-              <div className={styles.weekendDayCell}>
-                {arg.dayNumberText}
-              </div>
-            );
+          if (date.getDay() === 0 || date.getDay() === 6) {
+            return {
+              className: styles.weekendDay
+            };
           }
-          return arg.dayNumberText;
+          return {};
+        }}
+        formats={{
+          dayFormat: 'EEE',
+          weekdayFormat: 'EEE',
+          dayRangeHeaderFormat: ({ start, end }) => {
+            return `${format(start, 'MMM d')} - ${format(end, 'MMM d, yyyy')}`;
+          },
+          monthHeaderFormat: 'MMMM yyyy',
+          dayHeaderFormat: 'EEEE, MMMM d',
+          eventTimeRangeFormat: ({ start, end }) => {
+            if (!start || !end) return '';
+            return `${format(start, 'h:mm a')} - ${format(end, 'h:mm a')}`;
+          }
         }}
       />
     </div>

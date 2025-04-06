@@ -10,13 +10,6 @@ import {
   getAuthToken
 } from '../services/userService';
 
-// Import storage keys from userService
-import {
-  TOKEN_KEY,
-  REFRESH_TOKEN_KEY,
-  USER_KEY
-} from '../services/userService';
-
 // Auth context
 const AuthContext = createContext(null);
 
@@ -174,24 +167,9 @@ export const AuthProvider = ({ children }) => {
   const login = async (username, password) => {
     try {
       setLoading(true);
-      
-      // Clear localStorage of any potential mock tokens before login
-      localStorage.removeItem(TOKEN_KEY);
-      localStorage.removeItem(REFRESH_TOKEN_KEY);
-      localStorage.removeItem(USER_KEY);
-      
-      console.log('AuthContext: Attempting login for username:', username);
+      console.log('Attempting login for username:', username);
       const userData = await loginService(username, password);
-      console.log('AuthContext: Login successful, received data:', {
-        user: userData.user ? {
-          id: userData.user.id,
-          email: userData.user.email,
-          username: userData.user.username
-        } : 'No user data',
-        hasToken: !!userData.token || !!userData.accessToken,
-        hasRefreshToken: !!userData.refreshToken,
-        responseKeys: Object.keys(userData)
-      });
+      console.log('Login successful, user data:', userData);
       
       // Process user data to add firstName/lastName if needed
       if (userData && userData.user) {
@@ -206,7 +184,7 @@ export const AuthProvider = ({ children }) => {
       setUser(userData.user || userData);
       return userData;
     } catch (error) {
-      console.error('AuthContext: Login failed with error:', error);
+      console.error('Login failed with error:', error);
       setError(error.message || 'Login failed');
       throw error;
     } finally {
@@ -218,27 +196,10 @@ export const AuthProvider = ({ children }) => {
   const register = async (userData) => {
     try {
       setLoading(true);
-      
-      // Clear localStorage of any potential mock tokens before registration
-      localStorage.removeItem(TOKEN_KEY);
-      localStorage.removeItem(REFRESH_TOKEN_KEY);
-      localStorage.removeItem(USER_KEY);
-      
-      console.log('AuthContext: Registering user with data:', { 
-        ...userData, 
-        password: '********' // Don't log the actual password
-      });
       const newUser = await registerService(userData);
-      console.log('AuthContext: Registration successful, received data:', {
-        user: newUser.user ? { ...newUser.user, id: newUser.user.id } : 'No user data',
-        hasToken: !!newUser.token || !!newUser.accessToken,
-        hasRefreshToken: !!newUser.refreshToken,
-        responseKeys: Object.keys(newUser)
-      });
       setUser(newUser);
       return newUser;
     } catch (error) {
-      console.error('AuthContext: Registration failed with error:', error);
       setError(error.message || 'Registration failed');
       throw error;
     } finally {

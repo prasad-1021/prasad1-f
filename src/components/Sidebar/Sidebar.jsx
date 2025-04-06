@@ -27,7 +27,7 @@ const Sidebar = () => {
                 
                 // First try the auth/me endpoint
                 try {
-                    const authResponse = await axios.get(`${process.env.REACT_APP_API_URL || 'https://eventmeeting.onrender.com/api'}/auth/me`, {
+                    const authResponse = await axios.get(`${process.env.REACT_APP_API_URL || 'https://eventmeeting-backend.onrender.com/api'}/auth/me`, {
                         headers: {
                             Authorization: `Bearer ${token}`
                         }
@@ -55,7 +55,7 @@ const Sidebar = () => {
                 }
                 
                 // If auth/me failed, try the users/me endpoint as fallback
-                const response = await axios.get(`${process.env.REACT_APP_API_URL || 'https://eventmeeting.onrender.com/api'}/users/me`, {
+                const response = await axios.get(`${process.env.REACT_APP_API_URL || 'https://eventmeeting-backend.onrender.com/api'}/users/me`, {
                     headers: {
                         Authorization: `Bearer ${token}`
                     }

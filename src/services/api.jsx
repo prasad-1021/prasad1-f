@@ -1,7 +1,5 @@
 import axios from 'axios';
-
-// Mock data replacement (empty implementation since we removed the file)
-const getMockParticipants = () => [];
+import { getMockParticipants } from './mockData';
 
 /**
  * API Service
@@ -11,7 +9,7 @@ const getMockParticipants = () => [];
  */
 
 // Configuration for API base URL
-const API_BASE_URL = process.env.REACT_APP_API_URL || 'https://eventmeeting.onrender.com';
+const API_BASE_URL = process.env.REACT_APP_API_URL || 'https://eventmeeting-backend.onrender.com';
 
 // Use mock data in development mode
 const USE_MOCK_DATA = process.env.REACT_APP_USE_MOCK_DATA === 'true' || false;

@@ -1,6 +1,6 @@
 import { authenticatedRequest } from './userService';
 
-const API_URL = process.env.REACT_APP_API_URL || 'https://eventmeeting.onrender.com/api';
+const API_URL = process.env.REACT_APP_API_URL || 'https://eventmeeting-backend.onrender.com/api';
 
 /**
  * Gets the user's availability settings

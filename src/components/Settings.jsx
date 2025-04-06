@@ -4,7 +4,7 @@ import { useToast } from '../contexts/ToastContext';
 import { useAuth } from '../contexts/AuthContext';
 import { updateUserProfile, updatePassword, resetPassword, authenticatedRequest } from '../services/userService';
 
-const API_URL = process.env.REACT_APP_API_URL || 'https://eventmeeting.onrender.com/api';
+const API_URL = process.env.REACT_APP_API_URL || 'https://eventmeeting-backend.onrender.com/api';
 
 /**
  * Settings Component
