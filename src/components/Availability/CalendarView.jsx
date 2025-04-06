@@ -4,12 +4,21 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import listPlugin from '@fullcalendar/list';
+import { format, addDays, startOfWeek } from 'date-fns';
 import styles from './CalendarView.module.css';
 import { getAvailability } from '../../services/availabilityService';
 import { availabilityToEvents, getStatusColor } from './utils';
 import { getEvents } from '../../services/eventService';
 import { HiChevronLeft, HiChevronRight } from 'react-icons/hi';
 import { BiSearch } from 'react-icons/bi';
+
+// Define valid view types
+const Views = {
+  MONTH: 'dayGridMonth',
+  WEEK: 'timeGridWeek',
+  DAY: 'timeGridDay',
+  AGENDA: 'listWeek'
+};
 
 // Function to convert time string to date object
 const timeStringToDate = (dateStr, timeStr) => {

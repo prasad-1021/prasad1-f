@@ -1,0 +1,256 @@
+/* Availability Form Styles */
+.formContainer {
+  width: 100%;
+  margin-bottom: 60px;
+}
+
+.dayContainer {
+  margin-bottom: 24px;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 16px;
+  background-color: #fff;
+}
+
+.dayHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.dayName {
+  font-weight: 600;
+  font-size: 18px;
+  color: #111827;
+}
+
+.toggle {
+  position: relative;
+  display: inline-block;
+  width: 48px;
+  height: 24px;
+}
+
+.toggle input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #e5e7eb;
+  transition: 0.4s;
+  border-radius: 24px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 18px;
+  width: 18px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  transition: 0.4s;
+  border-radius: 50%;
+}
+
+input:checked + .slider {
+  background-color: #1877F2;
+}
+
+input:checked + .slider:before {
+  transform: translateX(24px);
+}
+
+.timeSlotContainer {
+  margin-top: 12px;
+}
+
+.timeSlot {
+  display: flex;
+  align-items: center;
+  margin-bottom: 12px;
+  gap: 16px;
+}
+
+.timeField {
+  flex: 1;
+  padding: 8px 12px;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+.addSlotButton {
+  display: inline-flex;
+  align-items: center;
+  background: none;
+  border: none;
+  color: #1877F2;
+  font-size: 14px;
+  cursor: pointer;
+  padding: 0;
+  margin-top: 4px;
+}
+
+.addSlotButton svg {
+  margin-right: 4px;
+}
+
+.removeSlotButton {
+  background: none;
+  border: none;
+  color: #ef4444;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.submitButton {
+  background-color: #1877F2;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 12px 24px;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 16px;
+  margin-top: 24px;
+  transition: background-color 0.2s;
+}
+
+.submitButton:hover {
+  background-color: #1565D8;
+}
+
+.submitButton:disabled {
+  background-color: #9CA3AF;
+  cursor: not-allowed;
+}
+
+.eventType {
+  margin-bottom: 24px;
+}
+
+.eventTypeLabel {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: #4B5563;
+}
+
+.eventTypeDropdown {
+  position: relative;
+  width: 100%;
+}
+
+.eventTypeButton {
+  width: 100%;
+  padding: 12px 16px;
+  background-color: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  text-align: left;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+}
+
+.eventTypeOptions {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background-color: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  margin-top: 4px;
+  z-index: 10;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  max-height: 250px;
+  overflow-y: auto;
+}
+
+.eventTypeOption {
+  padding: 12px 16px;
+  cursor: pointer;
+}
+
+.eventTypeOption:hover {
+  background-color: #f3f4f6;
+}
+
+.errorText {
+  color: #ef4444;
+  font-size: 14px;
+  margin-top: 4px;
+}
+
+.timeZoneSection {
+  margin-bottom: 24px;
+}
+
+.timeZoneLabel {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: #4B5563;
+}
+
+.copySection {
+  margin-bottom: 24px;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 16px;
+  background-color: #f9fafb;
+}
+
+.copyTitle {
+  font-weight: 600;
+  margin-bottom: 12px;
+  color: #4B5563;
+}
+
+.copyOptions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.copyDay {
+  background-color: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  padding: 8px 16px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.copyDay:hover {
+  border-color: #1877F2;
+  color: #1877F2;
+}
+
+.sectionTitle {
+  font-weight: 600;
+  font-size: 20px;
+  margin-bottom: 16px;
+  color: #111827;
+}
+
+.loadingState {
+  text-align: center;
+  padding: 20px;
+} 
