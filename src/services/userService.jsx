@@ -9,8 +9,10 @@ import { mockUsers, mockTokens, simulateApiDelay, simulateApiError, addMockUser,
 
 // Use mock data if in development mode or API_URL is not set
 const USE_MOCK_DATA = false;
-// Update API URL to use Render backend by default
-const API_URL = process.env.REACT_APP_API_URL || 'https://eventmeeting-backend.onrender.com/api';
+// Update API URL to use the Render deployment
+const API_URL = process.env.REACT_APP_API_URL || 'https://eventmeeting.onrender.com/api';
+// const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
+// const API_URL = process.env.REACT_APP_API_URL || 'https://eventmeeting-backend.onrender.com/api';
 
 // Local storage keys
 const USER_KEY = 'cnnct_user';
@@ -35,8 +37,10 @@ export const getCurrentUser = async () => {
       // Use auth/me endpoint which is actually implemented on the backend
       const response = await axios.get(`${API_URL}/auth/me`, {
         headers: {
-          Authorization: `Bearer ${token}`
-        }
+          Authorization: `Bearer ${token}`,
+          'Accept': 'application/json'
+        },
+        withCredentials: true
       });
       
       console.log('Current user API response:', response.data);
@@ -315,7 +319,9 @@ export const authenticatedRequest = async (url, options = {}) => {
       ...options.headers,
       'Authorization': `Bearer ${currentToken}`,
       'Content-Type': 'application/json',
+      'Accept': 'application/json'
     },
+    credentials: 'include'
   };
   
   console.log(`Making authenticated request to: ${formattedUrl}`);
@@ -420,13 +426,22 @@ export const register = async (userData) => {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
+      'Accept': 'application/json'
     },
+    credentials: 'include',
     body: JSON.stringify(userData),
   });
   
   if (!response.ok) {
-    const error = await response.json();
-    throw new Error(error.message || 'Registration failed');
+    const errorText = await response.text();
+    let errorMessage = 'Registration failed';
+    try {
+      const errorJson = JSON.parse(errorText);
+      errorMessage = errorJson.message || errorMessage;
+    } catch (e) {
+      errorMessage = `Registration failed with status ${response.status}`;
+    }
+    throw new Error(errorMessage);
   }
   
   const data = await response.json();
@@ -577,14 +592,28 @@ export const login = async (identifier, password) => {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
+        'Accept': 'application/json'
       },
+      credentials: 'include',
       body: JSON.stringify({ username: identifier, password }),
     });
     
     if (!response.ok) {
-      const error = await response.json();
-      console.error('Login failed:', error);
-      throw new Error(error.message || 'Login failed');
+      const errorText = await response.text();
+      console.error('Login failed with status:', response.status, response.statusText);
+      console.error('Error response body:', errorText);
+      
+      // Try to parse as JSON if possible
+      let errorMessage = 'Login failed';
+      try {
+        const errorJson = JSON.parse(errorText);
+        errorMessage = errorJson.message || errorMessage;
+      } catch (e) {
+        // If we can't parse JSON, use a generic message
+        errorMessage = `Login failed with status ${response.status}`;
+      }
+      
+      throw new Error(errorMessage);
     }
     
     const data = await response.json();
