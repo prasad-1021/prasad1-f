@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { IoAdd } from "react-icons/io5";
 import styles from './Sidebar.module.css';
-import { useAuth } from '../../contexts/AuthContext';
+import { useAuth } from '../contexts/AuthContext';
 import logoSvg from '../../assets/logo.svg';
 import eventsSvg from '../../assets/events.svg';
 import bookingSvg from '../../assets/booking.svg';

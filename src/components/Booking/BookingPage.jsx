@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import styles from './BookingPage.module.css';
 import MeetingCard from './MeetingCard';
-import { useToast } from '../../contexts/ToastContext';
+import { useToast } from '../contexts/ToastContext';
 import api from '../../services/api';
-import { useAuth } from '../../contexts/AuthContext';
+import { useAuth } from '../contexts/AuthContext';
 
 const BookingPage = () => {
     const [activeTab, setActiveTab] = useState('upcoming');
