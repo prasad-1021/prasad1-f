@@ -8,7 +8,6 @@ import { getUserAvailability, getTimezone, getEventType } from '../../services/a
 import { defaultTimeGap } from './data.jsx';
 import { toast } from 'react-toastify';
 import { Segmented } from 'antd';
-import TimeGapSettings from './TimeGapSettings';
 
 const AvailabilityPage = () => {
     const [activeTab, setActiveTab] = useState('availability');
