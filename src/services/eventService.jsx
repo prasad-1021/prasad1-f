@@ -17,11 +17,17 @@ import {
 // Constants
 const USE_MOCK_DATA = process.env.REACT_APP_USE_MOCK_DATA === 'true' || false;
 
-// Use mock data if in development mode or API_URL is not set
-// API URLs
-const API_URL = process.env.REACT_APP_API_URL || 'https://eventmeeting-backend.onrender.com/api';
-const MEETINGS_ENDPOINT = `${API_URL}/meetings`;  // Use meetings endpoint instead of events
-const EVENTS_ENDPOINT = `${API_URL}/events`;  // Events endpoint for the event types
+// Use the correct API URL
+const API_URL = process.env.REACT_APP_API_URL || 'https://eventmeeting.onrender.com/api';
+
+// Format the base URL properly to ensure /api is in the path
+const getBaseUrl = () => {
+  // If API_URL already has /api, use it, otherwise add it
+  return API_URL.includes('/api') ? API_URL : `${API_URL.replace(/\/$/, '')}/api`;
+};
+
+const MEETINGS_ENDPOINT = `${getBaseUrl()}/meetings`;  // Use meetings endpoint instead of events
+const EVENTS_ENDPOINT = `${getBaseUrl()}/events`;  // Events endpoint for the event types
 
 /**
  * Gets all events

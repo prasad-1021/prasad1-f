@@ -1,13 +1,20 @@
 import { authenticatedRequest } from './userService';
 
-const API_URL = process.env.REACT_APP_API_URL || 'https://eventmeeting-backend.onrender.com/api';
+// Update API URL to use the correct endpoint
+const API_URL = process.env.REACT_APP_API_URL || 'https://eventmeeting.onrender.com/api';
+
+// Format the base URL properly to ensure /api is in the path
+const getBaseUrl = () => {
+  // If API_URL already has /api, use it, otherwise add it
+  return API_URL.includes('/api') ? API_URL : `${API_URL.replace(/\/$/, '')}/api`;
+};
 
 /**
  * Gets the user's availability settings
  * @returns {Promise<Array>} Array of availability objects by day
  */
 export const getAvailability = async () => {
-  return authenticatedRequest(`${API_URL}/users/availability`);
+  return authenticatedRequest(`${getBaseUrl()}/users/availability`);
 };
 
 /**
@@ -16,7 +23,7 @@ export const getAvailability = async () => {
  * @returns {Promise<Object>} Response object
  */
 export const updateAvailability = async (availabilityData) => {
-  return authenticatedRequest(`${API_URL}/users/availability`, {
+  return authenticatedRequest(`${getBaseUrl()}/users/availability`, {
     method: 'PUT',
     body: JSON.stringify(availabilityData)
   });
@@ -29,7 +36,7 @@ export const updateAvailability = async (availabilityData) => {
  * @returns {Promise<Object>} Updated availability object
  */
 export const updateDayAvailability = async (day, dayData) => {
-  return authenticatedRequest(`${API_URL}/users/availability/${day}`, {
+  return authenticatedRequest(`${getBaseUrl()}/users/availability/${day}`, {
     method: 'PUT',
     body: JSON.stringify(dayData)
   });
@@ -40,7 +47,7 @@ export const updateDayAvailability = async (day, dayData) => {
  * @returns {Promise<Object>} Timezone object
  */
 export const getTimezone = async () => {
-  return authenticatedRequest(`${API_URL}/users/timezone`);
+  return authenticatedRequest(`${getBaseUrl()}/users/timezone`);
 };
 
 /**
@@ -49,7 +56,7 @@ export const getTimezone = async () => {
  * @returns {Promise<Object>} Response object
  */
 export const updateTimezone = async (timezone) => {
-  return authenticatedRequest(`${API_URL}/users/timezone`, {
+  return authenticatedRequest(`${getBaseUrl()}/users/timezone`, {
     method: 'PUT',
     body: JSON.stringify({ timezone })
   });
@@ -61,7 +68,7 @@ export const updateTimezone = async (timezone) => {
  * @returns {Promise<Object>} Response indicating if the event conflicts
  */
 export const checkAvailabilityConflict = async (eventData) => {
-  return authenticatedRequest(`${API_URL}/meetings/check-availability`, {
+  return authenticatedRequest(`${getBaseUrl()}/meetings/check-availability`, {
     method: 'POST',
     body: JSON.stringify(eventData)
   });

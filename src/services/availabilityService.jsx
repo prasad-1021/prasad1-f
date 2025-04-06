@@ -6,9 +6,17 @@
 
 import { authenticatedRequest } from './userService';
 
-const API_URL = process.env.REACT_APP_API_URL || 'https://eventmeeting-backend.onrender.com/api';
-const AVAILABILITY_ENDPOINT = `${API_URL}/users/availability`;
-const PREFERENCES_ENDPOINT = `${API_URL}/users/preferences`;
+// Update API URL to match the configured one in userService
+const API_URL = process.env.REACT_APP_API_URL || 'https://eventmeeting.onrender.com/api';
+
+// Format the base URL properly to ensure /api is in the path
+const getBaseUrl = () => {
+  // If API_URL already has /api, use it, otherwise add it
+  return API_URL.includes('/api') ? API_URL : `${API_URL.replace(/\/$/, '')}/api`;
+};
+
+const AVAILABILITY_ENDPOINT = `${getBaseUrl()}/users/availability`;
+const PREFERENCES_ENDPOINT = `${getBaseUrl()}/users/preferences`;
 
 /**
  * Get the user's availability settings
