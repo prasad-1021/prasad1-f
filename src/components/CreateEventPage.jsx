@@ -293,6 +293,18 @@ const CreateEventPage = () => {
             // If not in edit mode, try to fetch the preferred event type
             const fetchPreferredEventType = async () => {
                 try {
+                    // First check if we have a lastUsedEventType in session storage
+                    const lastUsedEventType = sessionStorage.getItem('lastUsedEventType');
+                    if (lastUsedEventType) {
+                        console.log('Using last used event type from session:', lastUsedEventType);
+                        setEventData(prev => ({
+                            ...prev,
+                            eventType: lastUsedEventType
+                        }));
+                        return; // Skip further checks if we have a last used type
+                    }
+                    
+                    // Next, check if we have eventFormData in session storage
                     const storedData = sessionStorage.getItem('eventFormData');
                     // Check if we already have event type in session (user is in the middle of creating an event)
                     if (storedData) {
@@ -307,7 +319,7 @@ const CreateEventPage = () => {
                         }
                     }
                     
-                    // Only fetch from API if not already in session
+                    // Only fetch from API if not found in session storage
                     const response = await getEventType();
                     if (response.success && response.data && response.data.eventType) {
                         // Update the event type in the form with the preferred value

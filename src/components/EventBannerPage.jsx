@@ -336,6 +336,9 @@ const EventBannerPage = () => {
                 timeRange: timeRange
             });
             
+            // Get the event type to use (ensure we have it from some source)
+            const eventType = eventData.eventType || eventData.type || 'Meeting';
+            
             // Combine event data and banner data
             const combinedData = {
                 title: bannerData.title || eventData.title || eventData.eventTopic || 'Team A Meeting-1',
@@ -349,8 +352,8 @@ const EventBannerPage = () => {
                 timezone: eventData.timeZone || '(UTC +5:00 Delhi)',
                 meetingLink: bannerData.link,
                 hostId: userId,
-                type: eventData.eventType || eventData.type || 'Meeting',
-                eventType: eventData.eventType || eventData.type || 'Meeting', // Set both for cross-compatibility
+                type: eventType,
+                eventType: eventType, // Set both for cross-compatibility
                 bannerSettings: {
                     backgroundColor: bannerData.backgroundColor
                 },
@@ -374,6 +377,18 @@ const EventBannerPage = () => {
             
             let result;
             
+            // Import the eventType update function here to avoid circular imports
+            const { updateEventType } = require('../services/availabilityService');
+            
+            // Save the event type preference first
+            try {
+                console.log('Saving event type preference:', eventType);
+                await updateEventType(eventType);
+            } catch (prefError) {
+                console.warn('Could not save event type preference:', prefError);
+                // Continue with event creation even if preference save fails
+            }
+            
             if (isEditMode && eventId) {
                 // This is an update operation
                 console.log(`Updating event ${eventId} with data:`, combinedData);
@@ -393,6 +408,14 @@ const EventBannerPage = () => {
             
             // Clear session storage
             sessionStorage.removeItem('eventFormData');
+            
+            // Before navigating, ensure we store the event type in session storage 
+            // to retain it for new events creation
+            try {
+                sessionStorage.setItem('lastUsedEventType', eventType);
+            } catch (e) {
+                console.warn('Could not save last used event type to session storage:', e);
+            }
             
             // Navigate to events page
             navigate('/events');
