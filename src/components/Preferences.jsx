@@ -141,7 +141,7 @@ const Preferences = () => {
 
   const handleSavePreferences = async () => {
     if (!username.trim()) {
-      errorToast('Please select username and preference');
+      errorToast('Please enter a username to continue');
       return;
     }
     
@@ -164,7 +164,14 @@ const Preferences = () => {
         try {
           // Update the user profile
           await updateUserProfile(profileData);
-          successToast('Preferences saved successfully!');
+          
+          // Check if this is a new registration or returning user
+          const isNewSetup = sessionStorage.getItem('newUserRegistration') === 'true';
+          if (isNewSetup) {
+            successToast('Profile setup complete! Welcome to CNNCT');
+          } else {
+            successToast('Profile updated successfully');
+          }
         } catch (apiError) {
           console.error('API update failed, using local fallback:', apiError);
           saveToLocalStorage(profileData);
@@ -246,7 +253,7 @@ const Preferences = () => {
     localStorage.setItem(USER_KEY, JSON.stringify(updatedUser));
     
     // Notify user that we're using offline mode
-    successToast('Preferences saved in offline mode');
+    successToast('Profile saved locally. You can continue using CNNCT');
   };
 
   const handleKeyDown = (e) => {

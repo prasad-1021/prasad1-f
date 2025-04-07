@@ -16,8 +16,6 @@ import ProtectedRoute from './components/ProtectedRoute';
 import LandingLayout from './components/LandingLayout';
 import { AuthProvider } from './contexts/AuthContext';
 import { ToastProvider } from './contexts/ToastContext';
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 import './App.css';
 
 function App() {
@@ -138,58 +136,6 @@ function App() {
             
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
-          
-          <ToastContainer 
-            position="top-right"
-            autoClose={5000}
-            hideProgressBar={true}
-            newestOnTop
-            closeOnClick
-            rtl={false}
-            pauseOnFocusLoss
-            draggable
-            pauseOnHover
-            theme="colored"
-            toastStyle={{
-              borderRadius: '4px',
-              padding: '12px 16px',
-              fontSize: '14px',
-              fontWeight: 'normal',
-              color: 'white',
-              display: 'flex',
-              alignItems: 'center',
-              gap: '10px'
-            }}
-            toastClassName={({ type }) => 
-              type === 'error' 
-                ? 'toast-error-container' 
-                : type === 'success' 
-                  ? 'toast-success-container' 
-                  : 'toast-container'
-            }
-            enableMultiContainer={true}
-            containerId="default"
-          />
-          
-          <ToastContainer
-            position="top-center"
-            autoClose={2000}
-            hideProgressBar={false}
-            newestOnTop
-            closeOnClick
-            rtl={false}
-            pauseOnFocusLoss={false}
-            draggable={false}
-            pauseOnHover={false}
-            theme="colored"
-            limit={1}
-            closeButton={true}
-            style={{
-              zIndex: 9999
-            }}
-            toastClassName="toast-error-container"
-            containerId="centered"
-          />
         </Router>
       </ToastProvider>
     </AuthProvider>

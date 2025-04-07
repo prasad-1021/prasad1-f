@@ -629,10 +629,13 @@ export const login = async (identifier, password) => {
       console.error('Error response body:', errorText);
       
       // Try to parse as JSON if possible
-      let errorMessage = 'Login failed';
+      let errorMessage = 'Invalid username or password';
       try {
         const errorJson = JSON.parse(errorText);
-        errorMessage = errorJson.message || errorMessage;
+        // Only use specific error messages, otherwise use our default message
+        if (errorJson.message && errorJson.message.includes('credentials')) {
+          errorMessage = errorJson.message;
+        }
       } catch (e) {
         // If we can't parse JSON, use a generic message
         errorMessage = `Login failed with status ${response.status}`;

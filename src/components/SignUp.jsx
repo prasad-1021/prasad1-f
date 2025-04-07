@@ -150,7 +150,7 @@ const SignUp = () => {
           console.error('Error saving email:', error);
         }
         
-        successToast('Account created successfully! Please select username and preference.');
+        successToast('Account created! Complete your profile to get started');
         // Redirect to preferences page - avoid replace:true to maintain navigation history
         navigate('/preferences');
       } else {

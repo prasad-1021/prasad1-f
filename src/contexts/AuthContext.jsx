@@ -171,6 +171,17 @@ export const AuthProvider = ({ children }) => {
       const userData = await loginService(username, password);
       console.log('Login successful, user data:', userData);
       
+      // Check if this is a first-time login
+      const isFirstLogin = !localStorage.getItem('has_logged_in_before');
+      if (isFirstLogin) {
+        localStorage.setItem('has_logged_in_before', 'true');
+      }
+      
+      // Add isFirstLogin flag to the userData
+      if (userData) {
+        userData.isFirstLogin = isFirstLogin;
+      }
+      
       // Process user data to add firstName/lastName if needed
       if (userData && userData.user) {
         if (userData.user.name && (!userData.user.firstName || !userData.user.lastName)) {

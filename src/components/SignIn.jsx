@@ -55,13 +55,19 @@ const SignIn = () => {
           console.log('User needs to set username and/or preferences');
           // Set the new user flag to ensure they complete the preferences flow
           sessionStorage.setItem('newUserRegistration', 'true');
-          successToast('Please select username and preference');
+          successToast('Please complete your profile setup');
           navigate('/preferences');
           return;
         }
       }
       
-      successToast('Welcome back!');
+      // Show appropriate welcome message based on if this is first time login
+      if (userData && userData.isFirstLogin) {
+        successToast('Welcome to CNNCT!');
+      } else {
+        successToast('Welcome back!');
+      }
+      
       navigate('/events'); // No replace:true to avoid infinite loops
     } catch (error) {
       console.error('Login error:', error);

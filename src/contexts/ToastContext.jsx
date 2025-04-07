@@ -22,6 +22,17 @@ export const ToastProvider = ({ children }) => {
   const addToast = useCallback((type, message, duration = 3000) => {
     const id = uuidv4();
     
+    // Ensure message is not empty and is a string
+    if (!message) {
+      console.error('Toast message is empty or invalid');
+      message = type === 'success' ? 'Operation successful' : 'An error occurred';
+    }
+    
+    if (typeof message !== 'string') {
+      console.error('Toast message is not a string:', message);
+      message = String(message);
+    }
+    
     // Ensure duration is numeric and greater than 0
     const safeDuration = typeof duration === 'number' && duration > 0 ? duration : 3000;
     
