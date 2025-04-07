@@ -43,7 +43,24 @@ const SignIn = () => {
     
     try {
       setLoading(true);
-      await auth.login(formData.username, formData.password);
+      const userData = await auth.login(formData.username, formData.password);
+      
+      // Check if the user has set username and preferences
+      if (userData && userData.user) {
+        const user = userData.user;
+        const hasUsername = !!user.username;
+        const hasPreferences = user.preferences && user.preferences.categories && user.preferences.categories.length > 0;
+        
+        if (!hasUsername || !hasPreferences) {
+          console.log('User needs to set username and/or preferences');
+          // Set the new user flag to ensure they complete the preferences flow
+          sessionStorage.setItem('newUserRegistration', 'true');
+          successToast('Please select username and preference');
+          navigate('/preferences');
+          return;
+        }
+      }
+      
       successToast('Welcome back!');
       navigate('/events'); // No replace:true to avoid infinite loops
     } catch (error) {

@@ -19,6 +19,25 @@ const SignUp = () => {
     agreeToTerms: false
   });
   
+  // Load saved form data from localStorage on component mount
+  useEffect(() => {
+    try {
+      const savedFormData = localStorage.getItem('signup_form_data');
+      if (savedFormData) {
+        const parsedData = JSON.parse(savedFormData);
+        // Don't restore password fields for security
+        setFormData(prevData => ({
+          ...prevData,
+          firstName: parsedData.firstName || '',
+          lastName: parsedData.lastName || '',
+          email: parsedData.email || ''
+        }));
+      }
+    } catch (error) {
+      console.error('Error loading saved form data:', error);
+    }
+  }, []);
+  
   // Check if user is already logged in
   useEffect(() => {
     if (isAuthenticated && !authLoading) {
@@ -45,10 +64,26 @@ const SignUp = () => {
   
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
-    setFormData(prevData => ({
-      ...prevData,
+    const newFormData = {
+      ...formData,
       [name]: type === 'checkbox' ? checked : value
-    }));
+    };
+    
+    setFormData(newFormData);
+    
+    // Save non-sensitive data to localStorage for form persistence
+    if (name !== 'password' && name !== 'confirmPassword') {
+      try {
+        const dataToSave = {
+          firstName: newFormData.firstName,
+          lastName: newFormData.lastName,
+          email: newFormData.email
+        };
+        localStorage.setItem('signup_form_data', JSON.stringify(dataToSave));
+      } catch (error) {
+        console.error('Error saving form data:', error);
+      }
+    }
     
     // Clear errors when user starts typing
     if (errors[name]) {
@@ -98,6 +133,7 @@ const SignUp = () => {
         lastName: formData.lastName.trim(),
         email: formData.email.trim(),
         password: formData.password
+        // Note: username will be set later in the preferences page
       };
       
       // Register the user
@@ -107,7 +143,14 @@ const SignUp = () => {
         // Set flag in session storage to indicate new user registration
         sessionStorage.setItem('newUserRegistration', 'true');
         
-        successToast('Account created successfully! Please set your preferences.');
+        // Store user email for the preferences page
+        try {
+          localStorage.setItem('signup_email', formData.email.trim());
+        } catch (error) {
+          console.error('Error saving email:', error);
+        }
+        
+        successToast('Account created successfully! Please select username and preference.');
         // Redirect to preferences page - avoid replace:true to maintain navigation history
         navigate('/preferences');
       } else {

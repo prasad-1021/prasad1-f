@@ -66,14 +66,16 @@ const ProtectedRoute = ({ children, requirePreferences = false }) => {
   // Check if user needs to complete preferences
   const isNewUser = sessionStorage.getItem('newUserRegistration') === 'true';
   const hasPreferences = currentUser?.preferences?.categories?.length > 0;
+  const hasUsername = !!currentUser?.username;
   
   console.log('ProtectedRoute: Has preferences:', hasPreferences);
+  console.log('ProtectedRoute: Has username:', hasUsername);
   console.log('ProtectedRoute: Is new user:', isNewUser);
   
   // Only redirect to preferences if we need preferences, user doesn't have them,
   // and we're not already on the preferences page
-  if (requirePreferences && !hasPreferences && !isPreferencesPage) {
-    console.log('User needs to set preferences, redirecting to preferences page');
+  if (requirePreferences && (!hasPreferences || !hasUsername) && !isPreferencesPage) {
+    console.log('User needs to set preferences and/or username, redirecting to preferences page');
     return <Navigate to="/preferences" />;
   }
 

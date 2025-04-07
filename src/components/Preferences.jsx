@@ -69,12 +69,32 @@ const Preferences = () => {
       // Check if this is an existing user (not a new registration)
       const isNewUser = sessionStorage.getItem('newUserRegistration') === 'true';
       
+      // Try to prefill username if it's a new registration from email
+      if (isNewUser && username === '' && currentUser.email) {
+        const emailUsername = currentUser.email.split('@')[0];
+        setUsername(emailUsername);
+      }
+      
+      // Also try to use stored email from signup
+      try {
+        if (username === '') {
+          const signupEmail = localStorage.getItem('signup_email');
+          if (signupEmail) {
+            const emailUsername = signupEmail.split('@')[0];
+            setUsername(emailUsername);
+          }
+        }
+      } catch (error) {
+        console.error('Error getting signup email:', error);
+      }
+      
       console.log('User has preferences:', currentUser.preferences?.categories?.length > 0);
       console.log('Is new user:', isNewUser);
+      console.log('Has username:', !!currentUser.username);
       
-      // If user has preferences and is not a new user, redirect to events
-      if (currentUser.preferences?.categories?.length > 0 && !isNewUser) {
-        console.log('Redirecting to events page - user already has preferences');
+      // If user has preferences and username and is not a new user, redirect to events
+      if (currentUser.preferences?.categories?.length > 0 && currentUser.username && !isNewUser) {
+        console.log('Redirecting to events page - user already has preferences and username');
         navigate('/events');
       }
       // Otherwise, stay on preferences page to collect user preferences
@@ -121,7 +141,7 @@ const Preferences = () => {
 
   const handleSavePreferences = async () => {
     if (!username.trim()) {
-      errorToast('Please enter a username');
+      errorToast('Please select username and preference');
       return;
     }
     
@@ -253,13 +273,15 @@ const Preferences = () => {
               <input
                 type="text"
                 className={styles.usernameInput}
-                placeholder="Tell us your username"
+                placeholder="Tell us your username *"
                 value={username}
                 onChange={handleUsernameChange}
                 onKeyDown={handleKeyDown}
-              aria-label="Username"
-              tabIndex={1}
+                aria-label="Username"
+                tabIndex={1}
+                required
               />
+              <span className={styles.requiredIndicator}>* Required</span>
             </div>
             
             <div className={styles.categorySection}>
