@@ -172,8 +172,8 @@ const MeetingCard = ({
     const openParticipantsPopup = async () => {
         try {
             setLoading(true);
-            // Get participant data
-            const response = await api.get(`/api/meetings/${meetingId}/participants`);
+            // Get participant data - use the correct API endpoint
+            const response = await api.get(`/api/bookings/meeting/${meetingId}/participants`);
             
             let participantsList = [];
             if (response.data?.participants) {
@@ -204,8 +204,10 @@ const MeetingCard = ({
             setShowParticipantsPopup(true);
         } catch (error) {
             console.error('Error fetching participants:', error);
-            errorToast('Failed to load participants');
-            // Fallback
+            // Silently fall back to existing participants data without showing error toast
+            console.log('Falling back to existing participants data');
+            
+            // Format the existing participants data
             const formattedParticipants = participants.map(p => ({
                 id: p.id || p.userId || p._id,
                 name: p.name || p.email || 'Anonymous',
