@@ -14,13 +14,19 @@ const BookingPage = () => {
         past: []
     });
     const [loading, setLoading] = useState(true);
-    const [authStatus, setAuthStatus] = useState('checking');
+    const { isAuthenticated, user } = useAuth();
+    // Initialize authStatus based on current auth state rather than "checking"
+    const [authStatus, setAuthStatus] = useState(isAuthenticated ? 'authenticated' : 'checking');
     const { successToast, errorToast } = useToast();
-    const { user } = useAuth();
 
     // Check authentication status
     const checkAuthStatus = useCallback(async () => {
         try {
+            // Skip API test if user is already authenticated
+            if (isAuthenticated && user && authStatus === 'authenticated') {
+                return true;
+            }
+            
             // First, test basic API connectivity
             try {
                 console.log('Testing API connectivity...');
@@ -57,7 +63,7 @@ const BookingPage = () => {
             setAuthStatus('error');
             return false;
         }
-    }, [user]);
+    }, [user, isAuthenticated, authStatus]);
 
     // Function to categorize meetings based on status and time
     const categorizeMeeting = useCallback((meeting) => {
@@ -221,12 +227,19 @@ const BookingPage = () => {
         }
     }, [errorToast, checkAuthStatus, user.id, categorizeMeeting]);
 
+    // Set up data fetching
     useEffect(() => {
+        // Immediately set authStatus to authenticated if user is already logged in
+        if (isAuthenticated && user && user.username) {
+            setAuthStatus('authenticated');
+        }
+        
         fetchMeetings();
+        
         // Set up interval to refresh meetings every minute
         const interval = setInterval(fetchMeetings, 60000);
         return () => clearInterval(interval);
-    }, [fetchMeetings]);
+    }, [fetchMeetings, isAuthenticated, user]);
 
     const handleTabChange = (tab) => {
         setActiveTab(tab);
@@ -435,7 +448,7 @@ const BookingPage = () => {
             <div className={styles.header}>
                 <h1>Bookings</h1>
                 <p className={styles.description}>Manage your upcoming and past meetings</p>
-                {authStatus !== 'authenticated' && (
+                {authStatus !== 'authenticated' && authStatus !== 'checking' && (
                     <div className={styles.authWarning}>
                         <p>Authentication status: {authStatus}</p>
                         <p>Please login again if you're experiencing issues.</p>
