@@ -1,18 +1,24 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
+import { useToast } from '../../contexts/ToastContext';
 import logoSvg from '../../assets/logo.svg';
 import './Navbar.module.css';
 
 const Navbar = () => {
     const { user, logout } = useAuth();
+    const { successToast } = useToast();
     const navigate = useNavigate();
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
     const handleLogout = async () => {
         try {
-            await logout();
-            navigate('/signin');
+            successToast('Logged out successfully');
+            // Small delay to allow toast to be seen
+            setTimeout(async () => {
+                await logout();
+                navigate('/signin');
+            }, 1000);
         } catch (error) {
             console.error('Failed to logout', error);
         }

@@ -131,8 +131,12 @@ const Profile = () => {
   };
 
   const handleLogout = () => {
-    logout();
-    navigate('/signin');
+    successToast('Logged out successfully');
+    // Small delay to allow toast to be seen
+    setTimeout(() => {
+      logout();
+      navigate('/signin');
+    }, 1000);
   };
 
   // If user data is not loaded yet, show a loading state

@@ -3,6 +3,7 @@ import { NavLink, useNavigate } from 'react-router-dom';
 import { IoAdd } from "react-icons/io5";
 import styles from './Sidebar.module.css';
 import { useAuth } from '../../contexts/AuthContext';
+import { useToast } from '../../contexts/ToastContext';
 import logoSvg from '../../assets/logo.svg';
 import eventsSvg from '../../assets/events.svg';
 import bookingSvg from '../../assets/booking.svg';
@@ -15,6 +16,7 @@ import axios from 'axios';
 
 const Sidebar = () => {
     const { user, logout } = useAuth();
+    const { successToast } = useToast();
     const navigate = useNavigate();
     const [userData, setUserData] = useState(null);
     
@@ -83,8 +85,12 @@ const Sidebar = () => {
     };
     
     const handleLogout = () => {
-        logout();
-        navigate('/signin');
+        successToast('Logged out successfully');
+        // Small delay to allow toast to be seen
+        setTimeout(() => {
+            logout();
+            navigate('/signin');
+        }, 1000);
     };
 
     // Determine the display name - use userData from MongoDB if available, fall back to context user

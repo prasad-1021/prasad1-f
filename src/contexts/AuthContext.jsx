@@ -231,6 +231,8 @@ export const AuthProvider = ({ children }) => {
         refreshIntervalRef.current = null;
       }
       
+      // No toast here since we'll navigate away
+      
       return true;
     } catch (error) {
       setError(error.message || 'Logout failed');

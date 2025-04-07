@@ -25,7 +25,11 @@ export const ToastProvider = ({ children }) => {
     // Ensure message is not empty and is a string
     if (!message) {
       console.error('Toast message is empty or invalid');
-      message = type === 'success' ? 'Operation successful' : 'An error occurred';
+      message = type === 'success' 
+        ? 'Operation successful' 
+        : type === 'error' 
+          ? 'An error occurred' 
+          : 'Notification';
     }
     
     if (typeof message !== 'string') {

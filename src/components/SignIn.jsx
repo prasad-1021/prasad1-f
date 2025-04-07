@@ -61,8 +61,10 @@ const SignIn = () => {
         }
       }
       
-      // Show appropriate welcome message based on if this is first time login
-      if (userData && userData.isFirstLogin) {
+      // Use simple logic based on isFirstLogin flag
+      const firstTimeLogin = userData?.isFirstLogin === true;
+      
+      if (firstTimeLogin) {
         successToast('Welcome to CNNCT!');
       } else {
         successToast('Welcome back!');
@@ -71,7 +73,7 @@ const SignIn = () => {
       navigate('/events'); // No replace:true to avoid infinite loops
     } catch (error) {
       console.error('Login error:', error);
-      errorToast(error.message || 'Failed to sign in');
+      errorToast(error.message || 'Invalid username or password');
     } finally {
       setLoading(false);
     }
