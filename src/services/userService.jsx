@@ -519,8 +519,12 @@ export const updateUserProfile = async (profileData) => {
   console.log('Updating user profile with data:', profileData);
   
   try {
-    // Call the API to update user data - using the correct endpoint
-    const response = await authenticatedRequest(`${API_URL}/auth/updatedetails`, {
+    // Format the URL properly to ensure it includes /api path
+    const updateUrl = API_URL.includes('/api') ? `${API_URL}/auth/updatedetails` : `${API_URL.replace(/\/$/, '')}/api/auth/updatedetails`;
+    console.log('Profile update URL:', updateUrl);
+    
+    // Call the API to update user data with the correct URL
+    const response = await authenticatedRequest(updateUrl, {
       method: 'PUT',
       body: JSON.stringify(profileData),
     });
@@ -726,8 +730,12 @@ export const updatePassword = async (currentPassword, newPassword) => {
   console.log('Updating password with auth endpoint');
   
   try {
+    // Format the URL properly to ensure it includes /api path
+    const passwordUpdateUrl = API_URL.includes('/api') ? `${API_URL}/auth/updatepassword` : `${API_URL.replace(/\/$/, '')}/api/auth/updatepassword`;
+    console.log('Password update URL:', passwordUpdateUrl);
+    
     // Use the auth endpoint for password updates
-    const response = await authenticatedRequest(`${API_URL}/auth/updatepassword`, {
+    const response = await authenticatedRequest(passwordUpdateUrl, {
       method: 'PUT',
       body: JSON.stringify({ currentPassword, newPassword }),
     });
@@ -746,7 +754,8 @@ export const updatePassword = async (currentPassword, newPassword) => {
     // Try the users endpoint as fallback
     try {
       console.log('Trying users endpoint as fallback');
-      const fallbackResponse = await authenticatedRequest(`${API_URL}/users/password`, {
+      const fallbackUrl = API_URL.includes('/api') ? `${API_URL}/users/password` : `${API_URL.replace(/\/$/, '')}/api/users/password`;
+      const fallbackResponse = await authenticatedRequest(fallbackUrl, {
         method: 'PUT',
         body: JSON.stringify({ currentPassword, newPassword }),
       });
@@ -776,8 +785,12 @@ export const resetPassword = async (newPassword) => {
   }
   
   try {
+    // Format the URL properly to ensure it includes /api path
+    const resetUrl = API_URL.includes('/api') ? `${API_URL}/users/password/reset` : `${API_URL.replace(/\/$/, '')}/api/users/password/reset`;
+    console.log('Password reset URL:', resetUrl);
+    
     // Try the dedicated password reset endpoint first
-    const response = await authenticatedRequest(`${API_URL}/users/password/reset`, {
+    const response = await authenticatedRequest(resetUrl, {
       method: 'PUT',
       body: JSON.stringify({ newPassword }),
     });
