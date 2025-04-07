@@ -47,7 +47,7 @@ function App() {
             } />
             
             <Route path="/events" element={
-              <ProtectedRoute>
+              <ProtectedRoute requirePreferences={true}>
                 <div className="app">
                   <Sidebar />
                   <main className="main-content">
@@ -58,7 +58,7 @@ function App() {
             } />
             
             <Route path="/availability" element={
-              <ProtectedRoute>
+              <ProtectedRoute requirePreferences={true}>
                 <div className="app">
                   <Sidebar />
                   <main className="main-content">
@@ -69,7 +69,7 @@ function App() {
             } />
             
             <Route path="/booking" element={
-              <ProtectedRoute>
+              <ProtectedRoute requirePreferences={true}>
                 <div className="app">
                   <Sidebar />
                   <main className="main-content">
@@ -80,7 +80,7 @@ function App() {
             } />
             
             <Route path="/profile" element={
-              <ProtectedRoute>
+              <ProtectedRoute requirePreferences={true}>
                 <div className="app">
                   <Sidebar />
                   <main className="main-content">
@@ -91,7 +91,7 @@ function App() {
             } />
             
             <Route path="/settings" element={
-              <ProtectedRoute>
+              <ProtectedRoute requirePreferences={true}>
                 <div className="app">
                   <Sidebar />
                   <main className="main-content">
@@ -102,7 +102,7 @@ function App() {
             } />
             
             <Route path="/create-event" element={
-              <ProtectedRoute>
+              <ProtectedRoute requirePreferences={true}>
                 <div className="app">
                   <Sidebar />
                   <main className="main-content">
@@ -113,7 +113,7 @@ function App() {
             } />
             
             <Route path="/event-banner" element={
-              <ProtectedRoute>
+              <ProtectedRoute requirePreferences={true}>
                 <div className="app">
                   <Sidebar />
                   <main className="main-content">
@@ -124,7 +124,7 @@ function App() {
             } />
             
             <Route path="/add-event" element={
-              <ProtectedRoute>
+              <ProtectedRoute requirePreferences={true}>
                 <div className="app">
                   <Sidebar />
                   <main className="main-content">

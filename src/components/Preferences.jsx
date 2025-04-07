@@ -165,13 +165,11 @@ const Preferences = () => {
           // Update the user profile
           await updateUserProfile(profileData);
           
+          // Clear new user flag only when username is successfully set
+          sessionStorage.removeItem('newUserRegistration');
+          
           // Check if this is a new registration or returning user
-          const isNewSetup = sessionStorage.getItem('newUserRegistration') === 'true';
-          if (isNewSetup) {
-            successToast('Profile setup complete! Welcome to CNNCT');
-          } else {
-            successToast('Profile updated successfully');
-          }
+          successToast('Profile setup complete! Welcome to CNNCT');
         } catch (apiError) {
           console.error('API update failed, using local fallback:', apiError);
           saveToLocalStorage(profileData);
@@ -180,9 +178,6 @@ const Preferences = () => {
         console.log('No authentication token found, using local storage only');
         saveToLocalStorage(profileData);
       }
-      
-      // Clear new user flag
-      sessionStorage.removeItem('newUserRegistration');
       
       // Ensure auth context is updated with the latest user data
       // This is important to prevent ProtectedRoute from redirecting back

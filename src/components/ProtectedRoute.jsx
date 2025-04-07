@@ -74,8 +74,8 @@ const ProtectedRoute = ({ children, requirePreferences = false }) => {
   
   // Only redirect to preferences if we need preferences, user doesn't have them,
   // and we're not already on the preferences page
-  if (requirePreferences && (!hasPreferences || !hasUsername) && !isPreferencesPage) {
-    console.log('User needs to set preferences and/or username, redirecting to preferences page');
+  if (requirePreferences && !hasUsername && !isPreferencesPage) {
+    console.log('User needs to set username, redirecting to preferences page');
     return <Navigate to="/preferences" />;
   }
 
