@@ -188,6 +188,7 @@ const Preferences = () => {
             // Update auth context
             auth.updateUser({
               ...userData,
+              username: username.trim(),
               preferences: {
                 categories: [selectedCategory]
               }
@@ -273,7 +274,7 @@ const Preferences = () => {
               <input
                 type="text"
                 className={styles.usernameInput}
-                placeholder="Tell us your username *"
+                placeholder="Tell us your username"
                 value={username}
                 onChange={handleUsernameChange}
                 onKeyDown={handleKeyDown}
@@ -281,7 +282,6 @@ const Preferences = () => {
                 tabIndex={1}
                 required
               />
-              <span className={styles.requiredIndicator}>* Required</span>
             </div>
             
             <div className={styles.categorySection}>

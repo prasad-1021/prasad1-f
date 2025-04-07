@@ -547,7 +547,8 @@ export const updateUserProfile = async (profileData) => {
       name: userData.name,
       firstName: userData.firstName || profileData.firstName,
       lastName: userData.lastName || profileData.lastName,
-      email: userData.email || profileData.email
+      email: userData.email || profileData.email,
+      username: userData.username || profileData.username
     };
     
     console.log('Updating user in local storage:', updatedUser);
@@ -660,6 +661,11 @@ export const login = async (identifier, password) => {
       email: identifier,
       username: identifier
     };
+    
+    // Ensure username is set 
+    if (!userObject.username) {
+      userObject.username = identifier;
+    }
     
     // Save user and token to local storage
     localStorage.setItem(USER_KEY, JSON.stringify(userObject));
