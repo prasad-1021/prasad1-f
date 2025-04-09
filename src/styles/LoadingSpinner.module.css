@@ -68,3 +68,38 @@
   }
 } 
 
+@media (max-width: 768px) {
+  .loadingText {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .small .bounce1, .small .bounce2, .small .bounce3 {
+    width: 6px;
+    height: 6px;
+  }
+  
+  .medium .bounce1, .medium .bounce2, .medium .bounce3 {
+    width: 10px;
+    height: 10px;
+  }
+  
+  .large .bounce1, .large .bounce2, .large .bounce3 {
+    width: 14px;
+    height: 14px;
+  }
+  
+  .loadingText {
+    font-size: 0.85rem;
+    margin-top: 0.75rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bounce1, .bounce2, .bounce3 {
+    animation: none;
+    opacity: 0.7;
+  }
+} 
+

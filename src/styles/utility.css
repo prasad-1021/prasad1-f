@@ -1,0 +1,203 @@
+/* Responsive Utility Classes */
+
+/* Display utilities */
+.d-none {
+  display: none !important;
+}
+
+.d-block {
+  display: block !important;
+}
+
+.d-flex {
+  display: flex !important;
+}
+
+.d-inline {
+  display: inline !important;
+}
+
+.d-inline-block {
+  display: inline-block !important;
+}
+
+/* Responsive display classes */
+@media (max-width: 1200px) {
+  .d-lg-none {
+    display: none !important;
+  }
+  
+  .d-lg-block {
+    display: block !important;
+  }
+  
+  .d-lg-flex {
+    display: flex !important;
+  }
+}
+
+@media (max-width: 992px) {
+  .d-md-none {
+    display: none !important;
+  }
+  
+  .d-md-block {
+    display: block !important;
+  }
+  
+  .d-md-flex {
+    display: flex !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .d-sm-none {
+    display: none !important;
+  }
+  
+  .d-sm-block {
+    display: block !important;
+  }
+  
+  .d-sm-flex {
+    display: flex !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .d-xs-none {
+    display: none !important;
+  }
+  
+  .d-xs-block {
+    display: block !important;
+  }
+  
+  .d-xs-flex {
+    display: flex !important;
+  }
+}
+
+/* Flexbox utilities */
+.flex-row {
+  flex-direction: row !important;
+}
+
+.flex-column {
+  flex-direction: column !important;
+}
+
+.justify-center {
+  justify-content: center !important;
+}
+
+.justify-between {
+  justify-content: space-between !important;
+}
+
+.justify-end {
+  justify-content: flex-end !important;
+}
+
+.align-center {
+  align-items: center !important;
+}
+
+.align-start {
+  align-items: flex-start !important;
+}
+
+.align-end {
+  align-items: flex-end !important;
+}
+
+/* Responsive flexbox classes */
+@media (max-width: 768px) {
+  .flex-sm-column {
+    flex-direction: column !important;
+  }
+  
+  .flex-sm-row {
+    flex-direction: row !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .flex-xs-column {
+    flex-direction: column !important;
+  }
+  
+  .flex-xs-row {
+    flex-direction: row !important;
+  }
+}
+
+/* Text utilities */
+.text-center {
+  text-align: center !important;
+}
+
+.text-left {
+  text-align: left !important;
+}
+
+.text-right {
+  text-align: right !important;
+}
+
+/* Responsive text alignment */
+@media (max-width: 768px) {
+  .text-sm-center {
+    text-align: center !important;
+  }
+}
+
+/* Margin and padding utilities */
+.m-0 {
+  margin: 0 !important;
+}
+
+.p-0 {
+  padding: 0 !important;
+}
+
+/* Width utilities */
+.w-100 {
+  width: 100% !important;
+}
+
+.w-75 {
+  width: 75% !important;
+}
+
+.w-50 {
+  width: 50% !important;
+}
+
+/* Responsive width */
+@media (max-width: 768px) {
+  .w-sm-100 {
+    width: 100% !important;
+  }
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .no-animation {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* Hide content visually but keep it accessible for screen readers */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+} 

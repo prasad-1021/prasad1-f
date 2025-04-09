@@ -1,4 +1,3 @@
-
 .copySource {
   border-left: 3px solid #1877F2;
   background-color: rgba(24, 119, 242, 0.05);
@@ -36,10 +35,28 @@
   max-width: 100%;
 }
 
+@media (max-width: 992px) {
+  .copySource {
+    border-left-width: 2px;
+  }
+  
+  .activeCopy {
+    transform: scale(1.05);
+  }
+}
+
 @media (max-width: 768px) {
   .copyIcon, .checkIcon {
     width: 14px;
     height: 14px;
+  }
+  
+  .activeCopy {
+    transform: scale(1.03);
+  }
+  
+  .copySource {
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
   }
 }
 
@@ -48,8 +65,23 @@
     width: 12px;
     height: 12px;
   }
+  
+  .activeCopy {
+    transform: none;
+  }
+  
+  .copySource {
+    border-left-width: 2px;
+  }
 }
 
+@media (max-width: 320px) {
+  .copyButton {
+    min-width: 24px;
+    min-height: 24px;
+    padding: 4px;
+  }
+}
 
 .copyButton {
   display: flex;

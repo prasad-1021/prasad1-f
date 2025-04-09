@@ -1,6 +1,3 @@
-
-
-
 .pageContainer {
   display: flex;
   min-height: 100vh;
@@ -136,12 +133,34 @@
 }
 
 
+@media (max-width: 1200px) {
+  .mainContent {
+    padding: 24px;
+  }
+}
+
+@media (max-width: 992px) {
+  .mainContent {
+    padding: 20px;
+  }
+  
+  .createButton {
+    padding: 10px 20px;
+  }
+}
+
 @media (max-width: 768px) {
+  .pageContainer {
+    flex-direction: column;
+  }
+  
   .sidebar {
     width: 100%;
     height: auto;
     position: relative;
     padding: 16px 0;
+    border-right: none;
+    border-bottom: 1px solid #E9EEF8;
   }
 
   .mainContent {
@@ -151,6 +170,49 @@
 
   .userProfile {
     margin-top: 16px;
+  }
+  
+  .logoContainer {
+    padding: 0 16px;
+    margin-bottom: 20px;
+  }
+  
+  .logoText {
+    font-size: 20px;
+  }
+  
+  .createButton {
+    margin: 0 16px 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .mainContent {
+    padding: 12px;
+  }
+  
+  .sidebar {
+    padding: 12px 0;
+  }
+  
+  .navLink {
+    padding: 10px 12px;
+    font-size: 13px;
+  }
+  
+  .userName {
+    font-size: 13px;
+  }
+}
+
+@media (max-height: 700px) {
+  .logoContainer {
+    margin-bottom: 20px;
+  }
+  
+  .navLink {
+    padding: 10px 16px;
+    margin-bottom: 4px;
   }
 } 
 

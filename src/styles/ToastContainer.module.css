@@ -13,3 +13,10 @@
   padding: 0;
 } 
 
+@media (max-width: 576px) {
+  .toastContainer {
+    max-width: 90%;
+    top: 10px;
+  }
+} 
+

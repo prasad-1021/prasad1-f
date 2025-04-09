@@ -81,3 +81,29 @@
   }
 } 
 
+@media (max-width: 576px) {
+  .toastContainer {
+    min-width: 100%;
+    max-width: 100%;
+    padding: 12px;
+  }
+  
+  .message {
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 320px) {
+  .toastContainer {
+    padding: 10px;
+  }
+  
+  .contentWrapper {
+    gap: 8px;
+  }
+  
+  .message {
+    font-size: 12px;
+  }
+} 
+
